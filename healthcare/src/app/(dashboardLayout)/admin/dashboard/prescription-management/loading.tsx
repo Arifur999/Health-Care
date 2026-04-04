@@ -1,4 +1,4 @@
-export default function AdminLoading() {
+export default function AdminPrescriptionManagementLoading() {
   // Or a custom loading skeleton component
-  return <p>Admin Loading...</p>
+  return <p>Admin Prescription Management Loading...</p>
 }

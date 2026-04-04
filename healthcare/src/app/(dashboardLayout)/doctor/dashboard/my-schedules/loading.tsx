@@ -1,4 +1,4 @@
-export default function AdminLoading() {
+export default function DoctorMySchedulesLoading() {
   // Or a custom loading skeleton component
-  return <p>Admin Loading...</p>
+  return <p>Doctor My Schedules Loading...</p>
 }

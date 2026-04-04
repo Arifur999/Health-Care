@@ -1,4 +1,4 @@
-export default function AdminLoading() {
+export default function MyProfileLoading() {
   // Or a custom loading skeleton component
-  return <p>Admin Loading...</p>
+  return <p>My Profile Loading...</p>
 }
