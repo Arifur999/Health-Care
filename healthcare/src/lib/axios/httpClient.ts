@@ -48,9 +48,26 @@ const httpPost = async (endpoint: string, data: unknown, options?: ApiRequestOpt
     }
 }
 
+const httpPut = async (endpoint: string, data: unknown, options?: ApiRequestOptions) => {
+    try {
+        const response = await axiosInstance().put(endpoint, data, {
+            headers: options?.headers,
+            params: options?.params,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP PUT Error:', error);
+        throw error;
+    }
+}
+
+
+
 
 
 export const httpClient = {
     get: httpGet,
     post: httpPost,
+    put: httpPut,
+
 }
