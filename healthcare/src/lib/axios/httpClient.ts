@@ -16,6 +16,24 @@ const axiosInstance=() => {
     return instance;
 }
 
+export interface ApiRequestOptions {
+    headers?: Record<string, string>;
+    params?: Record<string, unknown>;
+    
+}
 
+const httpGet = async (endpoint: string, options?: ApiRequestOptions) => {
+    try {
+        const response = await axiosInstance().get(endpoint, {
+            headers: options?.headers,
+            params: options?.params,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP GET Error:', error);
+        throw error;
+    }
+}
 export const httpClient = {
+    get: httpGet,
 }
