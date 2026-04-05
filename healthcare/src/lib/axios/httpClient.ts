@@ -34,6 +34,23 @@ const httpGet = async (endpoint: string, options?: ApiRequestOptions) => {
         throw error;
     }
 }
+
+const httpPost = async (endpoint: string, data: unknown, options?: ApiRequestOptions) => {
+    try {
+        const response = await axiosInstance().post(endpoint, data, {
+            headers: options?.headers,
+            params: options?.params,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP POST Error:', error);
+        throw error;
+    }
+}
+
+
+
 export const httpClient = {
     get: httpGet,
+    post: httpPost,
 }
