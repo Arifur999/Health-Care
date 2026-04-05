@@ -61,6 +61,18 @@ const httpPut = async (endpoint: string, data: unknown, options?: ApiRequestOpti
     }
 }
 
+const httpDelete = async (endpoint: string, options?: ApiRequestOptions) => {
+    try {
+        const response = await axiosInstance().delete(endpoint, {
+            headers: options?.headers,
+            params: options?.params,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP DELETE Error:', error);
+        throw error;
+    }
+}
 
 
 
@@ -69,5 +81,6 @@ export const httpClient = {
     get: httpGet,
     post: httpPost,
     put: httpPut,
+    delete: httpDelete,
 
 }
