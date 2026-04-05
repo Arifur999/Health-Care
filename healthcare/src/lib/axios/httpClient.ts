@@ -61,6 +61,20 @@ const httpPut = async (endpoint: string, data: unknown, options?: ApiRequestOpti
     }
 }
 
+const httpPatch = async (endpoint: string, data: unknown, options?: ApiRequestOptions) => {
+    try {
+        const response = await axiosInstance().patch(endpoint, data, {
+            headers: options?.headers,
+            params: options?.params,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP PATCH Error:', error);
+        throw error;
+    }
+}
+
+
 const httpDelete = async (endpoint: string, options?: ApiRequestOptions) => {
     try {
         const response = await axiosInstance().delete(endpoint, {
@@ -77,10 +91,13 @@ const httpDelete = async (endpoint: string, options?: ApiRequestOptions) => {
 
 
 
+
+
 export const httpClient = {
     get: httpGet,
     post: httpPost,
     put: httpPut,
+    patch: httpPatch,
     delete: httpDelete,
 
 }
