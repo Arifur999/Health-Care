@@ -1,3 +1,4 @@
+import { ApiResponse } from '@/types/api.types';
 import axios from 'axios';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -22,9 +23,10 @@ export interface ApiRequestOptions {
     
 }
 
-const httpGet = async (endpoint: string, options?: ApiRequestOptions) => {
+const httpGet = async <TData>(endpoint: string, options?: ApiRequestOptions): Promise<ApiResponse<TData>> => {
     try {
-        const response = await axiosInstance().get(endpoint, {
+        const instance = axiosInstance();
+        const response =  await instance.get<ApiResponse<TData>>(endpoint, {
             headers: options?.headers,
             params: options?.params,
         });
@@ -35,9 +37,10 @@ const httpGet = async (endpoint: string, options?: ApiRequestOptions) => {
     }
 }
 
-const httpPost = async (endpoint: string, data: unknown, options?: ApiRequestOptions) => {
+const httpPost = async <TData>(endpoint: string, data: unknown, options?: ApiRequestOptions): Promise<ApiResponse<TData>> => {
     try {
-        const response = await axiosInstance().post(endpoint, data, {
+        const instance = axiosInstance();
+        const response = await instance.post<ApiResponse<TData>>(endpoint, data, {
             headers: options?.headers,
             params: options?.params,
         });
