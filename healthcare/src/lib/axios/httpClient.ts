@@ -80,9 +80,10 @@ const httpPatch = async <TData>(endpoint: string, data: unknown, options?: ApiRe
 }
 
 
-const httpDelete = async (endpoint: string, options?: ApiRequestOptions) => {
+const httpDelete = async <TData>(endpoint: string, options?: ApiRequestOptions): Promise<ApiResponse<TData>> => {
     try {
-        const response = await axiosInstance().delete(endpoint, {
+        const instance = axiosInstance();
+        const response = await instance.delete<ApiResponse<TData>>(endpoint, {
             headers: options?.headers,
             params: options?.params,
         });
