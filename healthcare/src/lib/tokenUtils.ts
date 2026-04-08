@@ -1,5 +1,6 @@
 "use server"
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { setCookie } from "./cookiesUtils";
 
 
 const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET
@@ -19,4 +20,13 @@ const getTokenSecondsRemaining = (token: string): number => {
      
         
     }
+}
+
+export const setTokenInCookies = async (
+    name: string,
+    token: string,
+    
+)=>{
+    const maxAgeInSeconds = getTokenSecondsRemaining(token);
+    await setCookie(name, token, maxAgeInSeconds);
 }
