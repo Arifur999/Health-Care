@@ -9,3 +9,5 @@ export const LoginZodSchema = z.object({
     .regex(/[0-9]/, "Password must contain at least one number")
     .regex(/[@$!%*?&]/, "Password must contain at least one special character"),
 });
+
+export type ILogin = z.infer<typeof LoginZodSchema>;
