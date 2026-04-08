@@ -22,3 +22,8 @@ export const setCookie = async (
     return cookieStore.get(name)?.value;
   
   }
+
+  export const deleteCookie = async (name: string) => {
+    const cookieStore=await cookies();
+    cookieStore.delete(name);
+  };
