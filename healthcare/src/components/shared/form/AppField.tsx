@@ -3,6 +3,20 @@ import { cn } from '@/lib/utils';
 import { AnyFieldApi } from '@tanstack/react-form'
 
 
+const getErrorMessage = (error:unknown): string  => {
+    if (typeof error === "string") {
+        return error;
+    }
+    if (error && typeof error === "object" ) {
+        if ("message" in error && typeof error.message === "string") {
+            return error.message;
+        }
+       
+    }
+    return String(error);
+}
+
+
 type AppFieldProps = {
 
  field : AnyFieldApi;
@@ -26,11 +40,17 @@ const AppField = ({
     className,
     disabled=false
 }:AppFieldProps) => {
+
+    const FirstError = field.state.meta.isTouched && field.state.meta.errors.length > 0 ?
+    getErrorMessage(field.state.meta.errors[0]) : null;
+    const hasError=FirstError !== null;
+
+
     return (
         <div className={cn("space-y-1.5",className)}>
            <Label 
               htmlFor={field.name}
-              className={cn("font-medium", disabled && "cursor-not-allowed opacity-50")}
+              className={cn(hasError && "text-destructive" )}
               >{label}</Label>
               <div className="relative">
                 {
@@ -49,8 +69,8 @@ const AppField = ({
                   onBlur={field.handleBlur}
                   onChange={(e)=>field.handleChange(e.target.value)}
                   disabled={disabled}
-                //   aria-invalid={field.state.error ? "true" : "false"}
-                // aria-describedby=''
+                  aria-invalid={hasError}
+                  aria-describedby={hasError ? `${field.name}-error` : undefined}
                   className={cn(
                       prepend && "pl-10" ,
                       append && "pr-10" ,
@@ -62,9 +82,20 @@ const AppField = ({
                     {append}
                   </div>)
                 }
-
+                {
+                    hasError && (
+                        <p id={`${field.name}-error`} 
+                        role='alert'
+                        className="text-destructive text-sm mt-1">
+                            {FirstError}
+                        </p>
+                    )
+                }
                 </div>
         </div>
     )
 
+
 }
+
+export default AppField;
