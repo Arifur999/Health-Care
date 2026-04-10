@@ -1,6 +1,8 @@
+import LoginForm from "@/components/modules/Auth/LoginForm"
+
 const LoginPage=()=> {
   return (
-    <div>page</div>
+   <LoginForm />
   )
 }
 

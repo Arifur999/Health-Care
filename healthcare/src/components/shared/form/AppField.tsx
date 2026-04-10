@@ -19,26 +19,26 @@ const getErrorMessage = (error:unknown): string  => {
 
 type AppFieldProps = {
 
- field : AnyFieldApi;
- label:string;
- type?:"text" | "email" | "password" | "number";
- placeholder?:string;
- append?:string;
- prepend?:string;
- className?:string;
- disabled?:boolean;
+    field : AnyFieldApi;
+    label : string;
+    type ?: "text" | "email" | "password" | "number";
+    placeholder ?: string;
+    append ?: React.ReactNode;
+    prepend ?: React.ReactNode;
+    className ?: string;
+    disabled ?: boolean;
 
 }
 
 const AppField = ({
     field,
     label,
-    type="text",
+    type = "text",
     placeholder,
     append,
     prepend,
     className,
-    disabled=false
+    disabled = false,
 }:AppFieldProps) => {
 
     const FirstError = field.state.meta.isTouched && field.state.meta.errors.length > 0 ?
