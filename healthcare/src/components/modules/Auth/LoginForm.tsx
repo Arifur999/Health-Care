@@ -3,7 +3,7 @@ import AppField from "@/components/shared/form/AppField";
 import AppSubmitButton from "@/components/shared/form/AppSubmitButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ILogin, LoginZodSchema } from "@/zod/auth.validation";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -173,7 +173,18 @@ const LoginForm = () => {
           </svg>
           Sign in with Google
         </Button>
-        </CardContent>
+        </CardContent>  <CardFooter className="justify-center border-t pt-4">
+        <p className="text-sm text-muted-foreground">
+              Don&apos;t have an account?{" "}
+            <Link
+                href="/register"
+                className="text-primary font-medium hover:underline underline-offset-4"
+            >
+                Sign Up for an account
+            </Link>
+        </p>
+      </CardFooter>
+
         </Card>
     )
 }
