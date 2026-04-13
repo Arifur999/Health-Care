@@ -28,7 +28,7 @@ export const LoginAction = async (payload : ILogin): Promise<ILoginResponse | Ap
     
         await setTokenInCookies("accessToken", accessToken);
         await setTokenInCookies("refreshToken", refreshToken);
-        await setTokenInCookies("better-auth.session_token", token);
+        await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60 );
        
         redirect("/dashboard");
 

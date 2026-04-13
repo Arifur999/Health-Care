@@ -25,8 +25,9 @@ const getTokenSecondsRemaining = (token: string): number => {
 export const setTokenInCookies = async (
     name: string,
     token: string,
+    fallbackMaxAgeInSeconds =60 * 60 * 24  //1 day
     
 )=>{
     const maxAgeInSeconds = getTokenSecondsRemaining(token);
-    await setCookie(name, token, maxAgeInSeconds);
+    await setCookie(name, token, maxAgeInSeconds || fallbackMaxAgeInSeconds );
 }
