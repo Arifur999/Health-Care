@@ -1,3 +1,4 @@
+"use client";
 import { LoginAction } from "@/app/(commonLayout)/(auth)/login/_action";
 import AppField from "@/components/shared/form/AppField";
 import AppSubmitButton from "@/components/shared/form/AppSubmitButton";

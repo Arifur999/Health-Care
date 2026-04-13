@@ -33,7 +33,15 @@ export const LoginAction = async (payload : ILogin): Promise<ILoginResponse | Ap
         redirect("/dashboard");
 
     } catch (error) {
+
+        if (error && typeof error === "object" && "digest" in error && typeof error.digest === "string" &&
+            error.digest.startsWith("NEXT_REDIRECT_")) {
+            // Handle the redirect error gracefully
+            throw new Error("Redirection in progress. Please wait...");
+            }
+        
         return {
+            
             success: false,
             message: `Login failed: ${error instanceof Error ? error.message : "Unknown error"}`,
             
