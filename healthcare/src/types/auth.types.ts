@@ -15,3 +15,15 @@ export interface ILoginResponse {
     }
     
 }
+
+export interface IRegisterResponse {
+    success: boolean;
+    message: string;
+    user?: {
+        id: string;
+        email: string;
+        name: string;
+        role: string;
+        emailVerified: boolean;
+    }
+}
