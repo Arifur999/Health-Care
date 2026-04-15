@@ -21,8 +21,12 @@ export const doctorProtectedRoutes:RouteConfig = {
     pattern:[/^\/doctor\/dashboard/],
     exact:[]
 }
+// export const SuperAdminProtectedRoutes:RouteConfig = {
+//     pattern:[/^\/admin\/dashboard/],
+//     exact:[]
+// }
 
-export const adminOrSuperAdminProtectedRoutes:RouteConfig = {
+export const AdminProtectedRoutes:RouteConfig = {
     pattern:[/^\/admin\/dashboard/],
     exact:[]
 }
@@ -30,4 +34,32 @@ export const adminOrSuperAdminProtectedRoutes:RouteConfig = {
 export const patientProtectedRoutes:RouteConfig = {
     pattern:[/^\/dashboard/],
     exact:["/payment/success"]
+}
+
+export const isRouteMatches = (pathname:string, routes:RouteConfig) => {
+    if(routes.exact.includes(pathname)){
+        return true;
+    }
+    return routes.pattern.some((pattern:RegExp) => pattern.test(pathname));
+}
+
+export const getRouteOwner = (pathname:string) : "SUPER_ADMIN" | "ADMIN" | "DOCTOR" | "PATIENT" | "COMMON" | null => {
+    if(isRouteMatches(pathname,commonProtectedRoutes)){
+        return "COMMON";
+    }
+    if(isRouteMatches(pathname,doctorProtectedRoutes)){
+        return "DOCTOR";
+    }
+    // if(isRouteMatches(pathname,SuperAdminProtectedRoutes)){
+    //     return "SUPER_ADMIN";
+    // }
+
+    if(isRouteMatches(pathname,AdminProtectedRoutes)){
+        return "ADMIN";
+    }
+    if(isRouteMatches(pathname,patientProtectedRoutes)){
+        return "PATIENT";
+    }
+    return null;
+
 }
