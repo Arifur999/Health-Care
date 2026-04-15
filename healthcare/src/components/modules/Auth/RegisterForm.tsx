@@ -10,9 +10,11 @@ import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const RegisterForm = () => {
+    const router = useRouter();
     const [serverError, setServerError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -31,17 +33,16 @@ const RegisterForm = () => {
         onSubmit: async ({ value }) => {
             setServerError(null);
             try {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const result = await mutateAsync(value) as any;
+                const result = await mutateAsync(value);
                 if (!result.success) {
                     setServerError(result.message || "Registration failed");
                     return;
                 }
-                // Success - redirect happens in action
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } catch (error: any) {
-                console.log(`Registration failed: ${error.message}`);
-                setServerError(`Registration failed: ${error.message}`);
+                router.push("/verify-email");
+            } catch (error: unknown) {
+                const message = error instanceof Error ? error.message : "Registration failed";
+                console.log(`Registration failed: ${message}`);
+                setServerError(message);
             }
         },
     });

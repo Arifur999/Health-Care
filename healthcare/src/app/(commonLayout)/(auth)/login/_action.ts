@@ -4,11 +4,9 @@ import { setTokenInCookies } from "@/lib/tokenUtils";
 import { ApiErrorResponse } from "@/types/api.types";
 import { ILoginResponse } from "@/types/auth.types";
 import { ILogin, LoginZodSchema } from "@/zod/auth.validation";
-import { redirect } from "next/navigation";
 
 
-
-export const LoginAction = async (payload : ILogin): Promise<ILoginResponse | ApiErrorResponse> => {
+export const LoginAction = async (payload : ILogin): Promise<ApiErrorResponse> => {
 
     const parsedPayload = LoginZodSchema.safeParse(payload);
     if (!parsedPayload.success) {
@@ -23,27 +21,32 @@ export const LoginAction = async (payload : ILogin): Promise<ILoginResponse | Ap
     try {
         
         const response = await httpClient.post<ILoginResponse>("/auth/login", parsedPayload.data);
+
+        if (!response.success) {
+            return {
+                success: false,
+                message: response.message || "Login failed",
+            };
+        }
+
         const { token, accessToken, refreshToken } = response.data;
         // Store tokens in cookies
     
         await setTokenInCookies("accessToken", accessToken);
         await setTokenInCookies("refreshToken", refreshToken);
         await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60 );
-       
-        redirect("/dashboard");
+
+        return {
+            success: true,
+            message: response.message || "Login successful",
+        };
 
     } catch (error) {
-
-        if (error && typeof error === "object" && "digest" in error && typeof error.digest === "string" &&
-            error.digest.startsWith("NEXT_REDIRECT_")) {
-            // Handle the redirect error gracefully
-            throw new Error("Redirection in progress. Please wait...");
-            }
         
         return {
             
             success: false,
-            message: `Login failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+            message: error instanceof Error ? error.message : "Unknown error",
             
         }
     

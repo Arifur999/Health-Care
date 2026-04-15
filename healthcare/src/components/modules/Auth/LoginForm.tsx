@@ -7,13 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ILogin, LoginZodSchema } from "@/zod/auth.validation";
 import { useForm } from "@tanstack/react-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import {  Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const LoginForm = () => {
-    const queryClient = useQueryClient();
+    const router = useRouter();
     const [serverError, setServerError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -30,16 +31,16 @@ const LoginForm = () => {
         onSubmit : async ({value}) => {
             setServerError(null);
             try {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const result = await mutateAsync(value) as any;
+                const result = await mutateAsync(value);
                 if(!result.success){
                     setServerError(result.message || "Login failed");
                     return;
                 }
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } catch (error: any) {
-                console.log(`Login failed: ${error.message}`);
-                setServerError(`Login failed: ${error.message}`);
+                router.push("/dashboard");
+            } catch (error: unknown) {
+                const message = error instanceof Error ? error.message : "Login failed";
+                console.log(`Login failed: ${message}`);
+                setServerError(message);
             }
         }
 

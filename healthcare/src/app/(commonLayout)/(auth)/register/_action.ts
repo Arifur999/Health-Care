@@ -1,12 +1,9 @@
 "use server";
 import { httpClient } from "@/lib/axios/httpClient";
-import { setTokenInCookies } from "@/lib/tokenUtils";
 import { ApiErrorResponse } from "@/types/api.types";
-import { IRegisterResponse } from "@/types/auth.types";
 import { IRegister, RegisterZodSchema } from "@/zod/auth.validation";
-import { redirect } from "next/navigation";
 
-export const RegisterAction = async (payload: IRegister): Promise<IRegisterResponse | ApiErrorResponse> => {
+export const RegisterAction = async (payload: IRegister): Promise<ApiErrorResponse> => {
     const parsedPayload = RegisterZodSchema.safeParse(payload);
     
     if (!parsedPayload.success) {
@@ -18,33 +15,23 @@ export const RegisterAction = async (payload: IRegister): Promise<IRegisterRespo
     }
 
     try {
-        // Remove confirmPassword before sending to API
-        const { confirmPassword, ...registrationData } = parsedPayload.data;
+        const registrationData = {
+            name: parsedPayload.data.name,
+            email: parsedPayload.data.email,
+            password: parsedPayload.data.password,
+        };
         
-        const response = await httpClient.post<IRegisterResponse>("/auth/register", registrationData);
+        const response = await httpClient.post("/auth/register", registrationData);
         
-        if (response.data.success) {
-            // Optionally store tokens if API returns them
-            // const { token, accessToken, refreshToken } = response.data;
-            // await setTokenInCookies("accessToken", accessToken);
-            // await setTokenInCookies("refreshToken", refreshToken);
-            // await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60);
-            
-            // Redirect to verify email or login page
-            redirect("/verify-email");
-        }
-
-        return response.data;
+        return {
+            success: response.success,
+            message: response.message || "Registration failed",
+        };
 
     } catch (error) {
-        if (error && typeof error === "object" && "digest" in error && typeof error.digest === "string" &&
-            error.digest.startsWith("NEXT_REDIRECT_")) {
-            throw new Error("Redirection in progress. Please wait...");
-        }
-
         return {
             success: false,
-            message: `Registration failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+            message: error instanceof Error ? error.message : "Unknown error",
         }
     }
 }
