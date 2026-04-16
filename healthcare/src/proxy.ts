@@ -33,9 +33,33 @@ export async function proxy(request: NextRequest) {
     
     }
 
-    return NextResponse.next();
+   
 
+    if(routeOwner === null){
+        return NextResponse.next();
+     }
 
+     if(!accessToken || !isValidAccessToken){
+        const loginUrl =new URL("/login", request.url);
+        loginUrl.searchParams.set("redirect", pathname);
+        return NextResponse.redirect(loginUrl);
+
+     }
+
+     if(routeOwner === "COMMON"){
+        return NextResponse.next();
+
+     } 
+
+     if(routeOwner === "ADMIN" || routeOwner === "DOCTOR" || routeOwner === "PATIENT"){
+        if(routeOwner !== userRole){
+            return NextResponse.redirect(new URL(getDefaultDashboardRoute(userRole as UserRole), request.url));
+        }
+        
+     }
+
+    
+ return NextResponse.next();
    
    } catch (error) {
     console.error("Error in proxy middleware:", error);
@@ -43,5 +67,14 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-    matcher:[]
+    matcher : [
+        /*
+         * Match all request paths except for the ones starting with:
+         * - api (API routes)
+         * - _next/static (static files)
+         * - _next/image (image optimization files)
+         * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+         */
+        '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.well-known).*)',
+    ]
 }
