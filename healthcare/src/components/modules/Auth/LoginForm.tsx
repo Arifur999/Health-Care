@@ -13,14 +13,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const LoginForm = () => {
+
+interface LoginFormProps {
+  redirectPath: string;
+}
+
+const LoginForm = ({ redirectPath }: LoginFormProps) => {
     const router = useRouter();
     const [serverError, setServerError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
 
 
     const {mutateAsync ,isPending} =useMutation({
-        mutationFn:(payload : ILogin) => LoginAction(payload),
+        mutationFn:(payload : ILogin) => LoginAction(payload, redirectPath),
     })
 
     const form =useForm({
