@@ -1,6 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtUtils } from "./lib/jwtUtils";
 import { getDefaultDashboardRoute, getRouteOwner, isAuthRoute, UserRole } from "./lib/authUtils";
+import { getNewTokensWithRefreshToken } from "./services/auth.services";
+import { isTokenExpiringSoon } from "./lib/tokenUtils";
+
+
+async function refreshTokenMiddleware(refreshToken: string): Promise<boolean> {
+    try {
+        const refresh=await getNewTokensWithRefreshToken(refreshToken);
+        if(!refresh){
+            console.error("Failed to refresh token");
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error("Error in refreshTokenMiddleware:", error);
+        return false;
+    }
+}
 
 
 export async function proxy(request: NextRequest) {
@@ -27,6 +44,39 @@ export async function proxy(request: NextRequest) {
     userRole = unifySuperAdminAndAdminRole
 
     const isAuth=isAuthRoute(pathname);
+
+
+if(isValidAccessToken && refreshToken && (await isTokenExpiringSoon(accessToken))){
+   const requestHeader = new Headers(request.headers);
+   const response = NextResponse.next({
+    request: {
+        headers: requestHeader,
+    },
+   });
+
+   try {
+    const refreshed = await refreshTokenMiddleware(refreshToken);
+    if(refreshed){
+        response.headers.set("x-token-refreshed", "1");
+    }
+    
+    return NextResponse.next({
+        request: {
+            headers: requestHeader,
+        },
+        headers: response.headers,
+    });
+
+   } catch (error) {
+    console.error("Error refreshing token in middleware:", error);
+    
+   }
+
+   return response;
+}
+
+
+
 
     if(isAuth && isValidAccessToken){
         return NextResponse.redirect(new URL(getDefaultDashboardRoute(userRole as UserRole), request.url));
