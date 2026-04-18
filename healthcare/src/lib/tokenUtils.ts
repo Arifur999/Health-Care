@@ -38,3 +38,8 @@ export async function isTokenExpiringSoon(token: string, thresholdInSeconds = 30
     const remainingSeconds = getTokenSecondsRemaining(token);
     return remainingSeconds > 0 && remainingSeconds <= thresholdInSeconds;
 }
+
+export async function isTokenExpired(token: string): Promise<boolean> {
+    const remainingSeconds = getTokenSecondsRemaining(token);
+    return remainingSeconds === 0;
+}
