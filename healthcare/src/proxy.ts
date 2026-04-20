@@ -83,6 +83,11 @@ if(isValidAccessToken && refreshToken && (await isTokenExpiringSoon(accessToken)
     
     }
 
+
+    if (pathname=== "/reset-password" ) {
+        const email = request.nextUrl.searchParams.get("email");
+        
+    }
    
 
     if(routeOwner === null){
