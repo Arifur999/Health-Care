@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtUtils } from "./lib/jwtUtils";
 import { getDefaultDashboardRoute, getRouteOwner, isAuthRoute, UserRole } from "./lib/authUtils";
-import { getNewTokensWithRefreshToken } from "./services/auth.services";
+import { getNewTokensWithRefreshToken, getUserInfo } from "./services/auth.services";
 import { isTokenExpiringSoon } from "./lib/tokenUtils";
 
 
@@ -86,9 +86,17 @@ if(isValidAccessToken && refreshToken && (await isTokenExpiringSoon(accessToken)
 
     if (pathname=== "/reset-password" ) {
         const email = request.nextUrl.searchParams.get("email");
-        
+
+        if(accessToken && email){
+            const userInfo = await getUserInfo();
+            if(userInfo.needsPasswordChange){
+                return NextResponse.next();
+            }else{
+                return NextResponse.redirect(new URL(getDefaultDashboardRoute(userRole as UserRole), request.url));
+            }
+
     }
-   
+}
 
     if(routeOwner === null){
         return NextResponse.next();
