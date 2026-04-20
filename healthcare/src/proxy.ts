@@ -96,6 +96,16 @@ if(isValidAccessToken && refreshToken && (await isTokenExpiringSoon(accessToken)
             }
 
     }
+if(email){
+    return NextResponse.next();
+}
+
+const loginUrl = new URL("/login", request.url);
+loginUrl.searchParams.set("redirect", pathname);
+return NextResponse.redirect(loginUrl);
+    
+
+
 }
 
     if(routeOwner === null){
@@ -108,6 +118,32 @@ if(isValidAccessToken && refreshToken && (await isTokenExpiringSoon(accessToken)
         return NextResponse.redirect(loginUrl);
 
      }
+
+
+     if(accessToken){
+        const userInfo= await getUserInfo();
+
+        if(userInfo.needsPasswordChange){
+
+        if( pathname !== "/reset-password"){
+           const resetPasswordUrl = new URL("/reset-password", request.url);
+           resetPasswordUrl.searchParams.set("email", userInfo.email);
+           return NextResponse.redirect(resetPasswordUrl);
+        }
+
+        return NextResponse.next();
+
+     }
+
+     if(userInfo && !userInfo.needsPasswordChange && pathname === "/reset-password"){
+        return NextResponse.redirect(new URL(getDefaultDashboardRoute(userRole as UserRole), request.url));
+     }
+
+
+
+    }
+
+
 
      if(routeOwner === "COMMON"){
         return NextResponse.next();
