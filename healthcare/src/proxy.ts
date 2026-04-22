@@ -123,6 +123,19 @@ return NextResponse.redirect(loginUrl);
      if(accessToken){
         const userInfo= await getUserInfo();
 
+
+
+if(userInfo.emailVerified === false){
+    if(pathname !== "/verify-email"){
+        const verifyEmailUrl = new URL("/verify-email", request.url);
+        verifyEmailUrl.searchParams.set("email", userInfo.email);
+        return NextResponse.redirect(verifyEmailUrl);
+    }
+    return NextResponse.next();
+}
+
+
+
         if(userInfo.needsPasswordChange){
 
         if( pathname !== "/reset-password"){
