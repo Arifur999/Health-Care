@@ -8,55 +8,54 @@ import { ILogin, LoginZodSchema } from "@/zod/auth.validation";
 import { redirect } from "next/dist/client/components/navigation";
 
 
-export const LoginAction = async (payload : ILogin , redirectPath ?:string): Promise<ApiErrorResponse> => {
-
+export const loginAction = async (payload : ILogin, redirectPath ?: string ) : Promise<ILoginResponse | ApiErrorResponse> =>{
     const parsedPayload = LoginZodSchema.safeParse(payload);
-    if (!parsedPayload.success) {
+
+    if(!parsedPayload.success){
         const firstError = parsedPayload.error.issues[0].message || "Invalid input";
         return {
             success: false,
             message: firstError,
-           
-            
         }
     }
     try {
-        
+
         const response = await httpClient.post<ILoginResponse>("/auth/login", parsedPayload.data);
 
-        if (!response.success) {
-            return {
-                success: false,
-                message: response.message || "Login failed",
-            };
-        }
-
-        const { token, accessToken, refreshToken,user } = response.data;
-        // Store tokens in cookies
-        const {role,emailVerified,needsPasswordChange,email} = user;
+        const { accessToken, refreshToken, token, user} = response.data;
+        const {role, emailVerified, needsPasswordChange, email} = user;
         await setTokenInCookies("accessToken", accessToken);
         await setTokenInCookies("refreshToken", refreshToken);
-        await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60 );
+        await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60); // 1 day in seconds
 
-      if(!emailVerified){
-        redirect("/verify-email");
-      }else if(needsPasswordChange){
-        redirect(`/reset-password?email=${email}`);
-      }else{
-        const targetPath = redirectPath && isValidRedirectForRole(redirectPath, role as UserRole) ?
-         redirectPath : getDefaultDashboardRoute(role as UserRole);
-
-        redirect(targetPath);
-      }
-
-    } catch (error) {
-        
-        return {
+        // if(!emailVerified){
+        //     redirect("/verify-email");
+        // }else // in the catch block
             
-            success: false,
-            message: error instanceof Error ? error.message : "Unknown error",
+        if(needsPasswordChange){
+            //TODO : refactoring
+            redirect(`/reset-password?email=${email}`);
+        }else{
+            // redirect(redirectPath || "/dashboard");
+            const targetPath = redirectPath && isValidRedirectForRole(redirectPath, role as UserRole) ? redirectPath : getDefaultDashboardRoute(role as UserRole);
+
             
+            redirect(targetPath);
         }
-    
+        
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error : any) {
+        console.log(error, "error");
+        if(error && typeof error === "object" && "digest" in error && typeof error.digest === "string" && error.digest.startsWith("NEXT_REDIRECT")){
+            throw error;
+        }
+
+        if (error && error.response && error.response.data.message === "Email not verified") {
+            redirect(`/verify-email?email=${payload.email}`);
+        }
+        return {
+            success: false,
+            message: `Login failed: ${error.message}`,
+        }
     }
 }

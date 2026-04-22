@@ -52,7 +52,13 @@ export async function getUserInfo(){
     const accessToken = cookieStore.get("accessToken")?.value;
 
     if(!accessToken){
-        return null;
+        return {
+            id:"",
+            email:"",
+            role:"",
+            needsPasswordChange:false,
+            
+        }
     }
 
     const res = await fetch(`${BASE_API_URL}/auth/me`, {
