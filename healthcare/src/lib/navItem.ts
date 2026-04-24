@@ -64,7 +64,7 @@ export const doctorNavItems : NavSection[] = [
             },
         ]
     }
-]
+];
 
 export const adminNavItems: NavSection[] = [
     {
@@ -129,6 +129,39 @@ export const adminNavItems: NavSection[] = [
                 title: "Reviews",
                 href: "/admin/dashboard/reviews-management",
                 icon: "Star",
+            },
+        ],
+    },
+];
+
+export const patientNavItems: NavSection[] = [
+    {
+        title: "Appointments",
+        items: [
+            {
+                title: "My Appointments",
+                href: "/dashboard/my-appointments",
+                icon: "Calendar",
+            },
+            {
+                title: "Book Appointment",
+                href: "/dashboard/book-appointments",
+                icon: "ClipboardList",
+            },
+        ],
+    },
+    {
+        title: "Medical Records",
+        items: [
+            {
+                title: "My Prescriptions",
+                href: "/dashboard/my-prescriptions",
+                icon: "FileText",
+            },
+            {
+                title: "Health Records",
+                href: "/dashboard/health-records",
+                icon: "Activity",
             },
         ],
     },
