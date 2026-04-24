@@ -38,3 +38,30 @@ export const getCommonNavItems = (role : UserRole) : NavSection[] => {
     ]
 }
 
+export const doctorNavItems : NavSection[] = [
+    {
+        title: " Patient Management",
+        items : [
+            {
+                title : "Appointments",
+                href : "/doctor/dashboard/appointments",
+                icon : "Calender"
+            },
+            {
+                title: "My Schedules",
+                href: "/doctor/dashboard/my-schedules",
+                icon: "Clock",
+            },
+            {
+                title: "Prescriptions",
+                href: "/doctor/dashboard/prescriptions",
+                icon: "FileText",
+            },
+            {
+                title: "My Reviews",
+                href: "/doctor/dashboard/my-reviews",
+                icon: "Star",
+            },
+        ]
+    }
+]
