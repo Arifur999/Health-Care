@@ -1,4 +1,4 @@
-"ues client"
+"use client"
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { SheetTitle } from "@/components/ui/sheet";
@@ -7,7 +7,7 @@ import { UserInfo } from "@/types/user.types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils"
-import { getIconComponent } from "@/lib/iconMapper"
+import { getIconComponent } from "@/lib/iconMapper";
 
 interface DashboardMobileSidebarProps{
     userInfo : UserInfo;
