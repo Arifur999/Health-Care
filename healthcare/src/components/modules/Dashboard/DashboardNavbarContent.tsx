@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -6,6 +7,8 @@ import { UserInfo } from "@/types/user.types";
 import { Menu, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import DashboardMobileSidebar from "./DashboardMobileSidebar";
+import NotificationDropdown from "./NotificationDropdown";
+import UserDropdown from "./UserDropdown";
 
 interface DashboardNavbarProps {
     userInfo : UserInfo;

@@ -1,8 +1,10 @@
+"use client"
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { formatDistanceToNow } from "date-fns";
-import { Badge, Bell, Calendar, CheckCircle, Clock, UserPlus } from "lucide-react";
+import {  Bell, Calendar, CheckCircle, Clock, UserPlus } from "lucide-react";
 
 interface Notification {
     id: string;
