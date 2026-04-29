@@ -1,4 +1,5 @@
 import { PieChartData } from "@/types/dashboard.types";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 interface AppointmentPieChartProps {
@@ -63,10 +64,37 @@ const AppointmentPieChart = ({data, title, description}: AppointmentPieChartProp
             </Card>
         )
     }
-    
-    return (
 
-        <div></div>
-    )
+    return (
+    <Card className="col-span-2">
+        <CardHeader>
+            <CardTitle>{title}</CardTitle>
+            <CardDescription>{description}</CardDescription>
+        </CardHeader>
+
+        <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                    <Pie
+                        data={formattedData}
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={80}
+                        dataKey={"value"}
+                    >
+                        {formattedData.map((entry, index) => (
+                            <Cell
+                                key={`cell-${index}`}
+                                fill={CHART_COLORS[index % CHART_COLORS.length]}
+                            />
+                        ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                </PieChart>
+            </ResponsiveContainer>
+        </CardContent>
+    </Card>
+  )
 }
     export default AppointmentPieChart
