@@ -1,3 +1,5 @@
+import { PieChartData } from "@/types/dashboard.types";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 interface AppointmentPieChartProps {
     data : PieChartData[]
@@ -12,3 +14,30 @@ const CHART_COLORS = [
   "oklch(0.828 0.189 84.429)", // chart-4 - lime
   "oklch(0.769 0.188 70.08)", // chart-5 - orange variant
 ];
+
+
+
+const AppointmentPieChart = ({data, title, description}: AppointmentPieChartProps) => {
+
+       if(!data || !Array.isArray(data)){
+        return (
+            <Card className="col-span-2">
+                <CardHeader>
+                    <CardTitle>{title}</CardTitle>
+                    <CardDescription>{description}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-75">
+                    <p className="text-sm text-muted-foreground">
+                        Invalid data provided for the chart.
+                    </p>
+                </CardContent>
+            </Card>
+        )
+    }
+
+    return (
+
+        <div></div>
+    )
+}
+    export default AppointmentPieChart
