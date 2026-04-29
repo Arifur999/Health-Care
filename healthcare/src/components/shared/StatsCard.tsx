@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { Card, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { getIconComponent } from "@/lib/iconMapper";
 import { cn } from "@/lib/utils";
 
@@ -27,6 +27,22 @@ const StatsCard =({title,value,iconName,description,className}:StatsCardProps)=>
 
 
         </CardHeader>
+
+                    <CardContent className="space-y-1">
+                        <div className=" text-2xl font-bold">
+                            {value}
+                        </div>
+
+                        {
+                            description && (
+                                <p className="text-xs font-medium  text-muted-foreground">
+                                    {description}
+                                </p>
+                            )
+                        }
+                    </CardContent>
+
+
       </Card>
     )
 
