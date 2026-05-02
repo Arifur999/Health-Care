@@ -31,3 +31,4 @@ export interface IAdminDashboardData {
     barChartData : BarChartData[];
     pieChartData : PieChartData[];
 }
+
