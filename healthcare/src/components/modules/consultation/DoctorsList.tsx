@@ -18,7 +18,7 @@ const DoctorsList = () => {
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <div>{doctorData!.data.map((doctor: any) => (
+    <div>{doctorData!.map((doctor: any) => (
       <div key={doctor.id}>{doctor.name}</div>
     ))}</div>
   )

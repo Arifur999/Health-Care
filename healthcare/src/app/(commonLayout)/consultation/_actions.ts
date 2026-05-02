@@ -10,12 +10,9 @@ interface IDoctor {
     rating:number;
 }
 
-await QueryClient.prefetchQuery({
-    queryClient:["doctors"],
-    queryFn:getDoctors,
-})
+
 
 export const getDoctors = async () => {
-    const doctors =await httpClient.get("/doctors");
+    const doctors =await httpClient.get<IDoctor[]>("/doctors");
     return doctors.data;
 }
