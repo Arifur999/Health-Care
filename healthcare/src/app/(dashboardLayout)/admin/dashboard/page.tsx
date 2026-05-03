@@ -10,11 +10,13 @@ const AdminDashboardPage=async()=> {
   await queryClient.prefetchQuery({
     queryKey: ["admin-dashboard-data"],
     queryFn: getDashboardData,
+    staleTime: 30 * 1000, // 30 seconds data freshness
+    gcTime: 5 * 60 * 1000, // 5 minutes garbage collection time
   })
 
 
-  const dashboardData = queryClient.getQueryData(["admin-dashboard-data"]) as ApiResponse<IAdminDashboardData>;
-  console.log(dashboardData.data);
+  // const dashboardData = queryClient.getQueryData(["admin-dashboard-data"]) as ApiResponse<IAdminDashboardData>;
+  // console.log(dashboardData.data);
 
   return (
     
