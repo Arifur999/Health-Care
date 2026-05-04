@@ -3,7 +3,12 @@ import DoctorsList from "@/components/modules/consultation/DoctorsList";
 import { getDoctors } from "@/services/doctor.services";
 
 const ConsultationPage = async () => {
- 
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["doctors"],
+    queryFn: getDoctors,
+  });
  return (
    // Neat! Serialization is now as easy as passing props.
    // HydrationBoundary is a Client Component, so hydration will happen there.
