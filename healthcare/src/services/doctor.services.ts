@@ -1,14 +1,8 @@
 "use server";
 import { httpClient } from "@/lib/axios/httpClient"
-import { QueryClient } from "@tanstack/react-query";
+import { IDoctor } from "@/types/doctor.types";
 
-interface IDoctor {
-    id:number;
-    name:string;
-    specialization:string;
-    experience:number;
-    rating:number;
-}
+
 
 
 
