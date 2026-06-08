@@ -1,6 +1,21 @@
-const AdminManagementPage=()=> {
+import { getDoctors } from "@/services/doctor.services";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+
+const AdminManagementPage=async ()=> {
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["doctors"],
+    queryFn: getDoctors,
+    staleTime: 1000 * 60 * 60, // 1 hour
+    gcTime: 1000 * 60 * 60 * 6, // 6 hours
+  })
+  
   return (
-    <div>page</div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+     
+   </HydrationBoundary>
   )
 }
 
