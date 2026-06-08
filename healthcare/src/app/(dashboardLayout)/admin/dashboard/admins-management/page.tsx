@@ -1,3 +1,4 @@
+import DoctorsTable from "@/components/modules/Admin/DoctorsManagement/DoctorTable";
 import { getDoctors } from "@/services/doctor.services";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
@@ -14,7 +15,7 @@ const AdminManagementPage=async ()=> {
   
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-     
+     <DoctorsTable />
    </HydrationBoundary>
   )
 }
