@@ -27,7 +27,7 @@ const DataTable = <TData,>({ data, columns, actions, emptyMessage , isLoading  }
         {
             id : "actions", // Unique id for the column
             header: "Actions",
-            cell: ({ row }) => {
+            cell: ({ row }: { row: { original: TData } }) => {
                 const rowData = row.original;
 
                 return (

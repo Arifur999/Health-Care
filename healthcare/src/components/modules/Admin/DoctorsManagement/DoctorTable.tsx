@@ -6,14 +6,14 @@ import { IDoctor } from "@/types/doctor.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { useQuery } from "@tanstack/react-query";
 
-const doctorColumns: ColumnDef<IDoctor>[] = [
-    { accessorKey: "name", header: "Name" },
-    { accessorKey: "email", header: "Email" },
-    { accessorKey: "designation", header: "Designation" },
-    { accessorKey: "qualification", header: "Qualification" },
-    { accessorKey: "experience", header: "Experience" },
-    { accessorKey: "appointmentFee", header: "Fee" },
-];
+// const doctorColumns: ColumnDef<IDoctor>[] = [
+//     { accessorKey: "name", header: "Name" },
+//     { accessorKey: "email", header: "Email" },
+//     { accessorKey: "designation", header: "Designation" },
+//     { accessorKey: "qualification", header: "Qualification" },
+//     { accessorKey: "experience", header: "Experience" },
+//     { accessorKey: "appointmentFee", header: "Fee" },
+// ];
 
 const DoctorsTable = () => {
 
