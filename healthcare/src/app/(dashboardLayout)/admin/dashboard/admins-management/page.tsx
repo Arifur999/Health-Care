@@ -4,6 +4,8 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 
 const AdminManagementPage=async ()=> {
 
+  
+
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
