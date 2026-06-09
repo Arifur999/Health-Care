@@ -3,28 +3,25 @@
 import DataTable from "@/components/shared/table/DataTable";
 import { getDoctors } from "@/services/doctor.services";
 import { IDoctor } from "@/types/doctor.types";
-import { ColumnDef } from "@tanstack/react-table";
 import { useQuery } from "@tanstack/react-query";
+import { doctorColumns } from "./doctorsColumns";
 
-// const doctorColumns: ColumnDef<IDoctor>[] = [
-//     { accessorKey: "name", header: "Name" },
-//     { accessorKey: "email", header: "Email" },
-//     { accessorKey: "designation", header: "Designation" },
-//     { accessorKey: "qualification", header: "Qualification" },
-//     { accessorKey: "experience", header: "Experience" },
-//     { accessorKey: "appointmentFee", header: "Fee" },
-// ];
 
 const DoctorsTable = () => {
 
+    // const doctorColumns : ColumnDef<IDoctor>[] = [
+    //   { accessorKey: "name", header: "Name"},
+    // //   { accessorKey: "specialization", header: "Specialization" },
+    //   { accessorKey: "experience", header: "Experience" },
+    // //   { accessorKey: "rating", header: "Rating" },
+    // ];
+
    
 
-    const { data : doctorDataResponse, isLoading } = useQuery({
+    const { data: doctors = [], isLoading } = useQuery<IDoctor[]>({
         queryKey: ["doctors"],
         queryFn: getDoctors
     });
-
-    const doctors = doctorDataResponse || [];
 
     const handleView = (doctor : IDoctor) => {
         console.log("View doctor", doctor);

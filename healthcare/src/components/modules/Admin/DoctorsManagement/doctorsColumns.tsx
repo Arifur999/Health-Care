@@ -1,6 +1,7 @@
 
 import DateCell from "@/components/shared/cell/DateCell";
 import StatusBadgeCell from "@/components/shared/cell/StatusBadgeCell";
+import UserInfoCell from "@/components/shared/cell/UserInfoCell";
 import { Badge } from "@/components/ui/badge";
 import { IDoctor } from "@/types/doctor.types";
 import { ColumnDef } from "@tanstack/react-table";
