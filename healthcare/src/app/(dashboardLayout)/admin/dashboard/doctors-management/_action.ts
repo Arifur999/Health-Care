@@ -1,7 +1,7 @@
 "use server"
 
 import { ApiErrorResponse, ApiResponse } from "@/types/api.types"
-import { type ICreateDoctorPayload, type IDoctor, type IDoctorDetails, type IUpdateDoctorPayload }  from "@/types/doctor.types"
+import { IDoctorDetails, type ICreateDoctorPayload, type IDoctor, type IUpdateDoctorPayload }  from "@/types/doctor.types"
 
 
 

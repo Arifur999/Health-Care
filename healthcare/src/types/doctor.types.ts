@@ -1,4 +1,4 @@
-enum Gender {
+export enum Gender {
     MALE = "MALE",
     FEMALE = "FEMALE",
     OTHER = "OTHER"
@@ -132,3 +132,10 @@ export interface IDoctorAppointmentItem {
     } | null;
 }
 
+
+export interface IDoctorDetails extends IDoctor {
+    user: IDoctorUserDetails;
+    appointments?: IDoctorAppointmentItem[];
+    doctorSchedules?: IDoctorScheduleItem[];
+    reviews?: IDoctorReview[];
+}
