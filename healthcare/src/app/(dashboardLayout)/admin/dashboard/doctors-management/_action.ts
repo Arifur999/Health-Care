@@ -2,6 +2,7 @@
 
 import { ApiErrorResponse, ApiResponse } from "@/types/api.types"
 import { IDoctorDetails, type ICreateDoctorPayload, type IDoctor, type IUpdateDoctorPayload }  from "@/types/doctor.types"
+import { createDoctorServerZodSchema, updateDoctorServerZodSchema } from "@/zod/doctor.validation"
 
 
 
