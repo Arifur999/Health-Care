@@ -40,3 +40,22 @@ export interface IDoctor {
         }
     }>
 }
+
+
+export interface ICreateDoctorPayload {
+    password: string;
+    doctor: {
+        name: string;
+        email: string;
+        contactNumber: string;
+        address?: string;
+        registrationNumber: string;
+        experience?: number;
+        gender: Gender.MALE | Gender.FEMALE;
+        appointmentFee: number;
+        qualification: string;
+        currentWorkingPlace: string;
+        designation: string;
+    };
+    specialties: string[];
+}
