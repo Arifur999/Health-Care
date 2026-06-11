@@ -2,11 +2,7 @@
 
 import DataTable from "@/components/shared/table/DataTable";
 
-import {
-  serverManagedFilter,
-  useServerManagedDataTableFilters,
-} from "@/hooks/useServerManagedDataTableFilters";
-import { useServerManagedDataTableSearch } from "@/hooks/useServerManagedDataTableSearch";
+
 
 import { getAllSpecialties, getDoctors } from "@/services/doctor.services";
 import { PaginationMeta } from "@/types/api.types";
@@ -24,6 +20,7 @@ import { doctorColumns } from "./doctorsColumns";
 import { DataTableFilterConfig, DataTableFilterValues } from "@/components/shared/table/DataTableFilters";
 import { useServerManagedDataTable } from "@/hooks/useServerManagedDataTable";
 import { useRowActionModalState } from "@/hooks/useRowActionModalState";
+import { useServerManagedDataTableSearch } from "@/hooks/useServerManagedDataTableSearch";
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 10;
