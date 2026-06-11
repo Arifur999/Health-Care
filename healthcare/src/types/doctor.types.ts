@@ -41,7 +41,6 @@ export interface IDoctor {
     }>
 }
 
-
 export interface ICreateDoctorPayload {
     password: string;
     doctor: {
@@ -131,7 +130,6 @@ export interface IDoctorAppointmentItem {
         id?: string;
     } | null;
 }
-
 
 export interface IDoctorDetails extends IDoctor {
     user: IDoctorUserDetails;
