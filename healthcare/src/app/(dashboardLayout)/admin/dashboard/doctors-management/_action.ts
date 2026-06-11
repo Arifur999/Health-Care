@@ -1,10 +1,9 @@
 "use server"
 
-import { ApiErrorResponse, ApiResponse } from "@/types/api.types"
-import { IDoctorDetails, type ICreateDoctorPayload, type IDoctor, type IUpdateDoctorPayload }  from "@/types/doctor.types"
+import { createDoctor, deleteDoctor, getDoctorById, updateDoctor } from "@/services/doctor.services"
+import { type ApiErrorResponse, type ApiResponse } from "@/types/api.types"
+import { type ICreateDoctorPayload, type IDoctor, type IDoctorDetails, type IUpdateDoctorPayload } from "@/types/doctor.types"
 import { createDoctorServerZodSchema, updateDoctorServerZodSchema } from "@/zod/doctor.validation"
-
-
 
 const getActionErrorMessage = (error: unknown, fallbackMessage: string) => {
   if (

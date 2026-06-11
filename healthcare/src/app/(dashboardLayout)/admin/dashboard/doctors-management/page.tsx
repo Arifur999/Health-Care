@@ -1,5 +1,5 @@
 import DoctorsTable from "@/components/modules/Admin/DoctorsManagement/DoctorTable";
-import {  getDoctors } from "@/services/doctor.services";
+import {  getAllSpecialties, getDoctors } from "@/services/doctor.services";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
 const DoctorsManagementPage = async ({

@@ -12,7 +12,7 @@ import { getAllSpecialties, getDoctors } from "@/services/doctor.services";
 import { PaginationMeta } from "@/types/api.types";
 import { IDoctor } from "@/types/doctor.types";
 import { ISpecialty } from "@/types/specialty.types";
-import { useServerManagedDataTable } from "@/hooks/useServerManagedDataTable";
+
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
@@ -22,6 +22,7 @@ import EditDoctorFormModal from "./EditDoctorFormModal";
 import ViewDoctorProfileDialog from "./ViewDoctorProfileDialog";
 import { doctorColumns } from "./doctorsColumns";
 import { DataTableFilterConfig, DataTableFilterValues } from "@/components/shared/table/DataTableFilters";
+import { useServerManagedDataTable } from "@/hooks/useServerManagedDataTable";
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 10;
