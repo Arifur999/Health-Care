@@ -57,7 +57,7 @@ const ViewDoctorProfileDialog = ({
   })
 
   const hasError = data && !data.success
-  const doctorDetails = data && data.success ? data.data : null
+  const doctorDetails = data && data.success && "data" in data ? data.data : null
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

@@ -25,7 +25,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { Gender } from "@/types/doctor.types"
-
+import { type ISpecialty } from "@/types/specialty.types"
 import {
     createDoctorFormZodSchema,
     type ICreateDoctorFormValues,
@@ -37,7 +37,6 @@ import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
 import { toast } from "sonner"
 import SpecialtiesMultiSelect from "./SpecialtiesMultiSelect"
-import { ISpecialty } from "@/types/specialty.types"
 
 interface CreateDoctorFormModalProps {
   specialties: ISpecialty[]

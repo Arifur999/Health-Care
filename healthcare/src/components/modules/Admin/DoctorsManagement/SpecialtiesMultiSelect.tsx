@@ -12,8 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
-import { ISpecialty } from "@/types/specialty.types"
-
+import { type ISpecialty } from "@/types/specialty.types"
 import { ChevronDown } from "lucide-react"
 
 interface SpecialtiesMultiSelectProps {
