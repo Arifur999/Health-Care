@@ -21,6 +21,7 @@ import { DataTableFilterConfig, DataTableFilterValues } from "@/components/share
 import { useServerManagedDataTable } from "@/hooks/useServerManagedDataTable";
 import { useRowActionModalState } from "@/hooks/useRowActionModalState";
 import { useServerManagedDataTableSearch } from "@/hooks/useServerManagedDataTableSearch";
+import { serverManagedFilter, useServerManagedDataTableFilters } from "@/hooks/useServerManagedDataTableFilters";
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 10;
