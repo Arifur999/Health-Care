@@ -13,10 +13,11 @@ import { useSearchParams } from "next/navigation"
 import DeleteScheduleConfirmationDialog from "./DeleteScheduleConfirmationDialog"
 
 import { schedulesColumns } from "./schedulesColumns"
-import ViewScheduleDialog from "./ViewScheduleDialog"
+
 import { getSchedules } from "@/services/schedule.services"
 import CreateScheduleFormModal from "./CreateScheduleFormModal"
 import EditScheduleFormModal from "./EditScheduleFormModal"
+import ViewScheduleDialog from "./ViewScheduleDialog"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 10
