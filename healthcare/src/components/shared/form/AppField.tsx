@@ -1,34 +1,30 @@
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
-import { AnyFieldApi } from '@tanstack/react-form'
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
+import type { AnyFieldApi } from "@tanstack/react-form";
+import React from "react";
 
+const getErrorMessage = (error : unknown) : string => {
+    if (typeof error === "string") return error;
 
-const getErrorMessage = (error:unknown): string  => {
-    if (typeof error === "string") {
-        return error;
-    }
-    if (error && typeof error === "object" ) {
-        if ("message" in error && typeof error.message === "string") {
+    if(error && typeof error === "object"){
+        if("message" in error && typeof error.message === "string"){
             return error.message;
         }
-       
     }
+
     return String(error);
 }
 
-
 type AppFieldProps = {
-
     field : AnyFieldApi;
     label : string;
-    type ?: "text" | "email" | "password" | "number";
+    type ?: "text" | "email" | "password" | "number" | "date" | "time";
     placeholder ?: string;
     append ?: React.ReactNode;
     prepend ?: React.ReactNode;
     className ?: string;
     disabled ?: boolean;
-
 }
 
 const AppField = ({
@@ -40,14 +36,13 @@ const AppField = ({
     prepend,
     className,
     disabled = false,
-}:AppFieldProps) => {
+} : AppFieldProps) => {
 
-    const FirstError = field.state.meta.isTouched && field.state.meta.errors.length > 0 ?
-    getErrorMessage(field.state.meta.errors[0]) : null;
-    const hasError=FirstError !== null;
+    const firstError = field.state.meta.isTouched && field.state.meta.errors.length > 0 ? getErrorMessage(field.state.meta.errors[0]) : null;
 
+    const hasError = firstError !== null;
 
-    return (
+  return (
     <div className={cn("space-y-1.5", className)}>
         <Label
             htmlFor={field.name}
@@ -82,7 +77,7 @@ const AppField = ({
             />
 
             {
-                append && (<div className="absolute inset-y-0 right-0 flex items-center pr-3 z-10 pointer-events-auto">
+                append && (<div className="absolute inset-y-0 right-0 items-center pr-3 pointer-events-none z-10">
                     {append}
                 </div>)
             }
@@ -94,15 +89,13 @@ const AppField = ({
                      role="alert"
                      className="text-sm text-destructive" 
                     >
-                        {FirstError}
+                        {firstError}
                     </p>
                 )
             }
         </div>
     </div>
   )
-
-
 }
 
-export default AppField;
+export default AppField
