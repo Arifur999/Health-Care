@@ -9,12 +9,13 @@ import { PaginationMeta } from "@/types/api.types"
 import { type ISchedule } from "@/types/schedule.types"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
-import CreateScheduleFormModal from "./CreateScheduleFormModal"
+
 import DeleteScheduleConfirmationDialog from "./DeleteScheduleConfirmationDialog"
 import EditScheduleFormModal from "./EditScheduleFormModal"
 import { schedulesColumns } from "./schedulesColumns"
 import ViewScheduleDialog from "./ViewScheduleDialog"
 import { getSchedules } from "@/services/schedule.services"
+import CreateScheduleFormModal from "./CreateScheduleFormModal"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 10
