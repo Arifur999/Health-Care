@@ -11,11 +11,12 @@ import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 
 import DeleteScheduleConfirmationDialog from "./DeleteScheduleConfirmationDialog"
-import EditScheduleFormModal from "./EditScheduleFormModal"
+
 import { schedulesColumns } from "./schedulesColumns"
 import ViewScheduleDialog from "./ViewScheduleDialog"
 import { getSchedules } from "@/services/schedule.services"
 import CreateScheduleFormModal from "./CreateScheduleFormModal"
+import EditScheduleFormModal from "./EditScheduleFormModal"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 10
