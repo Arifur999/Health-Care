@@ -63,8 +63,8 @@ const SchedulesTable = ({ initialQueryString }: { initialQueryString: string }) 
 		queryFn: () => getSchedules(queryString),
 	})
 
-	const schedules = schedulesResponse?.data ?? []
-	const meta: PaginationMeta | undefined = schedulesResponse?.meta
+	const schedules = schedulesResponse && "data" in schedulesResponse ? schedulesResponse.data : []
+	const meta: PaginationMeta | undefined = schedulesResponse && "meta" in schedulesResponse ? schedulesResponse.meta : undefined
 
 	return (
 		<>

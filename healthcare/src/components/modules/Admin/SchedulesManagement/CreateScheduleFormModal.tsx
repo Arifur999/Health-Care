@@ -52,7 +52,7 @@ const CreateScheduleFormModal = () => {
         return
       }
 
-      const createdCount = result.data?.length ?? 0
+      const createdCount = "data" in result ? result.data?.length ?? 0 : 0
       toast.success(
         result.message ||
           (createdCount > 0

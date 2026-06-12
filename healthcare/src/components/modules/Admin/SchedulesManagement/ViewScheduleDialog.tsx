@@ -64,7 +64,7 @@ const ViewScheduleDialog = ({
   })
 
   const hasError = data && !data.success
-  const scheduleDetails = data && data.success
+  const scheduleDetails = data && data.success && "data" in data
     ? {
         ...schedule,
         ...data.data,
