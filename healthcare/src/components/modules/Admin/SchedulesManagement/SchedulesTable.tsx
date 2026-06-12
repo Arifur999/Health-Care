@@ -4,20 +4,17 @@ import DataTable from "@/components/shared/table/DataTable"
 import { useRowActionModalState } from "@/hooks/useRowActionModalState"
 import { useServerManagedDataTable } from "@/hooks/useServerManagedDataTable"
 import { useServerManagedDataTableSearch } from "@/hooks/useServerManagedDataTableSearch"
-
+import { getSchedules } from "@/services/schedule.services"
 import { PaginationMeta } from "@/types/api.types"
 import { type ISchedule } from "@/types/schedule.types"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
-
-import DeleteScheduleConfirmationDialog from "./DeleteScheduleConfirmationDialog"
-
-import { schedulesColumns } from "./schedulesColumns"
-
-import { getSchedules } from "@/services/schedule.services"
 import CreateScheduleFormModal from "./CreateScheduleFormModal"
+import DeleteScheduleConfirmationDialog from "./DeleteScheduleConfirmationDialog"
 import EditScheduleFormModal from "./EditScheduleFormModal"
+
 import ViewScheduleDialog from "./ViewScheduleDialog"
+import { schedulesColumns } from "./schedulesColumns"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 10
