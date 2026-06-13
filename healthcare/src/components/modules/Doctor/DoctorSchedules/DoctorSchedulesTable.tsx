@@ -20,14 +20,13 @@ import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 import { useMemo } from "react"
 
-import DeleteMyScheduleConfirmationDialog from "./DeleteMyScheduleConfirmationDialog"
-
 
 import { doctorSchedulesColumns } from "./doctorSchedulesColumns"
 import { IDoctorSchedule } from "@/types/doctorSchedule.types"
 import { getMyDoctorSchedules } from "@/services/doctorSchedule.services"
 import BookScheduleModal from "./BookScheduleModal"
 import ViewMyScheduleDialog from "./ViewMyScheduleDialog"
+import DeleteMyScheduleConfirmationDialog from "./DeleteMyScheduleConfirmationDialog"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 10
