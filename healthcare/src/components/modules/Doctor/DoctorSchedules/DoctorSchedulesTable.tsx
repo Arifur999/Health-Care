@@ -19,13 +19,15 @@ import { PaginationMeta } from "@/types/api.types"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 import { useMemo } from "react"
-import BookScheduleModal from "./BookScheduleModal"
+
 import DeleteMyScheduleConfirmationDialog from "./DeleteMyScheduleConfirmationDialog"
 
-import ViewMyScheduleDialog from "./ViewMyScheduleDialog"
+
 import { doctorSchedulesColumns } from "./doctorSchedulesColumns"
 import { IDoctorSchedule } from "@/types/doctorSchedule.types"
 import { getMyDoctorSchedules } from "@/services/doctorSchedule.services"
+import BookScheduleModal from "./BookScheduleModal"
+import ViewMyScheduleDialog from "./ViewMyScheduleDialog"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 10
