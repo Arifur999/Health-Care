@@ -13,16 +13,19 @@ import {
     useServerManagedDataTableFilters,
 } from "@/hooks/useServerManagedDataTableFilters"
 import { useServerManagedDataTableSearch } from "@/hooks/useServerManagedDataTableSearch"
-import { getMyDoctorSchedules } from "@/services/doctorSchedule.services"
+
 import { PaginationMeta } from "@/types/api.types"
-import { type IDoctorSchedule } from "@/types/doctorSchedule.types"
+
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 import { useMemo } from "react"
 import BookScheduleModal from "./BookScheduleModal"
 import DeleteMyScheduleConfirmationDialog from "./DeleteMyScheduleConfirmationDialog"
-import { doctorSchedulesColumns } from "./doctorSchedulesColumns"
+
 import ViewMyScheduleDialog from "./ViewMyScheduleDialog"
+import { doctorSchedulesColumns } from "./doctorSchedulesColumns"
+import { IDoctorSchedule } from "@/types/doctorSchedule.types"
+import { getMyDoctorSchedules } from "@/services/doctorSchedule.services"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 10
