@@ -1,9 +1,7 @@
 "use client"
 
-import {
-  bookAppointmentAction,
-  bookAppointmentWithPayLaterAction,
-} from "@/app/_actions/appointment.actions"
+
+import { bookAppointmentAction, bookAppointmentWithPayLaterAction } from "@/app/-actions/appointment.actions"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"

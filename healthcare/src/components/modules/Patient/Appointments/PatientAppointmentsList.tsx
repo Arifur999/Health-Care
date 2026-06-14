@@ -1,6 +1,7 @@
 "use client"
 
-import { initiateAppointmentPaymentAction } from "@/app/_actions/appointment.actions"
+
+import { initiateAppointmentPaymentAction } from "@/app/-actions/appointment.actions"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
