@@ -68,7 +68,7 @@ const PatientAppointmentsList = ({
       return
     }
 
-    if (!result.data.paymentUrl) {
+    if (!("data" in result) || !result.data.paymentUrl) {
       toast.error("Payment link is unavailable right now")
       return
     }
