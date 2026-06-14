@@ -5,7 +5,6 @@ import DataTableFilters, {
   DataTableFilterValues,
 } from "@/components/shared/table/DataTableFilters"
 import DataTableSearch from "@/components/shared/table/DataTableSearch"
-import BookAppointmentModal from "@/components/modules/Patient/Appointments/BookAppointmentModal"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -29,6 +28,7 @@ import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useMemo } from "react"
+import BookAppointmentModal from "../Patient/Appointments/BookAppointmentModal"
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 12
