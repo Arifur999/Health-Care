@@ -10,6 +10,7 @@ import {
 } from "@/types/appointment.types"
 import { bookAppointmentServerZodSchema } from "@/zod/appointment.validation"
 
+
 const getActionErrorMessage = (error: unknown, fallbackMessage: string) => {
   if (
     error &&
