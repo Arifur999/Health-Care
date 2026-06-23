@@ -10,6 +10,16 @@
 !.yarn/releases
 !.yarn/versions
 
+
+
+
+.pnpm-store
+.next
+dist
+.env
+.env.local
+
+
 # testing
 /coverage
 
