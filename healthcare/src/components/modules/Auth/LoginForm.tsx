@@ -1,5 +1,5 @@
 "use client";
-import { LoginAction } from "@/app/(commonLayout)/(auth)/login/_action";
+import { loginAction } from "@/app/(commonLayout)/(auth)/login/_action";
 import AppField from "@/components/shared/form/AppField";
 import AppSubmitButton from "@/components/shared/form/AppSubmitButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -25,7 +25,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
 
 
     const {mutateAsync ,isPending} =useMutation({
-        mutationFn:(payload : ILogin) => LoginAction(payload, redirectPath),
+        mutationFn:(payload : ILogin) => loginAction(payload, redirectPath),
     })
 
     const form =useForm({
@@ -37,7 +37,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
             setServerError(null);
             try {
                 const result = await mutateAsync(value);
-                if(!result.success){
+                if("success" in result && !result.success){
                     setServerError(result.message || "Login failed");
                     return;
                 }

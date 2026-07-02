@@ -2,6 +2,8 @@ import DashboardNavbar from "@/components/modules/Dashboard/dashboardNavbar"
 import DashboardSidebar from "@/components/modules/Dashboard/dashboardSidebar"
 import React from "react"
 
+export const dynamic = "force-dynamic";
+
 const RootDashboardLayout = async ({children} : {children: React.ReactNode}) => {
   return (
     <div className="flex h-screen overflow-hidden">
