@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+**/node_modules/
+.pnp
+.pnp.*
+.pnpm-store/
+
+# builds
+.next/
+**/.next/
+dist/
+build/
+out/
+coverage/
+
+# env and local config
+.env
+.env.*
+!.env.example
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# system/editor
+.DS_Store
+Thumbs.db
+*.pem
+*.tsbuildinfo
+
+# local agent metadata
+.agents/
+.codex/
