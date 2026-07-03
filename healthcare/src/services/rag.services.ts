@@ -6,6 +6,30 @@ export interface IRagQueryPayload {
     sourceTypes?: string;
 }
 
+export interface IRagSource {
+    id: string;
+    content: string;
+    similarity: number;
+    metadata?: {
+        name?: string;
+        [key: string]: unknown;
+    };
+}
+
+
+export interface IRagQueryData {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    answers: any;
+    sources: IRagSource[];
+    contextUsed: string;
+}
+
+export interface IIngestDoctorData {
+    success: boolean;
+    message: string;
+    indexedCount: number;
+}
+
 
 
 export const queryRagService = async (payload: IRagQueryPayload) =>{
@@ -14,6 +38,6 @@ export const queryRagService = async (payload: IRagQueryPayload) =>{
 }
 
 export const ingestDoctorService = async () => {
-    const response = await httpClient.post("/rag/ingest-doctor",{});
+    const response = await httpClient.post<IIngestDoctorData>("/rag/ingest-doctor",{});
     return response.data;
 }
