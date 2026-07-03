@@ -19,7 +19,9 @@ export interface IRagSource {
 
 export interface IRagQueryData {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    answers: any;
+    answer: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    answers?: any;
     sources: IRagSource[];
     contextUsed: string;
 }
@@ -38,6 +40,6 @@ export const queryRagService = async (payload: IRagQueryPayload) =>{
 }
 
 export const ingestDoctorService = async () => {
-    const response = await httpClient.post<IIngestDoctorData>("/rag/ingest-doctor",{});
+    const response = await httpClient.post<IIngestDoctorData>("/rag/ingest-doctors",{});
     return response.data;
 }

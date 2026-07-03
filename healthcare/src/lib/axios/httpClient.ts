@@ -33,6 +33,29 @@ async function tryRefreshToken(
     }
 }
 
+const getLocalApiBaseUrl = () => {
+    if(!API_BASE_URL.includes("ph-server")) {
+        return null;
+    }
+
+    return API_BASE_URL.replace("http://ph-server", "http://localhost");
+}
+
+const shouldRetryWithLocalApi = (error: unknown) => {
+    if(!axios.isAxiosError(error)) {
+        return false;
+    }
+
+    const code = error.code?.toLowerCase();
+    const message = error.message?.toLowerCase() ?? "";
+
+    return API_BASE_URL.includes("ph-server") &&
+        (code === "enotfound" ||
+         code === "econnrefused" ||
+         message.includes("getaddrinfo") ||
+         message.includes("could not be resolved"));
+}
+
 const axiosInstance = async () => {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
@@ -60,6 +83,29 @@ const axiosInstance = async () => {
     return instance;
 }
 
+const localAxiosInstance = async () => {
+    const localApiBaseUrl = getLocalApiBaseUrl();
+
+    if(!localApiBaseUrl) {
+        return null;
+    }
+
+    const cookieStore = await cookies();
+    const cookieHeader = cookieStore
+                                .getAll()
+                                .map((cookie) => `${cookie.name}=${cookie.value}`)
+                                .join("; ");
+
+    return axios.create({
+        baseURL : localApiBaseUrl,
+        timeout : 30000,
+        headers:{
+            'Content-Type' : 'application/json',
+            Cookie : cookieHeader
+        }
+    })
+}
+
 export interface ApiRequestOptions {
     params?: Record<string, unknown>;
     headers?: Record<string, string>;
@@ -74,6 +120,16 @@ const httpGet = async <TData>(endpoint: string, options?: ApiRequestOptions) : P
         });
         return response.data;
     } catch (error) {       
+        if(shouldRetryWithLocalApi(error)) {
+            const instance = await localAxiosInstance();
+            if(instance) {
+                const response = await instance.get<ApiResponse<TData>>(endpoint, {
+                    params: options?.params,
+                    headers: options?.headers,
+                });
+                return response.data;
+            }
+        }
         console.error(`GET request to ${endpoint} failed:`, error);
         throw error;
     }
@@ -88,6 +144,16 @@ const httpPost = async <TData>(endpoint: string, data: unknown, options?: ApiReq
         });
         return response.data;
     } catch (error) {
+        if(shouldRetryWithLocalApi(error)) {
+            const instance = await localAxiosInstance();
+            if(instance) {
+                const response = await instance.post<ApiResponse<TData>>(endpoint, data, {
+                    params: options?.params,
+                    headers: options?.headers,
+                });
+                return response.data;
+            }
+        }
         console.error(`POST request to ${endpoint} failed:`, error);
         throw error;
     }
@@ -102,6 +168,16 @@ const httpPut = async <TData>(endpoint: string, data: unknown, options?: ApiRequ
         });
         return response.data;
     } catch (error) {
+        if(shouldRetryWithLocalApi(error)) {
+            const instance = await localAxiosInstance();
+            if(instance) {
+                const response = await instance.put<ApiResponse<TData>>(endpoint, data, {
+                    params: options?.params,
+                    headers: options?.headers,
+                });
+                return response.data;
+            }
+        }
         console.error(`PUT request to ${endpoint} failed:`, error);
         throw error;
     }
@@ -117,6 +193,16 @@ const httpPatch = async <TData>(endpoint: string, data: unknown, options?: ApiRe
         return response.data;
     }
     catch (error) {
+        if(shouldRetryWithLocalApi(error)) {
+            const instance = await localAxiosInstance();
+            if(instance) {
+                const response = await instance.patch<ApiResponse<TData>>(endpoint, data, {
+                    params: options?.params,
+                    headers: options?.headers,
+                });
+                return response.data;
+            }
+        }
         console.error(`PATCH request to ${endpoint} failed:`, error);
         throw error;
     }
@@ -131,6 +217,16 @@ const httpDelete =  async <TData>(endpoint: string, options?: ApiRequestOptions)
         });
         return response.data;
     } catch (error) {
+        if(shouldRetryWithLocalApi(error)) {
+            const instance = await localAxiosInstance();
+            if(instance) {
+                const response = await instance.delete<ApiResponse<TData>>(endpoint, {
+                    params: options?.params,
+                    headers: options?.headers,
+                });
+                return response.data;
+            }
+        }
         console.error(`DELETE request to ${endpoint} failed:`, error);
         throw error;
     }

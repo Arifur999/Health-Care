@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import ChatbotWidget from "./-actions/ChatbotWidget";
 import "./globals.css";
 import QueryProviders from "./providers/QueryProvider";
 
@@ -31,6 +32,7 @@ export default function RootLayout({
       >
         <QueryProviders>
           {children}
+          <ChatbotWidget />
           <Toaster position="top-right" richColors />
         </QueryProviders>
       </body>
