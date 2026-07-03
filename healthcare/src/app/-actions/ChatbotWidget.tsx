@@ -59,11 +59,16 @@ export function ChatbotWidget() {
     const response = await queryRagAction(currentQuery)
 
     if (response.success) {
+      const answerText =
+        "answers" in response && response.answers
+          ? response.answers
+          : "Sorry, I couldn't process that."
+
       setMessages((prev) => [
         ...prev,
         {
           sender: "ai",
-          text: "answers" in response ? response.answers : "Sorry, I couldn't process that.",
+          text: answerText,
           sources: "sources" in response ? response.sources : undefined,
         },
       ])
