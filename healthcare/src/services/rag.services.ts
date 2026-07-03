@@ -6,8 +6,10 @@ export interface IRagQueryPayload {
     sourceTypes?: string;
 }
 
+
+
 export const queryRagService = async (payload: IRagQueryPayload) =>{
-    const response = await httpClient.post("/rag/query", payload);
+    const response = await httpClient.post<IRagQueryData>("/rag/query", payload);
     return response.data;
 }
 
