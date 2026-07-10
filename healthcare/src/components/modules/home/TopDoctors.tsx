@@ -1,46 +1,28 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { getDoctors } from "@/services/doctor.services"
+import { type IDoctor } from "@/types/doctor.types"
 import { CalendarCheck, MapPin, Star } from "lucide-react"
 import Link from "next/link"
 
-const doctors = [
-  {
-    name: "Dr. Sarah Ahmed",
-    specialty: "Cardiologist",
-    location: "Central Medical College",
-    experience: "12 years",
-    rating: "4.9",
-    image: "",
-  },
-  {
-    name: "Dr. Arif Rahman",
-    specialty: "Neurologist",
-    location: "City Care Hospital",
-    experience: "10 years",
-    rating: "4.8",
-    image: "",
-  },
-  {
-    name: "Dr. Maya Chowdhury",
-    specialty: "Pediatrician",
-    location: "Family Health Center",
-    experience: "9 years",
-    rating: "4.9",
-    image: "",
-  },
-]
-
 const getInitials = (name: string) =>
   name
-    .split(" ")
+    .trim()
+    .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
     .map((part) => part[0])
     .join("")
     .toUpperCase()
 
-const TopDoctors = () => {
+const TopDoctors = async () => {
+  const doctorsResponse = await getDoctors(
+    "sortBy=averageRating&sortOrder=desc&limit=3",
+  ).catch(() => null)
+
+  const doctors = doctorsResponse?.data ?? []
+
   return (
     <section className="bg-muted/30 py-16 sm:py-20">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -59,44 +41,56 @@ const TopDoctors = () => {
           </Button>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {doctors.map((doctor) => (
-            <article key={doctor.name} className="flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm">
-              <div className="flex items-start gap-4">
-                <Avatar className="size-16 ring-2 ring-secondary">
-                  <AvatarImage src={doctor.image} alt={doctor.name} />
-                  <AvatarFallback>{getInitials(doctor.name)}</AvatarFallback>
-                </Avatar>
-                <div className="min-w-0">
-                  <h3 className="truncate text-lg font-semibold">{doctor.name}</h3>
-                  <p className="text-sm text-muted-foreground">{doctor.specialty}</p>
-                  <div className="mt-2 flex items-center gap-1 text-sm font-medium text-amber-600">
-                    <Star className="size-4 fill-current" aria-hidden="true" />
-                    {doctor.rating}
+        {doctors.length === 0 ? (
+          <div className="mt-10 rounded-2xl border bg-card p-8 text-center text-sm text-muted-foreground">
+            Doctors will appear here once they are onboarded.
+          </div>
+        ) : (
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {doctors.map((doctor: IDoctor) => {
+              const specialtiesList = doctor.specialties?.map((item) => item.specialty.title) ?? []
+
+              return (
+                <article key={String(doctor.id)} className="flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="size-16 ring-2 ring-secondary">
+                      <AvatarImage src={doctor.profilePhoto} alt={doctor.name} />
+                      <AvatarFallback>{getInitials(doctor.name)}</AvatarFallback>
+                    </Avatar>
+                    <div className="min-w-0">
+                      <h3 className="truncate text-lg font-semibold">{doctor.name}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {specialtiesList[0] ?? doctor.designation ?? "Specialist"}
+                      </p>
+                      <div className="mt-2 flex items-center gap-1 text-sm font-medium text-amber-600">
+                        <Star className="size-4 fill-current" aria-hidden="true" />
+                        {doctor.averageRating?.toFixed(1) ?? "New"}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="mt-5 grid gap-3 text-sm text-muted-foreground">
-                <p className="flex items-center gap-2">
-                  <MapPin className="size-4 text-primary" aria-hidden="true" />
-                  {doctor.location}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">{doctor.experience}</Badge>
-                  <Badge variant="secondary">Online booking</Badge>
-                </div>
-              </div>
+                  <div className="mt-5 grid gap-3 text-sm text-muted-foreground">
+                    <p className="flex items-center gap-2">
+                      <MapPin className="size-4 text-primary" aria-hidden="true" />
+                      {doctor.currentWorkingPlace || "Not specified"}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary">{doctor.experience ?? 0} years</Badge>
+                      <Badge variant="secondary">${doctor.appointmentFee?.toFixed(0) ?? "N/A"} fee</Badge>
+                    </div>
+                  </div>
 
-              <Button className="mt-6 w-full" variant="outline" asChild>
-                <Link href="/consultation">
-                  <CalendarCheck className="size-4" aria-hidden="true" />
-                  Book Visit
-                </Link>
-              </Button>
-            </article>
-          ))}
-        </div>
+                  <Button className="mt-6 w-full" variant="outline" asChild>
+                    <Link href={`/consultation/doctor/${doctor.id}`}>
+                      <CalendarCheck className="size-4" aria-hidden="true" />
+                      Book Visit
+                    </Link>
+                  </Button>
+                </article>
+              )
+            })}
+          </div>
+        )}
       </div>
     </section>
   )
