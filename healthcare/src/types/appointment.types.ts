@@ -21,6 +21,9 @@ export interface IAppointmentPatient {
   id?: string
   name?: string
   email?: string
+  profilePhoto?: string
+  contactNumber?: string
+  address?: string
 }
 
 export interface IAppointmentSchedule {
