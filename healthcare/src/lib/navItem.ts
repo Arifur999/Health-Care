@@ -54,12 +54,12 @@ export const doctorNavItems : NavSection[] = [
             },
             {
                 title: "Prescriptions",
-                href: "/doctor/dashboard/prescriptions",
+                href: "/doctor/dashboard/prescription",
                 icon: "FileText",
             },
             {
                 title: "My Reviews",
-                href: "/doctor/dashboard/my-reviews",
+                href: "/doctor/dashboard/my-review",
                 icon: "Star",
             },
         ]
@@ -107,7 +107,7 @@ export const adminNavItems: NavSection[] = [
             },
             {
                 title: "Doctor Schedules",
-                href: "/admin/dashboard/doctor-schedules-managament",
+                href: "/admin/dashboard/doctor-schedules-management",
                 icon: "CalendarClock",
             },
             {
@@ -117,17 +117,17 @@ export const adminNavItems: NavSection[] = [
             },
             {
                 title: "Payments",
-                href: "/admin/dashboard/payments-management",
+                href: "/admin/dashboard/payment-management",
                 icon: "CreditCard",
             },
             {
                 title: "Prescriptions",
-                href: "/admin/dashboard/prescriptions-management",
+                href: "/admin/dashboard/prescription-management",
                 icon: "FileText",
             },
             {
                 title: "Reviews",
-                href: "/admin/dashboard/reviews-management",
+                href: "/admin/dashboard/review-management",
                 icon: "Star",
             },
         ],
@@ -155,7 +155,7 @@ export const patientNavItems: NavSection[] = [
         items: [
             {
                 title: "My Prescriptions",
-                href: "/dashboard/my-prescriptions",
+                href: "/dashboard/my-prescription",
                 icon: "FileText",
             },
             {
