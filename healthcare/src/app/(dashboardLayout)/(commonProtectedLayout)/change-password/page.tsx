@@ -1,7 +1,7 @@
-const ChangePasswordPage=()=> {
-  return (
-    <div>page</div>
-  )
+import ChangePasswordForm from "@/components/modules/Dashboard/ChangePasswordForm"
+
+const ChangePasswordPage = () => {
+  return <ChangePasswordForm />
 }
 
 export default ChangePasswordPage

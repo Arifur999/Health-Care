@@ -16,6 +16,12 @@ export interface ILoginResponse {
     
 }
 
+export interface IChangePasswordResponse {
+    accessToken: string;
+    refreshToken: string;
+    token: string;
+}
+
 export interface IRegisterResponse {
     success: boolean;
     message: string;

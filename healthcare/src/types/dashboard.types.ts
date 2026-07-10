@@ -24,11 +24,30 @@ export interface IAdminDashboardData {
     patientCount : number;
     doctorCount : number;
     adminCount : number;
-    superAdminCount : number;
+    superAdminCount ?: number;
     paymentCount : number;
     userCount : number;
     totalRevenue : number;
     barChartData : BarChartData[];
     pieChartData : PieChartData[];
+}
+
+export interface AppointmentStatusCount {
+    status: string;
+    count: number;
+}
+
+export interface IDoctorDashboardData {
+    reviewCount : number;
+    patientCount : number;
+    appointmentCount : number;
+    totalRevenue : number;
+    appointmentStatusDistribution : AppointmentStatusCount[];
+}
+
+export interface IPatientDashboardData {
+    appointmentCount : number;
+    reviewCount : number;
+    appointmentStatusDistribution : AppointmentStatusCount[];
 }
 

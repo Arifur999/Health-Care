@@ -1,11 +1,13 @@
 "use server";
 
 import { httpClient } from "@/lib/axios/httpClient";
-import { IAdminDashboardData } from "@/types/dashboard.types";
+import { IAdminDashboardData, IDoctorDashboardData, IPatientDashboardData } from "@/types/dashboard.types";
 
-export async function getDashboardData() {
+export async function getDashboardData<
+    TData = IAdminDashboardData | IDoctorDashboardData | IPatientDashboardData
+>() {
     try {
-        const response = await httpClient.get<IAdminDashboardData>("/stats");
+        const response = await httpClient.get<TData>("/stats");
         return response
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error : any) {
@@ -16,6 +18,6 @@ export async function getDashboardData() {
             data: null,
             meta: null
         }
-        
+
     }
 }

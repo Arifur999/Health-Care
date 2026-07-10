@@ -111,6 +111,57 @@ export interface ApiRequestOptions {
     headers?: Record<string, string>;
 }
 
+const multipartAxiosInstance = async () => {
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+    const refreshToken = cookieStore.get("refreshToken")?.value;
+
+    if(accessToken && refreshToken){
+        await tryRefreshToken(accessToken, refreshToken);
+    }
+
+    const cookieHeader = cookieStore
+                                .getAll()
+                                .map((cookie) => `${cookie.name}=${cookie.value}`)
+                                .join("; ");
+
+    return axios.create({
+        baseURL : API_BASE_URL,
+        timeout : 30000,
+        headers:{
+            Cookie : cookieHeader
+        }
+    })
+}
+
+const httpPostFormData = async <TData>(endpoint: string, formData: FormData, options?: ApiRequestOptions) : Promise<ApiResponse<TData>> => {
+    try {
+        const instance = await multipartAxiosInstance();
+        const response = await instance.post<ApiResponse<TData>>(endpoint, formData, {
+            params: options?.params,
+            headers: options?.headers,
+        });
+        return response.data;
+    } catch (error) {
+        console.error(`Multipart POST request to ${endpoint} failed:`, error);
+        throw error;
+    }
+}
+
+const httpPatchFormData = async <TData>(endpoint: string, formData: FormData, options?: ApiRequestOptions) : Promise<ApiResponse<TData>> => {
+    try {
+        const instance = await multipartAxiosInstance();
+        const response = await instance.patch<ApiResponse<TData>>(endpoint, formData, {
+            params: options?.params,
+            headers: options?.headers,
+        });
+        return response.data;
+    } catch (error) {
+        console.error(`Multipart PATCH request to ${endpoint} failed:`, error);
+        throw error;
+    }
+}
+
 const httpGet = async <TData>(endpoint: string, options?: ApiRequestOptions) : Promise<ApiResponse<TData>> => {
     try {     
         const instance = await axiosInstance();   
@@ -238,4 +289,6 @@ export const httpClient = {
     put: httpPut,
     patch: httpPatch,
     delete: httpDelete,
+    postFormData: httpPostFormData,
+    patchFormData: httpPatchFormData,
 }
