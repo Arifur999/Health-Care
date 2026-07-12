@@ -1,7 +1,16 @@
 "use server"
 
 import { httpClient } from "@/lib/axios/httpClient"
-import { type IPatientProfile, type IUpdatePatientProfilePayload } from "@/types/patient.types"
+import { type IPatientListItem, type IPatientProfile, type IUpdatePatientProfilePayload } from "@/types/patient.types"
+
+export const getAllPatients = async () => {
+  try {
+    return await httpClient.get<IPatientListItem[]>("/patients")
+  } catch (error) {
+    console.log("Error fetching patients:", error)
+    throw error
+  }
+}
 
 export const updateMyPatientProfile = async (
   payload: IUpdatePatientProfilePayload,

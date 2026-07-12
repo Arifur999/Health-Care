@@ -67,6 +67,20 @@ export interface IUpdatePatientMedicalReportPayload {
   shouldDelete?: boolean
 }
 
+export interface IPatientListItem {
+  id: string
+  name: string
+  email: string
+  profilePhoto?: string
+  contactNumber?: string
+  address?: string
+  createdAt?: string
+  user?: {
+    status?: string
+    emailVerified?: boolean
+  }
+}
+
 export interface IUpdatePatientProfilePayload {
   patientInfo?: IUpdatePatientInfoPayload
   patientHealthData?: Partial<IPatientHealthData>

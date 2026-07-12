@@ -1,15 +1,13 @@
-import PatientsRoster, {
-  ADMIN_ALL_APPOINTMENTS_FOR_PATIENTS_QUERY_KEY,
-} from "@/components/modules/Admin/PatientsManagement/PatientsRoster"
-import { getAllAppointments } from "@/services/appointment.services"
+import PatientsManagementTable from "@/components/modules/Admin/PatientsManagement/PatientsManagementTable"
+import { getAllPatients } from "@/services/patient.services"
 import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query"
 
 const PatientsManagementPage = async () => {
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
-    queryKey: ADMIN_ALL_APPOINTMENTS_FOR_PATIENTS_QUERY_KEY,
-    queryFn: () => getAllAppointments(),
+    queryKey: ["admin-patients"],
+    queryFn: getAllPatients,
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 60,
   })
@@ -20,12 +18,11 @@ const PatientsManagementPage = async () => {
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">Patients</h1>
           <p className="text-sm text-muted-foreground">
-            Showing patients derived from appointment history — there is no dedicated patient
-            directory endpoint in the backend yet.
+            All registered patients.
           </p>
         </div>
 
-        <PatientsRoster />
+        <PatientsManagementTable />
       </div>
     </HydrationBoundary>
   )
