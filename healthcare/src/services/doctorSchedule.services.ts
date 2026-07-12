@@ -52,3 +52,24 @@ export const deleteMyDoctorSchedule = async (id: string) => {
     throw error
   }
 }
+
+// Admin/Super Admin: list all doctor-schedule link records across every doctor.
+// Note: the backend's getAllDoctorSchedules only populates the `doctor`/`schedule`
+// relations when an `include=doctor,schedule` query param is present, so we make
+// sure it's always set here regardless of what the caller passed in.
+export const getAllDoctorSchedules = async (queryString: string) => {
+  try {
+    const params = new URLSearchParams(queryString)
+    if (!params.has("include")) {
+      params.set("include", "doctor,schedule")
+    }
+    const finalQueryString = params.toString()
+
+    return await httpClient.get<IDoctorSchedule[]>(
+      `/doctor-schedules?${finalQueryString}`,
+    )
+  } catch (error) {
+    console.log("Error fetching all doctor schedules:", error)
+    throw error
+  }
+}
