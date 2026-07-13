@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
 const quickLinks = [
-  { label: "Appointment", href: "/consultation" },
+  { label: "Appointment", href: "/appointment" },
   { label: "Doctors", href: "/consultation" },
   { label: "Services", href: "/diagnostics" },
   { label: "About Us", href: "/about-us" },

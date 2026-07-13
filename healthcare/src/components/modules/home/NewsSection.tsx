@@ -1,39 +1,15 @@
 "use client"
 
+import { newsArticles } from "@/lib/newsData"
+import { format } from "date-fns"
 import { HeartHandshake, MessageCircle } from "lucide-react"
+import Link from "next/link"
 import { useState } from "react"
-
-const articles = [
-  {
-    title: "This Article's Title goes Here, but not too long.",
-    author: "Monday 05, September 2021 | By Author",
-    likes: 68,
-    comments: 86,
-  },
-  {
-    title: "Five habits that keep your heart healthy year-round.",
-    author: "Wednesday 08, September 2021 | By Author",
-    likes: 52,
-    comments: 41,
-  },
-  {
-    title: "What to expect during your first specialist visit.",
-    author: "Monday 13, September 2021 | By Author",
-    likes: 77,
-    comments: 63,
-  },
-  {
-    title: "Understanding your lab results, explained simply.",
-    author: "Friday 17, September 2021 | By Author",
-    likes: 34,
-    comments: 29,
-  },
-]
 
 const NewsSection = () => {
   const [page, setPage] = useState(0)
-  const visible = articles.slice(page * 4, page * 4 + 4)
-  const pageCount = Math.ceil(articles.length / 4)
+  const visible = newsArticles.slice(page * 4, page * 4 + 4)
+  const pageCount = Math.ceil(newsArticles.length / 4)
 
   return (
     <section className="bg-muted py-20">
@@ -46,8 +22,9 @@ const NewsSection = () => {
 
       <div className="mx-auto mt-10 grid w-full max-w-6xl gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:px-8">
         {visible.map((article) => (
-          <article
-            key={article.title}
+          <Link
+            key={article.slug}
+            href={`/news/${article.slug}`}
             className="flex gap-4 rounded-[5px] bg-background p-3 shadow-sm transition-shadow hover:shadow-md"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -57,7 +34,9 @@ const NewsSection = () => {
               className="h-38.5 w-32 shrink-0 rounded-[5px] object-cover"
             />
             <div className="flex flex-col justify-center gap-2 py-2">
-              <p className="text-xs text-accent">{article.author}</p>
+              <p className="text-xs text-accent">
+                {format(new Date(article.date), "MMMM dd, yyyy")} | By {article.author}
+              </p>
               <p className="text-lg leading-6">{article.title}</p>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5">
@@ -66,11 +45,11 @@ const NewsSection = () => {
                 </span>
                 <span className="flex items-center gap-1.5">
                   <MessageCircle className="size-4" aria-hidden="true" />
-                  {article.comments}
+                  {article.views}
                 </span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
 

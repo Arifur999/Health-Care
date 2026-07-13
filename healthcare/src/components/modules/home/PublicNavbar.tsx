@@ -106,7 +106,7 @@ const PublicNavbar = () => {
           <div className="hidden items-center gap-12.5 lg:flex">
             <Search className="size-5 text-primary-foreground" aria-hidden="true" />
             <Button asChild className="rounded-full bg-secondary px-8 py-5 text-primary hover:bg-secondary/90">
-              <Link href="/consultation">Appointment</Link>
+              <Link href="/appointment">Appointment</Link>
             </Button>
           </div>
 
@@ -142,7 +142,7 @@ const PublicNavbar = () => {
                 </SheetClose>
                 <SheetClose asChild>
                   <Button className="rounded-full" asChild>
-                    <Link href="/consultation">Appointment</Link>
+                    <Link href="/appointment">Appointment</Link>
                   </Button>
                 </SheetClose>
               </div>

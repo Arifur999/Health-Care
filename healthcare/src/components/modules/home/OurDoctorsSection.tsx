@@ -8,19 +8,22 @@ import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 import { useState } from "react"
 
-const PAGE_SIZE = 3
+interface OurDoctorsSectionProps {
+  pageSize?: number
+  fetchLimit?: number
+}
 
-const OurDoctorsSection = () => {
+const OurDoctorsSection = ({ pageSize = 3, fetchLimit = 9 }: OurDoctorsSectionProps) => {
   const [page, setPage] = useState(0)
 
   const { data: doctorsResponse } = useQuery({
-    queryKey: ["home-our-doctors"],
-    queryFn: () => getDoctors("sortBy=averageRating&sortOrder=desc&limit=9"),
+    queryKey: ["home-our-doctors", fetchLimit],
+    queryFn: () => getDoctors(`sortBy=averageRating&sortOrder=desc&limit=${fetchLimit}`),
   })
 
   const doctors: IDoctor[] = doctorsResponse?.data ?? []
-  const pageCount = Math.max(1, Math.ceil(doctors.length / PAGE_SIZE))
-  const visibleDoctors = doctors.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE)
+  const pageCount = Math.max(1, Math.ceil(doctors.length / pageSize))
+  const visibleDoctors = doctors.slice(page * pageSize, page * pageSize + pageSize)
 
   if (doctors.length === 0) {
     return null
