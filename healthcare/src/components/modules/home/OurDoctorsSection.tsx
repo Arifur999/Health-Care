@@ -11,9 +11,16 @@ import { useState } from "react"
 interface OurDoctorsSectionProps {
   pageSize?: number
   fetchLimit?: number
+  eyebrow?: string
+  title?: string
 }
 
-const OurDoctorsSection = ({ pageSize = 3, fetchLimit = 9 }: OurDoctorsSectionProps) => {
+const OurDoctorsSection = ({
+  pageSize = 3,
+  fetchLimit = 9,
+  eyebrow = "Trusted Care",
+  title = "Our Doctors",
+}: OurDoctorsSectionProps) => {
   const [page, setPage] = useState(0)
 
   const { data: doctorsResponse } = useQuery({
@@ -32,8 +39,8 @@ const OurDoctorsSection = ({ pageSize = 3, fetchLimit = 9 }: OurDoctorsSectionPr
   return (
     <section className="bg-background py-20">
       <div className="mx-auto w-full max-w-3xl space-y-3 px-4 text-center sm:px-6 lg:px-8">
-        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">Trusted Care</p>
-        <h2 className="font-display text-3xl text-primary sm:text-4xl">Our Doctors</h2>
+        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">{eyebrow}</p>
+        <h2 className="font-display text-3xl text-primary sm:text-4xl">{title}</h2>
       </div>
 
       <div className="mx-auto mt-10 grid w-full max-w-6xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 lg:px-8">

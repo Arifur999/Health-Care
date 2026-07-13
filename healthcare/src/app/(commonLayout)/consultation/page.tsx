@@ -3,6 +3,7 @@ import { getAllSpecialties, getDoctors } from "@/services/doctor.services";
 import { getUserInfo } from "@/services/auth.services";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import DoctorsList from "@/components/modules/consultation/DoctorsList";
+import InnerPageHero from "@/components/shared/InnerPageHero";
 
 const SPECIALTIES_FILTER_KEY = "specialties.specialty.title";
 const APPOINTMENT_FEE_FILTER_KEY = "appointmentFee";
@@ -73,13 +74,18 @@ const ConsultationPage = async ({
     gcTime: 1000 * 60 * 60 * 24,
   });
  return (
-   <HydrationBoundary state={dehydrate(queryClient)}>
-      <DoctorsList
-        initialQueryString={queryString}
-        isAuthenticated={Boolean(currentUser)}
-        viewerRole={currentUser?.role ?? null}
-      />
-   </HydrationBoundary>
+   <>
+     <InnerPageHero title="Our Doctors" breadcrumb={[{ label: "Home", href: "/" }, { label: "Doctors" }]} />
+     <HydrationBoundary state={dehydrate(queryClient)}>
+        <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+          <DoctorsList
+            initialQueryString={queryString}
+            isAuthenticated={Boolean(currentUser)}
+            viewerRole={currentUser?.role ?? null}
+          />
+        </div>
+     </HydrationBoundary>
+   </>
  );
 }
 
