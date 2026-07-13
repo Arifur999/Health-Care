@@ -1,4 +1,5 @@
-import PageHeroBanner from "@/components/shared/PageHeroBanner"
+import ContactSection from "@/components/modules/home/ContactSection"
+import InnerPageHero from "@/components/shared/InnerPageHero"
 import { Button } from "@/components/ui/button"
 import {
   Baby,
@@ -56,30 +57,25 @@ const steps = [
 const MedicinePage = () => {
   return (
     <>
-      <PageHeroBanner
-        eyebrow="Medicine"
-        title="Prescriptions to doorstep, without the hassle."
-        description="Keep prescriptions from your consultations in one place and order genuine medicines through verified pharmacy partners."
-        action={
-          <div className="flex flex-wrap gap-3">
-            <Button size="lg" asChild>
-              <Link href="/dashboard/health-records">
-                <UploadCloud className="size-4" aria-hidden="true" />
-                Upload Prescription
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/consultation">Talk to a Doctor First</Link>
-            </Button>
-          </div>
-        }
-      />
+      <InnerPageHero title="Medicine" breadcrumb={[{ label: "Home", href: "/" }, { label: "Medicine" }]} />
+
+      <div className="mx-auto flex w-full max-w-7xl flex-wrap gap-3 px-4 pt-10 sm:px-6 lg:px-8">
+        <Button size="lg" asChild className="rounded-full bg-secondary text-primary hover:bg-secondary/90">
+          <Link href="/dashboard/health-records">
+            <UploadCloud className="size-4" aria-hidden="true" />
+            Upload Prescription
+          </Link>
+        </Button>
+        <Button size="lg" variant="outline" asChild className="rounded-full">
+          <Link href="/consultation">Talk to a Doctor First</Link>
+        </Button>
+      </div>
 
       <section className="bg-background py-16 sm:py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl space-y-3">
-            <span className="text-sm font-semibold uppercase tracking-wide text-primary">Categories</span>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Everything your care plan needs.</h2>
+            <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">Categories</p>
+            <h2 className="font-display text-3xl text-primary sm:text-4xl">Everything your care plan needs.</h2>
           </div>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -102,8 +98,8 @@ const MedicinePage = () => {
       <section className="bg-muted/30 py-16 sm:py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl space-y-3">
-            <span className="text-sm font-semibold uppercase tracking-wide text-primary">How it works</span>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">From prescription to delivery.</h2>
+            <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">How it works</p>
+            <h2 className="font-display text-3xl text-primary sm:text-4xl">From prescription to delivery.</h2>
           </div>
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -132,6 +128,8 @@ const MedicinePage = () => {
           </div>
         </div>
       </section>
+
+      <ContactSection />
     </>
   )
 }

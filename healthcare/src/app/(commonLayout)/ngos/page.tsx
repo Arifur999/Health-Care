@@ -1,4 +1,5 @@
-import PageHeroBanner from "@/components/shared/PageHeroBanner"
+import ContactSection from "@/components/modules/home/ContactSection"
+import InnerPageHero from "@/components/shared/InnerPageHero"
 import { Button } from "@/components/ui/button"
 import { Droplets, HandHeart, Heart, Mail, Tent, Users } from "lucide-react"
 import Link from "next/link"
@@ -29,25 +30,22 @@ const programs = [
 const NgosPage = () => {
   return (
     <>
-      <PageHeroBanner
-        eyebrow="Community & NGOs"
-        title="Healthcare access for every community."
-        description="We work with non-profit and community health partners to extend consultations, diagnostics, and support beyond the platform to those who need it most."
-        action={
-          <Button size="lg" asChild>
-            <Link href="mailto:partnerships@healthcare.com">
-              <HandHeart className="size-4" aria-hidden="true" />
-              Become a Partner
-            </Link>
-          </Button>
-        }
-      />
+      <InnerPageHero title="Community & NGOs" breadcrumb={[{ label: "Home", href: "/" }, { label: "NGOs" }]} />
+
+      <div className="mx-auto w-full max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+        <Button size="lg" asChild className="rounded-full bg-secondary text-primary hover:bg-secondary/90">
+          <Link href="mailto:partnerships@meddical.com">
+            <HandHeart className="size-4" aria-hidden="true" />
+            Become a Partner
+          </Link>
+        </Button>
+      </div>
 
       <section className="bg-background py-16 sm:py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl space-y-3">
-            <span className="text-sm font-semibold uppercase tracking-wide text-primary">Our programs</span>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">Our programs</p>
+            <h2 className="font-display text-3xl text-primary sm:text-4xl">
               Community initiatives we support.
             </h2>
           </div>
@@ -79,7 +77,7 @@ const NgosPage = () => {
               </p>
             </div>
             <Button variant="outline" asChild>
-              <Link href="mailto:partnerships@healthcare.com">
+              <Link href="mailto:partnerships@meddical.com">
                 <Mail className="size-4" aria-hidden="true" />
                 Contact Partnerships Team
               </Link>
@@ -87,6 +85,8 @@ const NgosPage = () => {
           </div>
         </div>
       </section>
+
+      <ContactSection />
     </>
   )
 }

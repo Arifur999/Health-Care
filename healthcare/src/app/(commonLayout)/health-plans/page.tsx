@@ -1,4 +1,5 @@
-import PageHeroBanner from "@/components/shared/PageHeroBanner"
+import ContactSection from "@/components/modules/home/ContactSection"
+import InnerPageHero from "@/components/shared/InnerPageHero"
 import { Button } from "@/components/ui/button"
 import { Check, Sparkles } from "lucide-react"
 import Link from "next/link"
@@ -47,11 +48,7 @@ const plans = [
 const HealthPlansPage = () => {
   return (
     <>
-      <PageHeroBanner
-        eyebrow="Health plans"
-        title="Choose a plan that fits how you use care."
-        description="From occasional visits to ongoing family care, pick a plan that keeps appointments, records, and support connected."
-      />
+      <InnerPageHero title="Health Plans" breadcrumb={[{ label: "Home", href: "/" }, { label: "Health Plans" }]} />
 
       <section className="bg-background py-16 sm:py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -109,6 +106,8 @@ const HealthPlansPage = () => {
           </p>
         </div>
       </section>
+
+      <ContactSection />
     </>
   )
 }

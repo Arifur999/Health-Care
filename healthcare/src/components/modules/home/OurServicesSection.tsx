@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Activity, Droplet, HeartPulse, Stethoscope } from "lucide-react"
+import Link from "next/link"
 
 const sideItems = [
   { label: "Free Checkup", icon: Stethoscope, active: false },
@@ -44,7 +45,7 @@ const OurServicesSection = () => {
             )
           })}
           <Button className="w-full rounded-none bg-primary py-5 text-secondary hover:bg-primary/90" asChild>
-            <a href="/diagnostics">View All</a>
+            <Link href="/diagnostics">View All</Link>
           </Button>
         </div>
 
