@@ -52,24 +52,19 @@ const PublicFooter = () => {
 
         <div className="space-y-4">
           <h2 className="text-lg font-semibold">Newsletter</h2>
-          <form
-            className="flex items-center gap-2 rounded-[5px] bg-secondary p-1.5"
-            onSubmit={(event) => event.preventDefault()}
-          >
+          <div className="flex items-center gap-2 rounded-[5px] bg-secondary p-1.5">
             <input
               type="email"
-              required
               placeholder="Enter your email address"
               className="w-full bg-transparent px-3 py-2 text-sm text-primary placeholder:text-primary/70 focus:outline-none"
             />
-            <button
-              type="submit"
-              aria-label="Subscribe"
+            <span
+              aria-hidden="true"
               className="flex size-9 shrink-0 items-center justify-center rounded-[5px] bg-primary text-primary-foreground"
             >
-              <ArrowUpRight className="size-4" aria-hidden="true" />
-            </button>
-          </form>
+              <ArrowUpRight className="size-4" />
+            </span>
+          </div>
         </div>
       </div>
 

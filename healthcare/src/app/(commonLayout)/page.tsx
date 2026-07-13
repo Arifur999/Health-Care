@@ -1,21 +1,23 @@
-import CtaBanner from "@/components/modules/home/CtaBanner"
+import BookAppointmentSection from "@/components/modules/home/BookAppointmentSection"
+import ContactSection from "@/components/modules/home/ContactSection"
 import Hero from "@/components/modules/home/Hero"
-import OurServices from "@/components/modules/home/OurServices"
-import Steps from "@/components/modules/home/Steps"
-import Testimonials from "@/components/modules/home/Testimonials"
-import TopDoctors from "@/components/modules/home/TopDoctors"
-import WhyChooseUs from "@/components/modules/home/WhyChooseUs"
+import NewsSection from "@/components/modules/home/NewsSection"
+import OurDoctorsSection from "@/components/modules/home/OurDoctorsSection"
+import OurServicesSection from "@/components/modules/home/OurServicesSection"
+import OurSpecialties from "@/components/modules/home/OurSpecialties"
+import WelcomeSection from "@/components/modules/home/WelcomeSection"
 
 const CommonLayoutPage = () => {
   return (
     <>
       <Hero />
-      <OurServices />
-      <Steps />
-      <TopDoctors />
-      <WhyChooseUs />
-      <Testimonials />
-      <CtaBanner />
+      <WelcomeSection />
+      <OurServicesSection />
+      <OurSpecialties />
+      <BookAppointmentSection />
+      <OurDoctorsSection />
+      <NewsSection />
+      <ContactSection />
     </>
   )
 }

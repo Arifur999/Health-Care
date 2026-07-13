@@ -1,110 +1,74 @@
 import { Button } from "@/components/ui/button"
-import { Activity, CalendarDays, Search, ShieldCheck, Star, Users } from "lucide-react"
+import { Banknote, CalendarCheck, Users } from "lucide-react"
 import Link from "next/link"
 
-const stats = [
-  { label: "Specialist Doctors", value: "120+" },
-  { label: "Care Services", value: "24/7" },
-  { label: "Patient Rating", value: "4.9" },
+const highlights = [
+  {
+    title: "Book an Appointment",
+    icon: CalendarCheck,
+    className: "bg-primary text-primary-foreground",
+  },
+  {
+    title: "Expert Doctors",
+    icon: Users,
+    className: "bg-secondary text-primary",
+  },
+  {
+    title: "Affordable Care",
+    icon: Banknote,
+    className: "bg-accent text-accent-foreground",
+  },
 ]
 
 const Hero = () => {
   return (
-    <section className="bg-linear-to-br from-background via-blue-50/70 to-cyan-50/80">
-      <div className="mx-auto grid min-h-[calc(100vh-4rem)] w-full max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-16">
-        <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 rounded-full border bg-background/80 px-3 py-1 text-sm font-medium text-primary shadow-sm">
-            <ShieldCheck className="size-4" aria-hidden="true" />
-            Trusted digital healthcare support
-          </div>
+    <section className="relative overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -right-24 top-10 size-137.5 rounded-full bg-[#02ddcd]/15 blur-3xl" />
+        <div className="absolute -left-40 top-40 size-137.5 rounded-full bg-secondary/40 blur-3xl" />
+      </div>
 
-          <div className="space-y-5">
-            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Care that reaches you faster, wherever you are.
-            </h1>
-            <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-              Find qualified doctors, book appointments, track prescriptions, and manage essential healthcare services from one responsive platform.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button size="lg" asChild>
-              <Link href="/consultation">
-                <Search className="size-4" aria-hidden="true" />
-                Find Doctors
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/dashboard/book-appointments">
-                <CalendarDays className="size-4" aria-hidden="true" />
-                Book Appointment
-              </Link>
-            </Button>
-          </div>
-
-          <div className="grid max-w-2xl grid-cols-3 gap-3">
-            {stats.map((item) => (
-              <div key={item.label} className="rounded-xl border bg-background/80 p-4 shadow-sm">
-                <p className="text-2xl font-semibold text-foreground">{item.value}</p>
-                <p className="mt-1 text-xs text-muted-foreground sm:text-sm">{item.label}</p>
-              </div>
-            ))}
-          </div>
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-2 lg:px-8 lg:pt-20">
+        <div className="space-y-6">
+          <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">Caring for Life</p>
+          <h1 className="font-display text-4xl leading-tight text-primary sm:text-5xl">
+            Leading the Way
+            <br />
+            in Medical Excellence
+          </h1>
+          <Button size="lg" asChild className="rounded-full bg-secondary px-9 py-6 text-base text-primary hover:bg-secondary/90">
+            <Link href="/diagnostics">Our Services</Link>
+          </Button>
         </div>
 
         <div className="relative">
-          <div className="overflow-hidden rounded-3xl border bg-background shadow-xl">
-            <div className="border-b bg-muted/50 p-4">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">Today&apos;s Care Desk</p>
-                  <h2 className="text-xl font-semibold">Available specialists</h2>
-                </div>
-                <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700">
-                  Live
-                </span>
-              </div>
-            </div>
-
-            <div className="grid gap-4 p-5">
-              {[
-                ["Dr. Sarah Ahmed", "Cardiology", "09:30 AM", "98%"],
-                ["Dr. Arif Rahman", "Neurology", "11:00 AM", "96%"],
-                ["Dr. Maya Chowdhury", "Pediatrics", "02:15 PM", "99%"],
-              ].map(([name, specialty, time, score]) => (
-                <div key={name} className="flex items-center gap-4 rounded-2xl border bg-card p-4">
-                  <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                    <Users className="size-5" aria-hidden="true" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="truncate font-medium">{name}</h3>
-                    <p className="text-sm text-muted-foreground">{specialty}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm font-medium">{time}</p>
-                    <p className="flex items-center justify-end gap-1 text-xs text-amber-600">
-                      <Star className="size-3 fill-current" aria-hidden="true" />
-                      {score}
-                    </p>
-                  </div>
-                </div>
-              ))}
-
-              <div className="grid gap-3 rounded-2xl border bg-primary p-4 text-primary-foreground sm:grid-cols-[auto_1fr]">
-                <div className="flex size-11 items-center justify-center rounded-full bg-white/15">
-                  <Activity className="size-5" aria-hidden="true" />
-                </div>
-                <div>
-                  <h3 className="font-medium">Care coordination made simple</h3>
-                  <p className="mt-1 text-sm text-primary-foreground/80">
-                    Appointments, reports, consultation history, and payments stay connected.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/home/hero-doctor.jpg"
+            alt="Doctor caring for a patient"
+            className="h-87.5 w-full rounded-[5px] object-cover sm:h-112.5"
+          />
         </div>
       </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl translate-y-1/2 px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-4 sm:grid-cols-3">
+          {highlights.map((item) => {
+            const Icon = item.icon
+            return (
+              <div
+                key={item.title}
+                className={`flex items-center justify-center gap-4 rounded-[5px] px-6 py-6 shadow-lg ${item.className}`}
+              >
+                <p className="text-base font-medium">{item.title}</p>
+                <Icon className="size-9" aria-hidden="true" />
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      <div className="h-16 sm:h-20" aria-hidden="true" />
     </section>
   )
 }
