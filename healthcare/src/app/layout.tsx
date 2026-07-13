@@ -1,17 +1,18 @@
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Work_Sans, Yeseva_One } from "next/font/google";
 import ChatbotWidget from "./-actions/ChatbotWidget";
 import "./globals.css";
 import QueryProviders from "./providers/QueryProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const yesevaOne = Yeseva_One({
+  weight: "400",
+  variable: "--font-yeseva",
   subsets: ["latin"],
 });
 
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${workSans.variable} ${yesevaOne.variable} antialiased font-sans`}
       >
         <QueryProviders>
           {children}

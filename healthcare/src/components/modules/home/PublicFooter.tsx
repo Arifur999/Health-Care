@@ -1,77 +1,92 @@
-import { Button } from "@/components/ui/button"
-import { HeartPulse, Mail, MapPin, Phone } from "lucide-react"
+import { FacebookIcon, InstagramIcon, TwitterIcon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
 const quickLinks = [
-  { label: "Consultation", href: "/consultation" },
-  { label: "Diagnostics", href: "/diagnostics" },
-  { label: "Health Plans", href: "/health-plans" },
-  { label: "Medicine", href: "/medicine" },
+  { label: "Appointment", href: "/consultation" },
+  { label: "Doctors", href: "/consultation" },
+  { label: "Services", href: "/diagnostics" },
+  { label: "About Us", href: "/about-us" },
+]
+
+const socialLinks = [
+  { label: "Facebook", href: "#", icon: FacebookIcon },
+  { label: "Twitter", href: "#", icon: TwitterIcon },
+  { label: "Instagram", href: "#", icon: InstagramIcon },
 ]
 
 const PublicFooter = () => {
   return (
-    <footer className="border-t bg-background">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.2fr_0.8fr_1fr] lg:px-8">
+    <footer className="bg-primary text-primary-foreground">
+      <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div className="space-y-4">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <HeartPulse className="size-5" aria-hidden="true" />
-            </span>
-            <span className="text-lg font-semibold tracking-tight">HealthCare</span>
+          <Link href="/" className="font-display text-3xl uppercase tracking-wide text-secondary">
+            Meddical
           </Link>
-          <p className="max-w-sm text-sm leading-6 text-muted-foreground">
-            A connected healthcare platform for doctor discovery, appointment booking, prescriptions, diagnostics, and patient care support.
+          <p className="max-w-xs text-base leading-6">
+            Leading the Way in Medical Excellence, Trusted Care.
           </p>
-          <Button asChild>
-            <Link href="/consultation">Find a Doctor</Link>
-          </Button>
         </div>
 
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-wide">Quick Links</h2>
-          <nav className="mt-4 grid gap-3" aria-label="Footer navigation">
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold">Important Links</h2>
+          <nav className="grid gap-3" aria-label="Footer navigation">
             {quickLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
+              <Link key={item.label} href={item.href} className="text-base transition-colors hover:text-secondary">
                 {item.label}
               </Link>
             ))}
           </nav>
         </div>
 
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-wide">Contact</h2>
-          <div className="mt-4 grid gap-3 text-sm text-muted-foreground">
-            <p className="flex items-center gap-2">
-              <Phone className="size-4 text-primary" aria-hidden="true" />
-              +880 1700 000000
-            </p>
-            <p className="flex items-center gap-2">
-              <Mail className="size-4 text-primary" aria-hidden="true" />
-              support@healthcare.com
-            </p>
-            <p className="flex items-center gap-2">
-              <MapPin className="size-4 text-primary" aria-hidden="true" />
-              Dhaka, Bangladesh
-            </p>
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold">Contact Us</h2>
+          <div className="grid gap-3 text-base">
+            <p>Call: (237) 681-812-255</p>
+            <p>Email: support@meddical.com</p>
+            <p>Address: 0123 Some place</p>
+            <p>Dhaka, Bangladesh</p>
           </div>
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold">Newsletter</h2>
+          <form
+            className="flex items-center gap-2 rounded-[5px] bg-secondary p-1.5"
+            onSubmit={(event) => event.preventDefault()}
+          >
+            <input
+              type="email"
+              required
+              placeholder="Enter your email address"
+              className="w-full bg-transparent px-3 py-2 text-sm text-primary placeholder:text-primary/70 focus:outline-none"
+            />
+            <button
+              type="submit"
+              aria-label="Subscribe"
+              className="flex size-9 shrink-0 items-center justify-center rounded-[5px] bg-primary text-primary-foreground"
+            >
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+            </button>
+          </form>
         </div>
       </div>
 
-      <div className="border-t py-5">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p>Copyright 2026 HealthCare. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link href="/health-plans" className="hover:text-foreground">
-              Plans
-            </Link>
-            <Link href="/ngos" className="hover:text-foreground">
-              Community
-            </Link>
+      <div className="border-t border-primary-foreground/15">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+          <p>© {new Date().getFullYear()} MEDdical. All rights reserved.</p>
+          <div className="flex gap-3">
+            {socialLinks.map((social) => (
+              <Link
+                key={social.label}
+                href={social.href}
+                aria-label={social.label}
+                className="flex size-9 items-center justify-center rounded-full bg-primary-foreground/10 transition-colors hover:bg-secondary hover:text-primary"
+              >
+                <HugeiconsIcon icon={social.icon} size={16} />
+              </Link>
+            ))}
           </div>
         </div>
       </div>
