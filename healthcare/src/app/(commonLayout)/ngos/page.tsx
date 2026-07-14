@@ -30,7 +30,11 @@ const programs = [
 const NgosPage = () => {
   return (
     <>
-      <InnerPageHero title="Community & NGOs" breadcrumb={[{ label: "Home", href: "/" }, { label: "NGOs" }]} />
+      <InnerPageHero
+        title="Community & NGOs"
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "NGOs" }]}
+        image="/images/home/appointment-bg.jpg"
+      />
 
       <div className="mx-auto w-full max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
         <Button size="lg" asChild className="rounded-full bg-secondary text-primary hover:bg-secondary/90">

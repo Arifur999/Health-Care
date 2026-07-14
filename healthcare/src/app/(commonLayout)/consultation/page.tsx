@@ -75,7 +75,11 @@ const ConsultationPage = async ({
   });
  return (
    <>
-     <InnerPageHero title="Our Doctors" breadcrumb={[{ label: "Home", href: "/" }, { label: "Doctors" }]} />
+     <InnerPageHero
+       title="Our Doctors"
+       breadcrumb={[{ label: "Home", href: "/" }, { label: "Doctors" }]}
+       image="/images/banners/doctors.jpg"
+     />
      <HydrationBoundary state={dehydrate(queryClient)}>
         <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <DoctorsList

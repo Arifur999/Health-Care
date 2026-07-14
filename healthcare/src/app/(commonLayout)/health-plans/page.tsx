@@ -48,7 +48,11 @@ const plans = [
 const HealthPlansPage = () => {
   return (
     <>
-      <InnerPageHero title="Health Plans" breadcrumb={[{ label: "Home", href: "/" }, { label: "Health Plans" }]} />
+      <InnerPageHero
+        title="Health Plans"
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "Health Plans" }]}
+        image="/images/home/service-photo-2.jpg"
+      />
 
       <section className="bg-background py-16 sm:py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">

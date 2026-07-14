@@ -10,7 +10,11 @@ import Link from "next/link"
 const NewsPage = () => {
   return (
     <>
-      <InnerPageHero title="Blog Posts" breadcrumb={[{ label: "Home", href: "/" }, { label: "News" }]} />
+      <InnerPageHero
+        title="Blog Posts"
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "News" }]}
+        image="/images/banners/news.jpg"
+      />
 
       <section className="bg-background py-16">
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[2fr_1fr] lg:px-8">

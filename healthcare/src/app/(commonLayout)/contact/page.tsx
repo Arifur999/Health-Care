@@ -6,7 +6,11 @@ import MapEmbed from "@/components/shared/MapEmbed"
 const ContactPage = () => {
   return (
     <>
-      <InnerPageHero title="Our Contacts" breadcrumb={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
+      <InnerPageHero
+        title="Our Contacts"
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "Contact" }]}
+        image="/images/banners/contact.jpg"
+      />
 
       <div className="mx-auto w-full max-w-6xl px-4 pt-16 sm:px-6 lg:px-8">
         <MapEmbed query="Dhaka, Bangladesh" />

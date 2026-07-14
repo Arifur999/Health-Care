@@ -17,7 +17,11 @@ const photos = [
 const DiagnosticsPage = () => {
   return (
     <>
-      <InnerPageHero title="Our Services" breadcrumb={[{ label: "Home", href: "/" }, { label: "Services" }]} />
+      <InnerPageHero
+        title="Our Services"
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "Services" }]}
+        image="/images/banners/services.jpg"
+      />
 
       <section className="bg-background py-16 sm:py-20">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 lg:px-8">

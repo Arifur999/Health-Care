@@ -34,6 +34,7 @@ const SingleNewsPage = async ({ params }: SingleNewsPageProps) => {
           { label: "News", href: "/news" },
           { label: article.category },
         ]}
+        image="/images/banners/single-news.jpg"
       />
 
       <section className="bg-background py-16">

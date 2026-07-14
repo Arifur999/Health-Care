@@ -6,21 +6,26 @@ interface InnerPageHeroProps {
   image?: string
 }
 
-const InnerPageHero = ({ title, breadcrumb, image = "/images/home/doctor-card-1.jpg" }: InnerPageHeroProps) => {
+const InnerPageHero = ({ title, breadcrumb, image = "/images/banners/about.jpg" }: InnerPageHeroProps) => {
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-20">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt="" className="size-full object-cover" />
-        <div className="absolute inset-0 bg-background/75" />
+        <img src={image} alt="" className="size-full object-cover object-bottom" />
+        <div className="absolute inset-0 bg-background/50" />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <span className="absolute -right-32 top-30.5 size-64 rounded-full bg-secondary/50" />
+        <span className="absolute -left-30 -top-30 size-60 rounded-full bg-accent/30" />
       </div>
 
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <nav className="text-sm text-foreground/70" aria-label="Breadcrumb">
+        <nav className="text-base text-primary" aria-label="Breadcrumb">
           {breadcrumb.map((item, index) => (
             <span key={item.label}>
               {item.href ? (
-                <Link href={item.href} className="hover:text-primary">
+                <Link href={item.href} className="hover:text-accent">
                   {item.label}
                 </Link>
               ) : (
@@ -30,7 +35,7 @@ const InnerPageHero = ({ title, breadcrumb, image = "/images/home/doctor-card-1.
             </span>
           ))}
         </nav>
-        <h1 className="mt-2 font-display text-3xl text-primary sm:text-4xl">{title}</h1>
+        <h1 className="mt-2 font-display text-4xl text-primary sm:text-5xl">{title}</h1>
       </div>
 
       <div className="flex h-2 w-full">

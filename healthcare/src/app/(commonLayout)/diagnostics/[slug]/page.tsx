@@ -31,6 +31,7 @@ const SingleServicePage = async ({ params }: SingleServicePageProps) => {
       <InnerPageHero
         title={service.title}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/diagnostics" }, { label: service.title }]}
+        image="/images/banners/single-service.jpg"
       />
 
       <section className="bg-background py-16 sm:py-20">

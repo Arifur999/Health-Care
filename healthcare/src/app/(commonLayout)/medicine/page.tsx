@@ -57,7 +57,11 @@ const steps = [
 const MedicinePage = () => {
   return (
     <>
-      <InnerPageHero title="Medicine" breadcrumb={[{ label: "Home", href: "/" }, { label: "Medicine" }]} />
+      <InnerPageHero
+        title="Medicine"
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "Medicine" }]}
+        image="/images/home/service-photo-1.jpg"
+      />
 
       <div className="mx-auto flex w-full max-w-7xl flex-wrap gap-3 px-4 pt-10 sm:px-6 lg:px-8">
         <Button size="lg" asChild className="rounded-full bg-secondary text-primary hover:bg-secondary/90">

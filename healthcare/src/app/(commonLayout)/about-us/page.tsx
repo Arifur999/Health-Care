@@ -8,7 +8,11 @@ import PassionForPatientsBlock from "@/components/shared/PassionForPatientsBlock
 const AboutUsPage = () => {
   return (
     <>
-      <InnerPageHero title="About Us" breadcrumb={[{ label: "Home", href: "/" }, { label: "About" }]} />
+      <InnerPageHero
+        title="About Us"
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "About" }]}
+        image="/images/banners/about.jpg"
+      />
 
       <PassionForPatientsBlock
         eyebrow="Welcome to Meddical"
