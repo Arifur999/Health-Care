@@ -20,7 +20,7 @@ const InnerPageHero = ({ title, breadcrumb, image = "/images/banners/about.jpg" 
         <span className="absolute -left-30 -top-30 size-60 rounded-full bg-accent/30" />
       </div>
 
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-75 w-full max-w-7xl flex-col justify-center px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <nav className="text-base text-primary" aria-label="Breadcrumb">
           {breadcrumb.map((item, index) => (
             <span key={item.label}>
