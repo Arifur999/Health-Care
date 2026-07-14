@@ -1,9 +1,11 @@
 import { getAllSpecialties } from "@/services/doctor.services"
 import { type ISpecialty } from "@/types/specialty.types"
-import { Heart } from "lucide-react"
 import Link from "next/link"
 
 const SPECIALTIES_FILTER_KEY = "specialties.specialty.title"
+
+const getDefaultIcon = (isActive: boolean) =>
+  isActive ? "/images/icons/specialty-icon-active.svg" : "/images/icons/specialty-generic.svg"
 
 const OurSpecialties = async () => {
   const specialtiesResponse = await getAllSpecialties().catch(() => null)
@@ -31,15 +33,12 @@ const OurSpecialties = async () => {
               }`}
             >
               <span className="flex size-11 items-center justify-center overflow-hidden">
-                {specialty.icon ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={specialty.icon} alt="" className="size-full object-contain" />
-                ) : (
-                  <Heart
-                    className={`size-9 ${index === 1 ? "text-secondary" : "text-primary"}`}
-                    aria-hidden="true"
-                  />
-                )}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={specialty.icon || getDefaultIcon(index === 1)}
+                  alt=""
+                  className="size-9 object-contain"
+                />
               </span>
               <p className="text-base">{specialty.title}</p>
             </Link>
