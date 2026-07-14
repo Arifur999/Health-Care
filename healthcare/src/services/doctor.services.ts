@@ -64,3 +64,14 @@ export const getDoctorById = async (id: string) => {
         throw error;
     }
 }
+
+// Admin-only: includes appointment history with patient details.
+export const getDoctorByIdForAdmin = async (id: string) => {
+    try {
+        const doctor = await httpClient.get<IDoctorDetails>(`/doctors/${id}/admin-detail`);
+        return doctor;
+    } catch (error) {
+        console.log("Error fetching doctor admin detail:", error);
+        throw error;
+    }
+}

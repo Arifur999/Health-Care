@@ -1,6 +1,6 @@
 "use server"
 
-import { createDoctor, deleteDoctor, getDoctorById, updateDoctor } from "@/services/doctor.services"
+import { createDoctor, deleteDoctor, getDoctorByIdForAdmin, updateDoctor } from "@/services/doctor.services"
 import { type ApiErrorResponse, type ApiResponse } from "@/types/api.types"
 import { type ICreateDoctorPayload, type IDoctor, type IDoctorDetails, type IUpdateDoctorPayload } from "@/types/doctor.types"
 import { createDoctorServerZodSchema, updateDoctorServerZodSchema } from "@/zod/doctor.validation"
@@ -104,7 +104,7 @@ export const getDoctorByIdAction = async (
   }
 
   try {
-    return await getDoctorById(id)
+    return await getDoctorByIdForAdmin(id)
   } catch (error: unknown) {
     return {
       success: false,
