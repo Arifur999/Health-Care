@@ -82,7 +82,7 @@ const OurDoctorsSection = ({
               type="button"
               aria-label={`Show doctors page ${index + 1}`}
               onClick={() => setPage(index)}
-              className={`size-2.5 rounded-full transition-colors ${
+              className={`size-2.5 cursor-pointer rounded-full transition-colors ${
                 index === page ? "bg-primary" : "bg-secondary"
               }`}
             />

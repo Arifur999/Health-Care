@@ -8,10 +8,10 @@ interface InnerPageHeroProps {
 
 const InnerPageHero = ({ title, breadcrumb, image = "/images/banners/about.jpg" }: InnerPageHeroProps) => {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-20">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt="" className="size-full object-cover object-bottom" />
+        <img src={image} alt="" className="size-full object-cover object-[center_25%]" />
         <div className="absolute inset-0 bg-background/50" />
       </div>
 

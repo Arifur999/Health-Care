@@ -14,7 +14,7 @@ const NewsSidebar = () => {
         <button
           type="submit"
           aria-label="Search"
-          className="flex size-8 shrink-0 items-center justify-center rounded-[5px] bg-secondary text-primary"
+          className="flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-[5px] bg-secondary text-primary"
         >
           <Search className="size-4" aria-hidden="true" />
         </button>

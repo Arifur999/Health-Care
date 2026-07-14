@@ -22,7 +22,7 @@ const highlights = [
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-background">
+    <section className="relative isolate overflow-hidden bg-background">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -right-24 top-10 size-137.5 rounded-full bg-[#02ddcd]/15 blur-3xl" />
         <div className="absolute -left-40 top-40 size-137.5 rounded-full bg-secondary/40 blur-3xl" />

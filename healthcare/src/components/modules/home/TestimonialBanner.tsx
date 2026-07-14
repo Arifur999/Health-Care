@@ -23,7 +23,7 @@ const TestimonialBanner = () => {
   const current = reviews[index % reviews.length]
 
   return (
-    <section className="relative overflow-hidden py-20">
+    <section className="relative isolate overflow-hidden py-20">
       <div className="absolute inset-0 -z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/home/appointment-bg.jpg" alt="" className="size-full object-cover" />
@@ -45,7 +45,7 @@ const TestimonialBanner = () => {
                 type="button"
                 aria-label={`Show testimonial ${dotIndex + 1}`}
                 onClick={() => setIndex(dotIndex)}
-                className={`size-2.5 rounded-full transition-colors ${
+                className={`size-2.5 cursor-pointer rounded-full transition-colors ${
                   dotIndex === index % reviews.length ? "bg-secondary" : "bg-primary-foreground/30"
                 }`}
               />

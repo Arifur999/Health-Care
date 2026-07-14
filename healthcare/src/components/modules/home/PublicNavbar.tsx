@@ -2,6 +2,14 @@
 
 import { Button } from "@/components/ui/button"
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
   Sheet,
   SheetClose,
   SheetContent,
@@ -9,10 +17,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { getDefaultDashboardRoute } from "@/lib/authUtils"
 import { cn } from "@/lib/utils"
-import { Clock3, Mail, Menu, Phone, Search } from "lucide-react"
+import { logoutAction } from "@/services/auth.services"
+import { type UserInfo } from "@/types/user.types"
+import { Clock3, Key, LayoutDashboard, LogOut, Mail, Menu, Phone, Search, User } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useState } from "react"
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -22,6 +34,10 @@ const navItems = [
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ]
+
+interface PublicNavbarProps {
+  currentUser?: UserInfo | null
+}
 
 const Brand = ({ className }: { className?: string }) => (
   <Link href="/" className={cn("font-display text-3xl uppercase tracking-wide", className)}>
@@ -72,7 +88,74 @@ const TopBar = () => {
   )
 }
 
-const PublicNavbar = () => {
+const AccountMenu = ({ currentUser }: { currentUser: UserInfo }) => {
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true)
+    await logoutAction()
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="outline"
+          size="icon"
+          className="rounded-full border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+        >
+          <span className="text-sm font-semibold">{currentUser.name.charAt(0).toUpperCase()}</span>
+        </Button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuLabel>
+          <div className="flex flex-col space-y-1">
+            <p className="text-sm font-medium">{currentUser.name}</p>
+            <p className="text-xs text-muted-foreground">{currentUser.email}</p>
+            <p className="text-xs capitalize text-primary">{currentUser.role.toLowerCase().replace("_", " ")}</p>
+          </div>
+        </DropdownMenuLabel>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <Link href={getDefaultDashboardRoute(currentUser.role)}>
+            <LayoutDashboard className="mr-2 size-4" />
+            Dashboard
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <Link href="/my-profile">
+            <User className="mr-2 size-4" />
+            My Profile
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <Link href="/change-password">
+            <Key className="mr-2 size-4" />
+            Change Password
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem
+          onClick={() => void handleLogout()}
+          disabled={isLoggingOut}
+          className="cursor-pointer text-red-600"
+        >
+          <LogOut className="mr-2 size-4" />
+          {isLoggingOut ? "Logging out..." : "Logout"}
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
   const pathname = usePathname()
 
   return (
@@ -103,11 +186,22 @@ const PublicNavbar = () => {
             })}
           </nav>
 
-          <div className="hidden items-center gap-12.5 lg:flex">
+          <div className="hidden items-center gap-8 lg:flex">
             <Search className="size-5 text-primary-foreground" aria-hidden="true" />
             <Button asChild className="rounded-full bg-secondary px-8 py-5 text-primary hover:bg-secondary/90">
               <Link href="/appointment">Appointment</Link>
             </Button>
+            {currentUser ? (
+              <AccountMenu currentUser={currentUser} />
+            ) : (
+              <Button
+                asChild
+                variant="outline"
+                className="rounded-full border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              >
+                <Link href="/login">Login</Link>
+              </Button>
+            )}
           </div>
 
           <Sheet>
@@ -133,13 +227,32 @@ const PublicNavbar = () => {
                     </Link>
                   </SheetClose>
                 ))}
+                {currentUser && (
+                  <SheetClose asChild>
+                    <Link
+                      href={getDefaultDashboardRoute(currentUser.role)}
+                      className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    >
+                      Dashboard
+                    </Link>
+                  </SheetClose>
+                )}
               </div>
               <div className="grid gap-2 p-6">
-                <SheetClose asChild>
-                  <Button variant="outline" asChild>
-                    <Link href="/login">Login</Link>
-                  </Button>
-                </SheetClose>
+                {currentUser ? (
+                  <form action={logoutAction}>
+                    <Button variant="outline" type="submit" className="w-full">
+                      <LogOut className="size-4" aria-hidden="true" />
+                      Logout
+                    </Button>
+                  </form>
+                ) : (
+                  <SheetClose asChild>
+                    <Button variant="outline" asChild>
+                      <Link href="/login">Login</Link>
+                    </Button>
+                  </SheetClose>
+                )}
                 <SheetClose asChild>
                   <Button className="rounded-full" asChild>
                     <Link href="/appointment">Appointment</Link>

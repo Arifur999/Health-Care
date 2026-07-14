@@ -102,7 +102,7 @@ const AppointmentFormSection = () => {
 
             <button
               type="submit"
-              className="mt-3 w-full rounded-[5px] bg-accent py-3.5 text-sm font-medium uppercase text-accent-foreground transition-colors hover:bg-accent/90"
+              className="mt-3 w-full cursor-pointer rounded-[5px] bg-accent py-3.5 text-sm font-medium uppercase text-accent-foreground transition-colors hover:bg-accent/90"
             >
               Submit
             </button>

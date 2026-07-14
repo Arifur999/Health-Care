@@ -49,7 +49,7 @@ const BookAppointmentSection = () => {
   }
 
   return (
-    <section className="relative overflow-hidden py-24">
+    <section className="relative isolate overflow-hidden py-24">
       <div className="absolute inset-0 -z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/home/appointment-bg.jpg" alt="" className="size-full object-cover" />
@@ -110,7 +110,7 @@ const BookAppointmentSection = () => {
 
           <button
             type="submit"
-            className="mt-3 w-full rounded-[5px] bg-accent py-3.5 text-sm font-medium uppercase text-accent-foreground transition-colors hover:bg-accent/90"
+            className="mt-3 w-full cursor-pointer rounded-[5px] bg-accent py-3.5 text-sm font-medium uppercase text-accent-foreground transition-colors hover:bg-accent/90"
           >
             Submit
           </button>

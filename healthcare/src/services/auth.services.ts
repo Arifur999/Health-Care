@@ -1,7 +1,9 @@
 "use server"
 
+import { deleteCookie } from "@/lib/cookiesUtils";
 import { setTokenInCookies } from "@/lib/tokenUtils";
 import { cookies } from "next/headers";
+import { redirect } from "next/dist/client/components/navigation";
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -78,4 +80,28 @@ export async function getUserInfo() {
         console.error("Error fetching user info:", error);
         return null;
     }
+}
+
+export async function logoutAction() {
+    try {
+        const cookieStore = await cookies();
+        const accessToken = cookieStore.get("accessToken")?.value;
+        const sessionToken = cookieStore.get("better-auth.session_token")?.value;
+
+        await fetch(`${BASE_API_URL}/auth/logout`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Cookie: `accessToken=${accessToken}; better-auth.session_token=${sessionToken}`,
+            },
+        });
+    } catch (error) {
+        console.error("Error logging out:", error);
+    } finally {
+        await deleteCookie("accessToken");
+        await deleteCookie("refreshToken");
+        await deleteCookie("better-auth.session_token");
+    }
+
+    redirect("/login");
 }

@@ -70,7 +70,7 @@ const ContactFormSection = () => {
           />
           <button
             type="submit"
-            className="w-full rounded-[5px] bg-secondary py-3.5 text-sm font-medium uppercase text-primary transition-colors hover:bg-secondary/80"
+            className="w-full cursor-pointer rounded-[5px] bg-secondary py-3.5 text-sm font-medium uppercase text-primary transition-colors hover:bg-secondary/80"
           >
             Submit
           </button>
