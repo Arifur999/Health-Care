@@ -43,9 +43,9 @@ const PublicFooter = () => {
         <div className="space-y-4">
           <h2 className="text-lg font-semibold">Contact Us</h2>
           <div className="grid gap-3 text-base">
-            <p>Call: (237) 681-812-255</p>
+            <p>Call: +880 1700-000000</p>
             <p>Email: support@meddical.com</p>
-            <p>Address: 0123 Some place</p>
+            <p>Address: Meddical Hospital Campus</p>
             <p>Dhaka, Bangladesh</p>
           </div>
         </div>

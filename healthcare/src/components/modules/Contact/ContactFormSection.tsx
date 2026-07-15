@@ -5,8 +5,8 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 const infoCards = [
-  { label: "Emergency", lines: ["(237) 681-812-255", "(237) 666-331-894"], icon: Phone, className: "bg-secondary text-primary" },
-  { label: "Location", lines: ["0123 Some place", "9876 Some country"], icon: MapPin, className: "bg-primary text-secondary" },
+  { label: "Emergency", lines: ["+880 1700-000000", "+880 1800-000000"], icon: Phone, className: "bg-secondary text-primary" },
+  { label: "Location", lines: ["Meddical Hospital Campus", "Dhaka, Bangladesh"], icon: MapPin, className: "bg-primary text-secondary" },
   { label: "Email", lines: ["support@meddical.com", "care@meddical.com"], icon: Mail, className: "bg-secondary text-primary" },
   { label: "Working Hours", lines: ["Mon-Sat 09:00-20:00", "Sunday Emergency only"], icon: Clock3, className: "bg-secondary text-primary" },
 ]

@@ -28,7 +28,7 @@ const ScheduleHoursCard = () => {
         <Phone className="size-5 text-secondary" aria-hidden="true" />
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide">Emergency</p>
-          <p className="text-base">(237) 681-812-255</p>
+          <p className="text-base">+880 1700-000000</p>
         </div>
       </div>
     </div>

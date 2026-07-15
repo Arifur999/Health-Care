@@ -3,13 +3,13 @@ import { Clock3, Mail, MapPin, Phone } from "lucide-react"
 const cards = [
   {
     label: "Emergency",
-    lines: ["(237) 681-812-255", "(237) 666-331-894"],
+    lines: ["+880 1700-000000", "+880 1800-000000"],
     icon: Phone,
     className: "bg-secondary text-primary",
   },
   {
     label: "Location",
-    lines: ["0123 Some place", "Dhaka, Bangladesh"],
+    lines: ["Meddical Hospital Campus", "Dhaka, Bangladesh"],
     icon: MapPin,
     className: "bg-primary text-secondary",
   },
