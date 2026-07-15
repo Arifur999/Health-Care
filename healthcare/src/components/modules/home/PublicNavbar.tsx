@@ -39,9 +39,9 @@ interface PublicNavbarProps {
   currentUser?: UserInfo | null
 }
 
-const Brand = ({ className }: { className?: string }) => (
+const Brand = ({ className, inverted = false }: { className?: string; inverted?: boolean }) => (
   <Link href="/" className={cn("font-display text-3xl uppercase tracking-wide", className)}>
-    <span className="text-primary">Med</span>
+    <span className={inverted ? "text-primary-foreground" : "text-primary"}>Med</span>
     <span className="text-accent">dical</span>
   </Link>
 )
@@ -165,7 +165,7 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
       <div className="bg-primary">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:justify-center lg:gap-16 lg:px-8">
           <div className="lg:hidden">
-            <Brand className="text-2xl" />
+            <Brand className="text-2xl" inverted />
           </div>
 
           <nav className="hidden items-center gap-6 text-base lg:flex" aria-label="Main navigation">
