@@ -16,9 +16,9 @@ const WelcomeSection = () => {
       <div className="mx-auto mt-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/home/doctor-card-1.jpg"
+          src="/images/home/welcome-doctors-group.jpg"
           alt="Meddical care team"
-          className="h-52 w-full rounded-[5px] object-cover sm:h-62.5"
+          className="aspect-992/250 w-full rounded-[5px] object-cover"
         />
 
         <div className="mt-6 flex items-center justify-between gap-6">

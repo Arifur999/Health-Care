@@ -23,32 +23,30 @@ const highlights = [
 const Hero = () => {
   return (
     <section className="relative isolate overflow-hidden bg-background">
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -right-24 top-10 size-137.5 rounded-full bg-[#02ddcd]/15 blur-3xl" />
-        <div className="absolute -left-40 top-40 size-137.5 rounded-full bg-secondary/40 blur-3xl" />
+      <div className="absolute inset-0 -z-10">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/home/hero-doctor.jpg"
+          alt="Doctor caring for a patient"
+          className="size-full object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-r from-background from-35% via-background/70 via-55% to-transparent" />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -right-24 bottom-0 size-137.5 rounded-full bg-accent/40 blur-3xl" />
+          <div className="absolute -left-40 -top-24 size-137.5 rounded-full bg-secondary/30 blur-3xl" />
+        </div>
       </div>
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-2 lg:px-8 lg:pt-20">
-        <div className="space-y-6">
-          <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">Caring for Life</p>
-          <h1 className="font-display text-4xl leading-tight text-primary sm:text-5xl">
-            Leading the Way
-            <br />
-            in Medical Excellence
-          </h1>
-          <Button size="lg" asChild className="rounded-full bg-secondary px-9 py-6 text-base text-primary hover:bg-secondary/90">
-            <Link href="/diagnostics">Our Services</Link>
-          </Button>
-        </div>
-
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/home/hero-doctor.jpg"
-            alt="Doctor caring for a patient"
-            className="h-87.5 w-full rounded-[5px] object-cover sm:h-112.5"
-          />
-        </div>
+      <div className="mx-auto flex min-h-125 w-full max-w-7xl flex-col justify-center gap-6 px-4 py-14 sm:px-6 lg:min-h-137.5 lg:px-8">
+        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">Caring for Life</p>
+        <h1 className="font-display text-4xl leading-tight text-primary sm:text-5xl">
+          Leading the Way
+          <br />
+          in Medical Excellence
+        </h1>
+        <Button size="lg" asChild className="w-fit rounded-full bg-secondary px-9 py-6 text-base text-primary hover:bg-secondary/90">
+          <Link href="/diagnostics">Our Services</Link>
+        </Button>
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl translate-y-1/2 px-4 sm:px-6 lg:px-8">
