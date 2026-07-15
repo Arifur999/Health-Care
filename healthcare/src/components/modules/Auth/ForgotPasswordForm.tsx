@@ -38,7 +38,7 @@ const ForgotPasswordForm = () => {
   return (
     <Card className="mx-auto w-full max-w-md p-6 shadow-md">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Forgot your password?</CardTitle>
+        <CardTitle className="font-display text-2xl text-primary">Forgot your password?</CardTitle>
         <CardDescription>
           Enter your account email and we will send a 6-digit code to reset your password.
         </CardDescription>

@@ -48,7 +48,7 @@ const VerifyEmailForm = ({ initialEmail }: VerifyEmailFormProps) => {
   return (
     <Card className="mx-auto w-full max-w-md p-6 shadow-md">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Verify your email</CardTitle>
+        <CardTitle className="font-display text-2xl text-primary">Verify your email</CardTitle>
         <CardDescription>Enter the 6-digit code we sent to your email to activate your account.</CardDescription>
       </CardHeader>
       <CardContent>

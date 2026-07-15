@@ -53,7 +53,7 @@ const ResetPasswordForm = ({ initialEmail }: ResetPasswordFormProps) => {
   return (
     <Card className="mx-auto w-full max-w-md p-6 shadow-md">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Reset your password</CardTitle>
+        <CardTitle className="font-display text-2xl text-primary">Reset your password</CardTitle>
         <CardDescription>Enter the 6-digit code sent to your email and choose a new password.</CardDescription>
       </CardHeader>
       <CardContent>
