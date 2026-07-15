@@ -4,7 +4,6 @@ import InnerPageHero from "@/components/shared/InnerPageHero"
 import { Button } from "@/components/ui/button"
 import { newsArticles } from "@/lib/newsData"
 import { format } from "date-fns"
-import { Eye, Heart } from "lucide-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -43,14 +42,6 @@ const SingleNewsPage = async ({ params }: SingleNewsPageProps) => {
             <div className="flex flex-wrap items-center gap-4 text-sm text-accent">
               <span>{format(new Date(article.date), "MMMM dd, yyyy")}</span>
               <span>By {article.author}</span>
-              <span className="flex items-center gap-1 text-muted-foreground">
-                <Eye className="size-4" aria-hidden="true" />
-                {article.views}
-              </span>
-              <span className="flex items-center gap-1 text-muted-foreground">
-                <Heart className="size-4" aria-hidden="true" />
-                {article.likes}
-              </span>
             </div>
 
             {/* eslint-disable-next-line @next/next/no-img-element */}

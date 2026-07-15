@@ -5,8 +5,6 @@ export interface INewsArticle {
   content: string[]
   date: string
   author: string
-  views: number
-  likes: number
   category: string
 }
 
@@ -23,8 +21,6 @@ export const newsArticles: INewsArticle[] = [
     ],
     date: "2026-06-08",
     author: "Care Team",
-    views: 52,
-    likes: 41,
     category: "Health Care",
   },
   {
@@ -39,8 +35,6 @@ export const newsArticles: INewsArticle[] = [
     ],
     date: "2026-06-13",
     author: "Care Team",
-    views: 77,
-    likes: 63,
     category: "Medical",
   },
   {
@@ -55,8 +49,6 @@ export const newsArticles: INewsArticle[] = [
     ],
     date: "2026-06-17",
     author: "Care Team",
-    views: 34,
-    likes: 29,
     category: "Health Care",
   },
   {
@@ -71,8 +63,6 @@ export const newsArticles: INewsArticle[] = [
     ],
     date: "2026-06-22",
     author: "Care Team",
-    views: 68,
-    likes: 86,
     category: "Surgery",
   },
   {
@@ -87,8 +77,6 @@ export const newsArticles: INewsArticle[] = [
     ],
     date: "2026-06-27",
     author: "Care Team",
-    views: 45,
-    likes: 38,
     category: "Professional",
   },
   {
@@ -103,8 +91,6 @@ export const newsArticles: INewsArticle[] = [
     ],
     date: "2026-07-02",
     author: "Care Team",
-    views: 39,
-    likes: 22,
     category: "Medical",
   },
 ]

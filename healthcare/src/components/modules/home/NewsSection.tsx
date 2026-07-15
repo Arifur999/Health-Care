@@ -2,7 +2,6 @@
 
 import { newsArticles } from "@/lib/newsData"
 import { format } from "date-fns"
-import { HeartHandshake, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -38,16 +37,6 @@ const NewsSection = () => {
                 {format(new Date(article.date), "MMMM dd, yyyy")} | By {article.author}
               </p>
               <p className="text-lg leading-6">{article.title}</p>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <HeartHandshake className="size-4" aria-hidden="true" />
-                  {article.likes}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <MessageCircle className="size-4" aria-hidden="true" />
-                  {article.views}
-                </span>
-              </div>
             </div>
           </Link>
         ))}
