@@ -4,6 +4,7 @@ import { deleteCookie } from "@/lib/cookiesUtils";
 import { setTokenInCookies } from "@/lib/tokenUtils";
 import { cookies } from "next/headers";
 import { redirect } from "next/dist/client/components/navigation";
+import { cache } from "react";
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -49,7 +50,14 @@ export async function getNewTokensWithRefreshToken(refreshToken  : string) : Pro
     }
 }
 
-export async function getUserInfo() {
+// Multiple Server Components in the same request tree (sidebar, navbar, page
+// content) each call this independently. Without request-level dedup, that's
+// several separate live network round-trips to the backend per page load,
+// and if any single one of them is flaky/slow, that component silently
+// loses its user data while the others render fine (e.g. sidebar vanishing
+// while the page content still shows). cache() ensures one real fetch per
+// request, shared by every caller.
+export const getUserInfo = cache(async () => {
     try {
         const cookieStore = await cookies();
         const accessToken = cookieStore.get("accessToken")?.value;
@@ -80,7 +88,7 @@ export async function getUserInfo() {
         console.error("Error fetching user info:", error);
         return null;
     }
-}
+});
 
 export async function logoutAction() {
     try {

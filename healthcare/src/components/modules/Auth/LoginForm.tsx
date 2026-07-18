@@ -41,6 +41,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
                     setServerError(result.message || "Login failed");
                     return;
                 }
+                router.refresh();
                 router.push("/dashboard");
             } catch (error: unknown) {
                 const message = error instanceof Error ? error.message : "Login failed";

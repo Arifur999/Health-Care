@@ -33,7 +33,7 @@ const AppSubmitButton = ({
     >
       { isPending ? (
         <>
-        <Loader2 className="animate-spin" arial-hidden="true" />
+        <Loader2 className="animate-spin" aria-hidden="true" />
         {pendingLabel ? pendingLabel : children}
         </>
       ):children
