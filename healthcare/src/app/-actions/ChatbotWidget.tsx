@@ -4,8 +4,9 @@ import { ingestDoctorAction, queryRagAction, getUserRoleAction } from "@/app/-ac
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import Loader from "@/components/shared/Loader"
 import { cn } from "@/lib/utils"
-import { Loader2, MessageCircle, RotateCw, Send, Sparkles, X } from "lucide-react"
+import { MessageCircle, RotateCw, Send, Sparkles, X } from "lucide-react"
 import { useEffect, useRef, useState, type FormEvent } from "react"
 import { toast } from "sonner"
 
@@ -155,7 +156,7 @@ export function ChatbotWidget() {
           ))}
           {isLoading && (
             <div className="flex items-center gap-2 self-start rounded-lg bg-muted px-3 py-2">
-              <Loader2 className="size-4 animate-spin" />
+              <Loader size={16} label="Amy is checking" />
               <span className="text-sm text-muted-foreground">Amy is checking...</span>
             </div>
           )}
@@ -186,7 +187,7 @@ export function ChatbotWidget() {
             className="w-full"
           >
             {isSyncing ? (
-              <Loader2 className="mr-2 size-4 animate-spin" />
+              <Loader size={16} className="mr-2" label="Syncing" />
             ) : (
               <RotateCw className="mr-2 size-4" />
             )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/shared/Loader";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PaginationMeta } from "@/types/api.types";
@@ -156,7 +157,7 @@ const DataTable = <TData,>({ data = [] as TData[], columns, actions, toolbarActi
         {showLoadingOverlay && (
           <div className="absolute inset-0 bg-background/50 backdrop-blur-sm z-10 flex items-center justify-center">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+              <Loader size={32} />
               <span className="text-sm text-muted-foreground">Loading...</span>
             </div>
           </div>

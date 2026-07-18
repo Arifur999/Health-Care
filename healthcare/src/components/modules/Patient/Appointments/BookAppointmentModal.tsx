@@ -13,10 +13,11 @@ import {
 } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
+import Loader from "@/components/shared/Loader"
 import { type IDoctorDetails, type IDoctorScheduleItem } from "@/types/doctor.types"
 import { useQuery } from "@tanstack/react-query"
 import { format } from "date-fns"
-import { CalendarPlus, Clock3, Loader2 } from "lucide-react"
+import { CalendarPlus, Clock3 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useMemo, useState } from "react"
 import { toast } from "sonner"
@@ -147,7 +148,7 @@ const BookAppointmentModal = ({
 
             {isBusy && (
               <div className="flex items-center gap-2 rounded-xl border p-4 text-sm text-muted-foreground">
-                <Loader2 className="size-4 animate-spin" />
+                <Loader size={16} label="Loading available schedules" />
                 Loading available schedules...
               </div>
             )}

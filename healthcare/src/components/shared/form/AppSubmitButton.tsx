@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/shared/Loader";
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
 
 type AppSubmitButtonProps = {
     isPending:boolean;
@@ -34,7 +34,7 @@ const AppSubmitButton = ({
     >
       { isPending ? (
         <span className="flex items-center justify-center gap-2.5">
-          <Loader2 className="size-4.5 animate-spin" aria-hidden="true" />
+          <Loader size={16} onDark label={pendingLabel ?? "Submitting"} />
           <span className="animate-pulse">{pendingLabel ? pendingLabel : children}</span>
         </span>
       ):children
