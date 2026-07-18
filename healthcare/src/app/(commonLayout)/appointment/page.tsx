@@ -2,6 +2,12 @@ import AppointmentFormSection from "@/components/modules/Appointment/Appointment
 import ContactSection from "@/components/modules/home/ContactSection"
 import InnerPageHero from "@/components/shared/InnerPageHero"
 import MapEmbed from "@/components/shared/MapEmbed"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Book an Appointment",
+  description: "Tell us who you'd like to see and we'll take you straight to their schedule.",
+}
 
 const AppointmentPage = () => {
   return (

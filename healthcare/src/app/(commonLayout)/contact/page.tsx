@@ -2,6 +2,12 @@ import ContactFormSection from "@/components/modules/Contact/ContactFormSection"
 import NewsSection from "@/components/modules/home/NewsSection"
 import InnerPageHero from "@/components/shared/InnerPageHero"
 import MapEmbed from "@/components/shared/MapEmbed"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: "Get in touch with MEDdical — location, phone, email, and a contact form.",
+}
 
 const ContactPage = () => {
   return (

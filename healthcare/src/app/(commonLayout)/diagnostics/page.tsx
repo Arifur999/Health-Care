@@ -4,6 +4,12 @@ import { getIconComponent } from "@/lib/iconMapper"
 import { services } from "@/lib/servicesData"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Services",
+  description: "Diagnostic and clinical services offered at MEDdical.",
+}
 
 const photos = [
   "/images/home/service-photo-1.jpg",

@@ -4,6 +4,12 @@ import { getUserInfo } from "@/services/auth.services";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import DoctorsList from "@/components/modules/consultation/DoctorsList";
 import InnerPageHero from "@/components/shared/InnerPageHero";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Our Doctors",
+  description: "Browse qualified specialists by department, fee, and availability, and book a consultation.",
+};
 
 const SPECIALTIES_FILTER_KEY = "specialties.specialty.title";
 const APPOINTMENT_FEE_FILTER_KEY = "appointmentFee";

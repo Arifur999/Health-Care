@@ -28,7 +28,7 @@ const Hero = () => {
         <img
           src="/images/home/hero-doctor.jpg"
           alt="Doctor caring for a patient"
-          className="size-full object-cover"
+          className="size-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-linear-to-r from-background from-35% via-background/70 via-55% to-transparent" />
         <div className="pointer-events-none absolute inset-0 overflow-hidden">

@@ -5,6 +5,12 @@ import { Button } from "@/components/ui/button"
 import { newsArticles } from "@/lib/newsData"
 import { format } from "date-fns"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "News",
+  description: "Health news, tips, and updates from the MEDdical care team.",
+}
 
 const NewsPage = () => {
   return (

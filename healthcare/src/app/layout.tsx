@@ -17,8 +17,11 @@ const yesevaOne = Yeseva_One({
 });
 
 export const metadata: Metadata = {
-  title: "PH Healthcare Management System",
-  description: "A comprehensive healthcare management system built with Next.js, TypeScript, and Tailwind CSS. This application provides features for managing patient records, appointments, billing, and more, ensuring efficient healthcare administration.",
+  title: {
+    default: "MEDdical — Leading the Way in Medical Excellence",
+    template: "%s | MEDdical",
+  },
+  description: "MEDdical connects you with qualified specialists, digital prescriptions, and diagnostic services so your care team stays coordinated from the very first visit.",
 };
 
 export default function RootLayout({

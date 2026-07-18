@@ -4,6 +4,12 @@ import OurDoctorsSection from "@/components/modules/home/OurDoctorsSection"
 import TestimonialBanner from "@/components/modules/home/TestimonialBanner"
 import InnerPageHero from "@/components/shared/InnerPageHero"
 import PassionForPatientsBlock from "@/components/shared/PassionForPatientsBlock"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about MEDdical's mission, our specialists, and our commitment to patient-first care.",
+}
 
 const AboutUsPage = () => {
   return (
