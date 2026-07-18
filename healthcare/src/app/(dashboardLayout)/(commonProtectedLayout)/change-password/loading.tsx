@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function ChangePasswordLoading() {
-  // Or a custom loading skeleton component
-  return <p>Change Password Loading...</p>
+  return <RouteLoading label="Change Password Loading..." />
 }

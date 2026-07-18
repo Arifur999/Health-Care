@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function DoctorDashboardLoading() {
-  // Or a custom loading skeleton component
-  return <p>Doctor Dashboard Loading...</p>
+  return <RouteLoading label="Doctor Dashboard Loading..." />
 }

@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function PatientMyPrescriptionLoading() {
-  // Or a custom loading skeleton component
-  return <p>Patient My Prescription Loading...</p>
+  return <RouteLoading label="Patient My Prescription Loading..." />
 }

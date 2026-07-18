@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function ConsultationLoading() {
-  // Or a custom loading skeleton component
-  return <p>Consultation Loading...</p>
+  return <RouteLoading label="Consultation Loading..." />
 }

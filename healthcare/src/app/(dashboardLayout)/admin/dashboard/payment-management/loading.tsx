@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function AdminPaymentManagementLoading() {
-  // Or a custom loading skeleton component
-  return <p>Admin Payment Management Loading...</p>
+  return <RouteLoading label="Admin Payment Management Loading..." />
 }

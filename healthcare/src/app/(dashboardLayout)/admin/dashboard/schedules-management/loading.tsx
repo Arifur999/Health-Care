@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function AdminSchedulesManagementLoading() {
-  // Or a custom loading skeleton component
-  return <p>Admin Schedules Management Loading...</p>
+  return <RouteLoading label="Admin Schedules Management Loading..." />
 }

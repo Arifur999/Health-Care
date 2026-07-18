@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function DoctorMySchedulesLoading() {
-  // Or a custom loading skeleton component
-  return <p>Doctor My Schedules Loading...</p>
+  return <RouteLoading label="Doctor My Schedules Loading..." />
 }

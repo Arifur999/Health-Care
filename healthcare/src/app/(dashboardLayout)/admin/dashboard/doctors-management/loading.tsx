@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function AdminsDoctorsManagementLoading() {
-  // Or a custom loading skeleton component
-  return <p>Loading Admins Doctors Management...</p>;
+  return <RouteLoading label="Loading Admins Doctors Management..." />
 }

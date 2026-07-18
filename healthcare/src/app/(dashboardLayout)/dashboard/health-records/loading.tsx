@@ -1,4 +1,5 @@
+import RouteLoading from "@/components/shared/RouteLoading"
+
 export default function PatientHealthRecordsLoading() {
-  // Or a custom loading skeleton component
-  return <p>Patient Health Records Loading...</p>
+  return <RouteLoading label="Patient Health Records Loading..." />
 }
