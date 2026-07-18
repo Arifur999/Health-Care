@@ -12,10 +12,10 @@ type AppSubmitButtonProps = {
 }
 
 const AppSubmitButton = ({
-     isPending, 
-     children, 
-     pendingLabel, 
-     className, 
+     isPending,
+     children,
+     pendingLabel,
+     className,
      disabled = false,
     }:AppSubmitButtonProps
 ) => {
@@ -23,21 +23,22 @@ const AppSubmitButton = ({
     const isDisabled = disabled || isPending;
 
   return (
-    <Button 
+    <Button
     type="submit"
     disabled={isDisabled}
-    className={cn("w-full", 
-        isDisabled && "cursor-not-allowed opacity-50",
+    className={cn("w-full transition-all",
+        isPending && "cursor-wait disabled:opacity-100",
+        !isPending && isDisabled && "cursor-not-allowed opacity-50",
          className
         )}
     >
       { isPending ? (
-        <>
-        <Loader2 className="animate-spin" aria-hidden="true" />
-        {pendingLabel ? pendingLabel : children}
-        </>
+        <span className="flex items-center justify-center gap-2.5">
+          <Loader2 className="size-4.5 animate-spin" aria-hidden="true" />
+          <span className="animate-pulse">{pendingLabel ? pendingLabel : children}</span>
+        </span>
       ):children
-        
+
     }
     </Button>
   )
