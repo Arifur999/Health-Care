@@ -44,6 +44,9 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
                 router.refresh();
                 router.push("/dashboard");
             } catch (error: unknown) {
+                if (error && typeof error === "object" && "digest" in error && typeof error.digest === "string" && error.digest.startsWith("NEXT_REDIRECT")) {
+                    throw error;
+                }
                 const message = error instanceof Error ? error.message : "Login failed";
                 console.log(`Login failed: ${message}`);
                 setServerError(message);

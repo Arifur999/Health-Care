@@ -29,6 +29,9 @@ const ForgotPasswordForm = () => {
           setServerError(result.message || "Failed to send reset code");
         }
       } catch (error: unknown) {
+        if (error && typeof error === "object" && "digest" in error && typeof error.digest === "string" && error.digest.startsWith("NEXT_REDIRECT")) {
+          throw error;
+        }
         const message = error instanceof Error ? error.message : "Failed to send reset code";
         setServerError(message);
       }

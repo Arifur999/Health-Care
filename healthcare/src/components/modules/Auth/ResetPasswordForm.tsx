@@ -44,6 +44,9 @@ const ResetPasswordForm = ({ initialEmail }: ResetPasswordFormProps) => {
           setServerError(result.message || "Failed to reset password");
         }
       } catch (error: unknown) {
+        if (error && typeof error === "object" && "digest" in error && typeof error.digest === "string" && error.digest.startsWith("NEXT_REDIRECT")) {
+          throw error;
+        }
         const message = error instanceof Error ? error.message : "Failed to reset password";
         setServerError(message);
       }
