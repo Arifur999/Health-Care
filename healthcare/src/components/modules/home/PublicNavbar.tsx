@@ -20,6 +20,7 @@ import {
 import { getDefaultDashboardRoute } from "@/lib/authUtils"
 import { cn } from "@/lib/utils"
 import GlobalSearch from "@/components/shared/GlobalSearch"
+import ThemeToggle from "@/components/shared/ThemeToggle"
 import { logoutAction } from "@/services/auth.services"
 import { type UserInfo } from "@/types/user.types"
 import { Clock3, Key, LayoutDashboard, LogOut, Mail, Menu, Phone, Search, User } from "lucide-react"
@@ -196,6 +197,7 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
                 </button>
               }
             />
+            <ThemeToggle className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" />
             <Button asChild className="rounded-full bg-secondary px-8 py-5 text-primary hover:bg-secondary/90">
               <Link href="/appointment">Appointment</Link>
             </Button>

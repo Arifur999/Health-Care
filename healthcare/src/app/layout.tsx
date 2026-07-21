@@ -4,6 +4,7 @@ import { Work_Sans, Yeseva_One } from "next/font/google";
 import ChatbotWidget from "./-actions/ChatbotWidget";
 import "./globals.css";
 import QueryProviders from "./providers/QueryProvider";
+import ThemeProvider from "./providers/ThemeProvider";
 
 const workSans = Work_Sans({
   variable: "--font-work-sans",
@@ -30,15 +31,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${workSans.variable} ${yesevaOne.variable} antialiased font-sans`}
       >
-        <QueryProviders>
-          {children}
-          <ChatbotWidget />
-          <Toaster position="top-right" richColors />
-        </QueryProviders>
+        <ThemeProvider>
+          <QueryProviders>
+            {children}
+            <ChatbotWidget />
+            <Toaster position="top-right" richColors />
+          </QueryProviders>
+        </ThemeProvider>
       </body>
     </html>
   );

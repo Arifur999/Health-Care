@@ -6,10 +6,10 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Tier 1 — Quick, high-visibility fixes
 
-- [ ] Theme the 404 page (`src/app/not-found.tsx`) — currently plain unstyled text, doesn't match the site at all
-- [ ] Theme the error page (`src/app/error.tsx`) — same issue, default Next.js boilerplate
-- [ ] Add `sitemap.xml` + `robots.txt` — zero SEO discoverability right now
-- [ ] Wire up the navbar search icon — it renders but has no click handler, no functionality at all (dead UI element, misleading to users)
+- [x] Theme the 404 page (`src/app/not-found.tsx`) — currently plain unstyled text, doesn't match the site at all
+- [x] Theme the error page (`src/app/error.tsx`) — same issue, default Next.js boilerplate
+- [x] Add `sitemap.xml` + `robots.txt` — zero SEO discoverability right now
+- [x] Wire up the navbar search icon — it renders but has no click handler, no functionality at all (dead UI element, misleading to users)
 - [ ] Add Privacy Policy + Terms of Service pages, linked from the footer — currently don't exist at all; matters more than usual for a site handling health data
 - [ ] Add a dark mode toggle — `.dark` CSS variables already exist in globals.css, but there's no UI to switch themes, and `next-themes` is only wired into the toast library
 - [ ] Add a cookie consent banner — trust/compliance signal, low effort

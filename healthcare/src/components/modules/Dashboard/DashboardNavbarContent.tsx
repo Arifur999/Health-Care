@@ -2,6 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import GlobalSearch from "@/components/shared/GlobalSearch";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 import { NavSection } from "@/types/dashboard.types";
 import { UserInfo } from "@/types/user.types";
 import { Menu, Search } from "lucide-react";
@@ -52,15 +54,22 @@ const DashboardNavbarContent = ({dashboardHome, navItems, userInfo} : DashboardN
 
       {/* Search Component */}
       <div className="flex-1 flex items-center">
-          <div className="relative w-full hidden sm:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"/>
-              <Input type="text" placeholder="Search..." className="pl-9 pr-4" />
+          <div className="w-full hidden sm:block">
+              <GlobalSearch
+                trigger={
+                  <div className="relative w-full max-w-sm cursor-pointer text-left">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none"/>
+                    <Input type="text" placeholder="Search doctors, specialties..." className="pl-9 pr-4 pointer-events-none" readOnly />
+                  </div>
+                }
+              />
           </div>
       </div>
 
 
       {/* Right Side Actions */}
       <div className="flex items-center gap-2">
+          <ThemeToggle />
           {/* Notification */}
           <NotificationDropdown/>
 
