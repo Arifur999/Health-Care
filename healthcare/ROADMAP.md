@@ -17,11 +17,17 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Tier 2 — Meaningful UX features
 
-- [ ] Doctor availability indicator on doctor cards ("Available Today" / next open slot) using existing schedule data
-- [ ] Downloadable/printable prescription (PDF) for patients — real practical need, prescriptions currently only viewable on-screen
-- [ ] Real notification system — `NotificationDropdown` currently always shows an empty list on purpose (no fake data), but there's no backend Notification model or triggers (appointment confirmed, prescription ready, appointment reminder, etc.)
-- [ ] Trust badges — BMDC registration number and "Verified Doctor" badge visible on doctor cards/profile, not just buried in admin data
-- [ ] Emergency quick-contact floating button, sitewide (one-tap call), distinct from the header phone number
+- [~] Doctor availability indicator on doctor cards — DEFERRED: the doctors-list API doesn't include schedules by default (adding per-card would bloat the payload). The doctor **detail** page already shows availability. Needs a lightweight backend `_count` of open slots to do it on cards — flagged for approval.
+- [x] Downloadable/printable prescription (PDF) for patients — done via a browser-print letterhead view (no external PDF dep; "Save as PDF" works from the print dialog).
+- [ ] Real notification system — DEFERRED: needs a new backend Notification model + triggers (appointment confirmed, prescription ready, reminders). `NotificationDropdown` intentionally shows an empty list rather than fake data. Flagged for approval — biggest backend lift.
+- [x] Trust badges — Verified-doctor check + BMDC registration number now on doctor cards and detail.
+- [x] Emergency quick-contact — header number is a tel: link; mobile menu has a prominent emergency call block (mobile had no visible number before); footer phone/email are tel:/mailto: links. (Chose this over a floating button to avoid clutter with the chat widget + cookie banner.)
+
+### Bonus fixes found during Tier 2 / audit
+- [x] **Critical:** app-wide broken booking/schedules — frontend read a nonexistent `startDateTime` field; nothing schedule-related worked. Fixed across 20 files + backend constant.
+- [x] Dashboard sidebar branding was "PH Healthcare" → fixed to MEDdical.
+- [x] Currency inconsistency ($ vs ৳) → standardized on Taka via a shared helper.
+- [x] Removed leftover `console.log` in the backend doctors-list service.
 
 ## Tier 3 — Larger features (bigger lift, still valuable)
 
