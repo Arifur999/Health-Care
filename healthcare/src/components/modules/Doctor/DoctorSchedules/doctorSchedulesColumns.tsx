@@ -5,15 +5,15 @@ import { ColumnDef } from "@tanstack/react-table"
 import { differenceInMinutes } from "date-fns"
 
 const getDurationLabel = (doctorSchedule: IDoctorSchedule) => {
-  const startDateTime = doctorSchedule.schedule?.startDateTime
-  const endDateTime = doctorSchedule.schedule?.endDateTime
+  const startTime = doctorSchedule.schedule?.startTime
+  const endTime = doctorSchedule.schedule?.endTime
 
-  if (!startDateTime || !endDateTime) {
+  if (!startTime || !endTime) {
     return "N/A"
   }
 
-  const startDate = new Date(startDateTime)
-  const endDate = new Date(endDateTime)
+  const startDate = new Date(startTime)
+  const endDate = new Date(endTime)
 
   if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
     return "N/A"
@@ -25,31 +25,31 @@ const getDurationLabel = (doctorSchedule: IDoctorSchedule) => {
 
 export const doctorSchedulesColumns: ColumnDef<IDoctorSchedule>[] = [
   {
-    id: "startDateTime",
-    accessorKey: "schedule.startDateTime",
+    id: "startTime",
+    accessorKey: "schedule.startTime",
     header: "Start",
     cell: ({ row }) => {
-      const startDateTime = row.original.schedule?.startDateTime
+      const startTime = row.original.schedule?.startTime
 
-      if (!startDateTime) {
+      if (!startTime) {
         return <span className="text-sm text-muted-foreground">N/A</span>
       }
 
-      return <DateCell date={startDateTime} formatString="MMM dd, yyyy hh:mm a" />
+      return <DateCell date={startTime} formatString="MMM dd, yyyy hh:mm a" />
     },
   },
   {
-    id: "endDateTime",
-    accessorKey: "schedule.endDateTime",
+    id: "endTime",
+    accessorKey: "schedule.endTime",
     header: "End",
     cell: ({ row }) => {
-      const endDateTime = row.original.schedule?.endDateTime
+      const endTime = row.original.schedule?.endTime
 
-      if (!endDateTime) {
+      if (!endTime) {
         return <span className="text-sm text-muted-foreground">N/A</span>
       }
 
-      return <DateCell date={endDateTime} formatString="MMM dd, yyyy hh:mm a" />
+      return <DateCell date={endTime} formatString="MMM dd, yyyy hh:mm a" />
     },
   },
   {

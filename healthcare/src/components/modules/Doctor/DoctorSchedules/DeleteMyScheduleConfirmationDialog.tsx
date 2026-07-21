@@ -24,7 +24,7 @@ interface DeleteMyScheduleConfirmationDialogProps {
 }
 
 const getScheduleLabel = (doctorSchedule: IDoctorSchedule | null) => {
-  const value = doctorSchedule?.schedule?.startDateTime
+  const value = doctorSchedule?.schedule?.startTime
 
   if (!value) {
     return "this schedule"

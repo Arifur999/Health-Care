@@ -30,15 +30,15 @@ const formatDateTime = (value?: string | Date) => {
 }
 
 const getDurationLabel = (doctorSchedule: IDoctorSchedule | null) => {
-  const startDateTime = doctorSchedule?.schedule?.startDateTime
-  const endDateTime = doctorSchedule?.schedule?.endDateTime
+  const startTime = doctorSchedule?.schedule?.startTime
+  const endTime = doctorSchedule?.schedule?.endTime
 
-  if (!startDateTime || !endDateTime) {
+  if (!startTime || !endTime) {
     return "N/A"
   }
 
-  const startDate = new Date(startDateTime)
-  const endDate = new Date(endDateTime)
+  const startDate = new Date(startTime)
+  const endDate = new Date(endTime)
 
   if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
     return "N/A"
@@ -65,8 +65,8 @@ const ViewMyScheduleDialog = ({
 
         <div className="space-y-3 px-6 py-5 text-sm">
           <p><span className="font-medium">Schedule ID:</span> {doctorSchedule?.scheduleId ?? "N/A"}</p>
-          <p><span className="font-medium">Start:</span> {formatDateTime(doctorSchedule?.schedule?.startDateTime)}</p>
-          <p><span className="font-medium">End:</span> {formatDateTime(doctorSchedule?.schedule?.endDateTime)}</p>
+          <p><span className="font-medium">Start:</span> {formatDateTime(doctorSchedule?.schedule?.startTime)}</p>
+          <p><span className="font-medium">End:</span> {formatDateTime(doctorSchedule?.schedule?.endTime)}</p>
           <p><span className="font-medium">Duration:</span> {getDurationLabel(doctorSchedule)}</p>
           <p><span className="font-medium">Booked by Patient:</span> {doctorSchedule?.isBooked ? "Yes" : "No"}</p>
           <p><span className="font-medium">Assigned On:</span> {formatDateTime(doctorSchedule?.createdAt)}</p>

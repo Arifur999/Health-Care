@@ -33,13 +33,13 @@ const formatDateTime = (value?: string | Date | null) => {
   return format(dateValue, "MMM dd, yyyy hh:mm a")
 }
 
-const getDurationLabel = (startDateTime?: string | Date, endDateTime?: string | Date) => {
-  if (!startDateTime || !endDateTime) {
+const getDurationLabel = (startTime?: string | Date, endTime?: string | Date) => {
+  if (!startTime || !endTime) {
     return "N/A"
   }
 
-  const startDate = new Date(startDateTime)
-  const endDate = new Date(endDateTime)
+  const startDate = new Date(startTime)
+  const endDate = new Date(endTime)
 
   if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
     return "N/A"
@@ -106,9 +106,9 @@ const ViewScheduleDialog = ({
                     <h3 className="mb-3 text-sm font-semibold">Timing</h3>
                     <div className="space-y-2 text-sm">
                       <p><span className="font-medium">Schedule ID:</span> {scheduleDetails.id}</p>
-                      <p><span className="font-medium">Start:</span> {formatDateTime(scheduleDetails.startDateTime)}</p>
-                      <p><span className="font-medium">End:</span> {formatDateTime(scheduleDetails.endDateTime)}</p>
-                      <p><span className="font-medium">Duration:</span> {getDurationLabel(scheduleDetails.startDateTime, scheduleDetails.endDateTime)}</p>
+                      <p><span className="font-medium">Start:</span> {formatDateTime(scheduleDetails.startTime)}</p>
+                      <p><span className="font-medium">End:</span> {formatDateTime(scheduleDetails.endTime)}</p>
+                      <p><span className="font-medium">Duration:</span> {getDurationLabel(scheduleDetails.startTime, scheduleDetails.endTime)}</p>
                       <p><span className="font-medium">Created:</span> {formatDateTime(scheduleDetails.createdAt)}</p>
                       <p><span className="font-medium">Updated:</span> {formatDateTime(scheduleDetails.updatedAt)}</p>
                     </div>

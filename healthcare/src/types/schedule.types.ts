@@ -24,8 +24,8 @@ export interface IScheduleAppointment {
 
 export interface ISchedule {
   id: string
-  startDateTime: string | Date
-  endDateTime: string | Date
+  startTime: string | Date
+  endTime: string | Date
   createdAt?: string | Date
   updatedAt?: string | Date
   doctorSchedules?: IScheduleDoctorAssignment[]

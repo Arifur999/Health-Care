@@ -55,9 +55,9 @@ const BookScheduleModal = () => {
     const params = new URLSearchParams()
     params.set("page", "1")
     params.set("limit", "500")
-    params.set("sortBy", "startDateTime")
+    params.set("sortBy", "startTime")
     params.set("sortOrder", "asc")
-    params.set("startDateTime[gte]", getTodayStartIsoString())
+    params.set("startTime[gte]", getTodayStartIsoString())
     return params.toString()
   }, [])
 
@@ -78,8 +78,8 @@ const BookScheduleModal = () => {
   const availableSchedules = useMemo<ISchedule[]>(() => {
     const now = new Date()
     const allFutureSchedules = (schedulesResponse?.data ?? []).filter((item) => {
-      const startDateTime = new Date(item.startDateTime)
-      return !Number.isNaN(startDateTime.getTime()) && startDateTime >= now
+      const startTime = new Date(item.startTime)
+      return !Number.isNaN(startTime.getTime()) && startTime >= now
     })
 
     const existingScheduleIds = new Set(
@@ -183,10 +183,10 @@ const BookScheduleModal = () => {
                       />
                       <div className="space-y-1">
                         <p className="font-medium">
-                          {formatDateTime(schedule.startDateTime)}
+                          {formatDateTime(schedule.startTime)}
                         </p>
                         <p className="text-muted-foreground">
-                          Ends at {formatDateTime(schedule.endDateTime)}
+                          Ends at {formatDateTime(schedule.endTime)}
                         </p>
                       </div>
                     </label>

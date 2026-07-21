@@ -70,11 +70,11 @@ const BookAppointmentModal = ({
 
     return (data?.data.doctorSchedules ?? [])
       .filter((item) => {
-        if (item.isBooked || !item.schedule?.id || !item.schedule.startDateTime) {
+        if (item.isBooked || !item.schedule?.id || !item.schedule.startTime) {
           return false
         }
 
-        const scheduleStart = new Date(item.schedule.startDateTime)
+        const scheduleStart = new Date(item.schedule.startTime)
         if (Number.isNaN(scheduleStart.getTime())) {
           return false
         }
@@ -82,8 +82,8 @@ const BookAppointmentModal = ({
         return scheduleStart >= today
       })
       .sort((left, right) => {
-        const leftValue = new Date(left.schedule?.startDateTime ?? 0).getTime()
-        const rightValue = new Date(right.schedule?.startDateTime ?? 0).getTime()
+        const leftValue = new Date(left.schedule?.startTime ?? 0).getTime()
+        const rightValue = new Date(right.schedule?.startTime ?? 0).getTime()
         return leftValue - rightValue
       })
   }, [data?.data.doctorSchedules])
@@ -178,9 +178,9 @@ const BookAppointmentModal = ({
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <div className="space-y-1">
-                          <p className="font-medium">{formatDateTime(item.schedule?.startDateTime)}</p>
+                          <p className="font-medium">{formatDateTime(item.schedule?.startTime)}</p>
                           <p className="text-sm text-muted-foreground">
-                            Ends {formatDateTime(item.schedule?.endDateTime)}
+                            Ends {formatDateTime(item.schedule?.endTime)}
                           </p>
                         </div>
 

@@ -28,12 +28,12 @@ const formatScheduleLabel = (schedule: ISchedule | null) => {
     return "this schedule"
   }
 
-  const startDateTime = new Date(schedule.startDateTime)
-  if (Number.isNaN(startDateTime.getTime())) {
+  const startTime = new Date(schedule.startTime)
+  if (Number.isNaN(startTime.getTime())) {
     return "this schedule"
   }
 
-  return `schedule starting ${format(startDateTime, "MMM dd, yyyy hh:mm a")}`
+  return `schedule starting ${format(startTime, "MMM dd, yyyy hh:mm a")}`
 }
 
 const DeleteScheduleConfirmationDialog = ({

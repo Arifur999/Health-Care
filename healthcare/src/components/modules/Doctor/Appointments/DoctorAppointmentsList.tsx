@@ -84,7 +84,7 @@ const DoctorAppointmentsList = () => {
           </CardHeader>
           <CardContent className="space-y-3">
             <p className="text-sm text-muted-foreground">
-              {formatDateTime(appointment.schedule?.startDateTime)} — {formatDateTime(appointment.schedule?.endDateTime)}
+              {formatDateTime(appointment.schedule?.startTime)} — {formatDateTime(appointment.schedule?.endTime)}
             </p>
 
             <Select

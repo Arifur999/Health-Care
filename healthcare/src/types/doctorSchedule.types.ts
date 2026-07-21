@@ -19,8 +19,8 @@ export interface IDoctorSchedule {
   updatedAt?: string | Date
   schedule?: {
     id: string
-    startDateTime: string | Date
-    endDateTime: string | Date
+    startTime: string | Date
+    endTime: string | Date
     createdAt?: string | Date
     updatedAt?: string | Date
   }

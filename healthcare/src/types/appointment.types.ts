@@ -28,8 +28,8 @@ export interface IAppointmentPatient {
 
 export interface IAppointmentSchedule {
   id?: string
-  startDateTime?: string | Date
-  endDateTime?: string | Date
+  startTime?: string | Date
+  endTime?: string | Date
 }
 
 export interface IAppointmentPayment {

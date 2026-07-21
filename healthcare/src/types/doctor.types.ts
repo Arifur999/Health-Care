@@ -107,8 +107,8 @@ export interface IDoctorScheduleItem {
     isBooked?: boolean;
     schedule?: {
         id?: string;
-        startDateTime?: string | Date;
-        endDateTime?: string | Date;
+        startTime?: string | Date;
+        endTime?: string | Date;
     };
 }
 
@@ -123,8 +123,8 @@ export interface IDoctorAppointmentItem {
     };
     schedule?: {
         id?: string;
-        startDateTime?: string | Date;
-        endDateTime?: string | Date;
+        startTime?: string | Date;
+        endTime?: string | Date;
     };
     prescription?: {
         id?: string;

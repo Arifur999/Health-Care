@@ -64,13 +64,13 @@ const BookAppointmentsPage = async ({
   today.setHours(0, 0, 0, 0)
 
   const selectedSchedule = (doctorDetails.doctorSchedules ?? []).find((item) => {
-    const startDateTime = item.schedule?.startDateTime
+    const startTime = item.schedule?.startTime
 
-    if (item.isBooked || item.schedule?.id !== scheduleId || !startDateTime) {
+    if (item.isBooked || item.schedule?.id !== scheduleId || !startTime) {
       return false
     }
 
-    const parsedDate = new Date(startDateTime)
+    const parsedDate = new Date(startTime)
     return !Number.isNaN(parsedDate.getTime()) && parsedDate >= today
   })
 
@@ -84,8 +84,8 @@ const BookAppointmentsPage = async ({
         doctorProfilePhoto={doctorDetails.profilePhoto}
         doctorWorkingPlace={doctorDetails.currentWorkingPlace}
         appointmentFee={doctorDetails.appointmentFee}
-        scheduleStart={selectedSchedule?.schedule?.startDateTime}
-        scheduleEnd={selectedSchedule?.schedule?.endDateTime}
+        scheduleStart={selectedSchedule?.schedule?.startTime}
+        scheduleEnd={selectedSchedule?.schedule?.endTime}
         isScheduleAvailable={Boolean(selectedSchedule)}
       />
     </section>

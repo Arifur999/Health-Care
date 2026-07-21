@@ -46,10 +46,10 @@ const getFormattedInputValue = (value: string | Date | undefined, formatString: 
 }
 
 const getInitialValues = (schedule: ISchedule | null): IEditScheduleFormValues => ({
-  startDate: getFormattedInputValue(schedule?.startDateTime, "yyyy-MM-dd"),
-  endDate: getFormattedInputValue(schedule?.endDateTime, "yyyy-MM-dd"),
-  startTime: getFormattedInputValue(schedule?.startDateTime, "HH:mm"),
-  endTime: getFormattedInputValue(schedule?.endDateTime, "HH:mm"),
+  startDate: getFormattedInputValue(schedule?.startTime, "yyyy-MM-dd"),
+  endDate: getFormattedInputValue(schedule?.endTime, "yyyy-MM-dd"),
+  startTime: getFormattedInputValue(schedule?.startTime, "HH:mm"),
+  endTime: getFormattedInputValue(schedule?.endTime, "HH:mm"),
 })
 
 const EditScheduleFormModal = ({

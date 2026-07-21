@@ -5,14 +5,14 @@ import { ColumnDef } from "@tanstack/react-table"
 import { differenceInMinutes } from "date-fns"
 
 const getDurationLabel = (schedule: ISchedule) => {
-  const startDateTime = new Date(schedule.startDateTime)
-  const endDateTime = new Date(schedule.endDateTime)
+  const startTime = new Date(schedule.startTime)
+  const endTime = new Date(schedule.endTime)
 
-  if (Number.isNaN(startDateTime.getTime()) || Number.isNaN(endDateTime.getTime())) {
+  if (Number.isNaN(startTime.getTime()) || Number.isNaN(endTime.getTime())) {
     return "N/A"
   }
 
-  const durationInMinutes = differenceInMinutes(endDateTime, startDateTime)
+  const durationInMinutes = differenceInMinutes(endTime, startTime)
   if (durationInMinutes <= 0) {
     return "N/A"
   }
@@ -26,19 +26,19 @@ const getBookedCount = (schedule: ISchedule) => {
 
 export const schedulesColumns: ColumnDef<ISchedule>[] = [
   {
-    id: "startDateTime",
-    accessorKey: "startDateTime",
+    id: "startTime",
+    accessorKey: "startTime",
     header: "Start",
     cell: ({ row }) => (
-      <DateCell date={row.original.startDateTime} formatString="MMM dd, yyyy hh:mm a" />
+      <DateCell date={row.original.startTime} formatString="MMM dd, yyyy hh:mm a" />
     ),
   },
   {
-    id: "endDateTime",
-    accessorKey: "endDateTime",
+    id: "endTime",
+    accessorKey: "endTime",
     header: "End",
     cell: ({ row }) => (
-      <DateCell date={row.original.endDateTime} formatString="MMM dd, yyyy hh:mm a" />
+      <DateCell date={row.original.endTime} formatString="MMM dd, yyyy hh:mm a" />
     ),
   },
   {

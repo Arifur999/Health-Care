@@ -159,8 +159,8 @@ const ViewDoctorProfileDialog = ({
                     <div className="space-y-2">
                       {(doctorDetails.doctorSchedules ?? []).slice(0, 8).map((item, index) => (
                         <div key={item.id ?? item.schedule?.id ?? `schedule-${index}`} className="rounded-md border p-2 text-sm">
-                          <p><span className="font-medium">Start:</span> {formatDateTime(item.schedule?.startDateTime)}</p>
-                          <p><span className="font-medium">End:</span> {formatDateTime(item.schedule?.endDateTime)}</p>
+                          <p><span className="font-medium">Start:</span> {formatDateTime(item.schedule?.startTime)}</p>
+                          <p><span className="font-medium">End:</span> {formatDateTime(item.schedule?.endTime)}</p>
                           <p><span className="font-medium">Booked:</span> {item.isBooked ? "Yes" : "No"}</p>
                         </div>
                       ))}
@@ -179,7 +179,7 @@ const ViewDoctorProfileDialog = ({
                         <p><span className="font-medium">Patient:</span> {appointment.patient?.name || "N/A"}</p>
                         <p><span className="font-medium">Patient Email:</span> {appointment.patient?.email || "N/A"}</p>
                         <p><span className="font-medium">Status:</span> {appointment.status || "N/A"}</p>
-                        <p><span className="font-medium">Schedule:</span> {formatDateTime(appointment.schedule?.startDateTime)}</p>
+                        <p><span className="font-medium">Schedule:</span> {formatDateTime(appointment.schedule?.startTime)}</p>
                         <p><span className="font-medium">Has Prescription:</span> {appointment.prescription ? "Yes" : "No"}</p>
                       </div>
                     ))}

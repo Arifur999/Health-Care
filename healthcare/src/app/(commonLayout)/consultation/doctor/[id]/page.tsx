@@ -94,11 +94,11 @@ const ConsultationDoctorByIdPage = async ({
         return false
       }
 
-      if (!item.schedule?.startDateTime) {
+      if (!item.schedule?.startTime) {
         return false
       }
 
-      const startDate = new Date(item.schedule.startDateTime)
+      const startDate = new Date(item.schedule.startTime)
       if (Number.isNaN(startDate.getTime())) {
         return false
       }
@@ -106,8 +106,8 @@ const ConsultationDoctorByIdPage = async ({
       return startDate >= todayStart
     })
     .sort((a, b) => {
-      const leftValue = new Date(a.schedule?.startDateTime ?? 0).getTime()
-      const rightValue = new Date(b.schedule?.startDateTime ?? 0).getTime()
+      const leftValue = new Date(a.schedule?.startTime ?? 0).getTime()
+      const rightValue = new Date(b.schedule?.startTime ?? 0).getTime()
       return leftValue - rightValue
     })
 
@@ -194,8 +194,8 @@ const ConsultationDoctorByIdPage = async ({
               key={item.id ?? item.schedule?.id ?? `schedule-${index}`}
               className="rounded-xl border bg-muted/20 p-4 text-sm"
             >
-              <p><span className="font-medium">Start:</span> {formatDateTime(item.schedule?.startDateTime)}</p>
-              <p><span className="font-medium">End:</span> {formatDateTime(item.schedule?.endDateTime)}</p>
+              <p><span className="font-medium">Start:</span> {formatDateTime(item.schedule?.startTime)}</p>
+              <p><span className="font-medium">End:</span> {formatDateTime(item.schedule?.endTime)}</p>
               <p className="pt-1 text-xs text-emerald-700">Available</p>
             </div>
           ))}
