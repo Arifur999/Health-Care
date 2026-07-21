@@ -22,9 +22,11 @@ import {
 } from "@/hooks/useServerManagedDataTableFilters"
 import { useServerManagedDataTableSearch } from "@/hooks/useServerManagedDataTableSearch"
 import { getAllSpecialties, getDoctors } from "@/services/doctor.services"
+import { formatCurrency } from "@/lib/currency"
 import { type IDoctor } from "@/types/doctor.types"
 import { type ISpecialty } from "@/types/specialty.types"
 import { useQuery } from "@tanstack/react-query"
+import { BadgeCheck } from "lucide-react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useMemo } from "react"
@@ -319,10 +321,15 @@ const DoctorsList = ({
                     </Avatar>
 
                     <div className="min-w-0 space-y-1">
-                      <h3 className="truncate text-base font-semibold">{doctor.name}</h3>
+                      <div className="flex items-center gap-1.5">
+                        <h3 className="truncate text-base font-semibold">{doctor.name}</h3>
+                        <BadgeCheck className="size-4 shrink-0 text-accent" aria-label="Verified doctor" />
+                      </div>
                       <p className="truncate text-xs text-muted-foreground">{doctor.designation || "N/A"}</p>
                       <p className="text-xs text-muted-foreground">{doctor.currentWorkingPlace || "N/A"}</p>
-                      <p className="truncate text-xs text-muted-foreground">{doctor.email || "N/A"}</p>
+                      {doctor.registrationNumber && (
+                        <p className="truncate text-xs text-muted-foreground">BMDC: {doctor.registrationNumber}</p>
+                      )}
                     </div>
                   </div>
 
@@ -331,7 +338,7 @@ const DoctorsList = ({
                       <span className="font-medium">Experience:</span> {doctor.experience ?? 0} years
                     </p>
                     <p>
-                      <span className="font-medium">Fee:</span> ${doctor.appointmentFee?.toFixed(2) ?? "N/A"}
+                      <span className="font-medium">Fee:</span> {formatCurrency(doctor.appointmentFee)}
                     </p>
                     <p>
                       <span className="font-medium">Rating:</span> {doctor.averageRating?.toFixed(1) ?? "0.0"}

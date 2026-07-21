@@ -37,6 +37,8 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ]
 
+const EMERGENCY_PHONE = "+880 1700-000000"
+
 interface PublicNavbarProps {
   currentUser?: UserInfo | null
 }
@@ -55,15 +57,15 @@ const TopBar = () => {
         <Brand />
 
         <div className="flex items-center gap-10 text-sm">
-          <div className="flex items-center gap-3">
-            <span className="flex size-9 items-center justify-center rounded-full bg-secondary text-primary">
+          <a href={`tel:${EMERGENCY_PHONE.replace(/\s/g, "")}`} className="group flex items-center gap-3">
+            <span className="flex size-9 items-center justify-center rounded-full bg-secondary text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
               <Phone className="size-4" aria-hidden="true" />
             </span>
             <div>
-              <p className="font-medium text-accent">+880 1700-000000</p>
+              <p className="font-medium text-accent">{EMERGENCY_PHONE}</p>
               <p className="text-xs font-medium uppercase text-primary">Emergency</p>
             </div>
-          </div>
+          </a>
 
           <div className="flex items-center gap-3">
             <span className="flex size-9 items-center justify-center rounded-full bg-secondary text-primary">
@@ -226,6 +228,20 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
                 <SheetTitle className="sr-only">MEDdical navigation</SheetTitle>
                 <Brand />
               </SheetHeader>
+              <div className="px-6 pb-2">
+                <a
+                  href={`tel:${EMERGENCY_PHONE.replace(/\s/g, "")}`}
+                  className="flex items-center gap-3 rounded-lg bg-accent/10 px-3 py-2.5 text-accent transition-colors hover:bg-accent/20"
+                >
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                    <Phone className="size-4" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-xs font-medium uppercase text-primary">Emergency</span>
+                    <span className="block text-sm font-semibold">{EMERGENCY_PHONE}</span>
+                  </span>
+                </a>
+              </div>
               <div className="flex flex-1 flex-col gap-2 px-6">
                 {navItems.map((item) => (
                   <SheetClose key={item.href} asChild>

@@ -1,5 +1,6 @@
 "use client";
 
+import { formatCurrency } from "@/lib/currency"
 import AppointmentPieChart from "@/components/shared/AppointmentPieChart";
 import StatsCard from "@/components/shared/StatsCard";
 import { getDashboardData } from "@/services/dashboard.services";
@@ -44,7 +45,7 @@ const DoctorDashboardContent = () => {
         />
         <StatsCard
           title="Total Revenue"
-          value={`$${(data?.totalRevenue ?? 0).toFixed(2)}`}
+          value={formatCurrency(data?.totalRevenue)}
           iconName="CreditCard"
           description="Revenue from paid appointments"
         />

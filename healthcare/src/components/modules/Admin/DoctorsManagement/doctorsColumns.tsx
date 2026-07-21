@@ -1,3 +1,4 @@
+import { formatCurrency } from "@/lib/currency"
 import DateCell from "@/components/shared/cell/DateCell";
 import StatusBadgeCell from "@/components/shared/cell/StatusBadgeCell";
 import UserInfoCell from "@/components/shared/cell/UserInfoCell";
@@ -80,7 +81,7 @@ export const doctorColumns: ColumnDef<IDoctor>[] = [
     cell: ({ row }) => {
       return (
         <span className="text-sm font-semibold text-green-600">
-          ${row.original?.appointmentFee.toFixed(2) ?? "N/A"}
+          {formatCurrency(row.original?.appointmentFee)}
         </span>
       );
     },

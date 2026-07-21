@@ -4,8 +4,10 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { getUserInfo } from "@/services/auth.services"
 import { getDoctorById } from "@/services/doctor.services"
+import { formatCurrency } from "@/lib/currency"
 import { type IDoctorDetails } from "@/types/doctor.types"
 import { format } from "date-fns"
+import { BadgeCheck } from "lucide-react"
 import Link from "next/link"
 
 const formatDateTime = (value?: string | Date | null) => {
@@ -127,7 +129,13 @@ const ConsultationDoctorByIdPage = async ({
           </Avatar>
 
           <div className="relative space-y-2">
-            <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{doctorDetails.name}</h1>
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{doctorDetails.name}</h1>
+              <span className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent">
+                <BadgeCheck className="size-3.5" aria-hidden="true" />
+                Verified
+              </span>
+            </div>
             <p className="text-muted-foreground">{doctorDetails.designation || "N/A"}</p>
             <p className="text-sm text-muted-foreground">{doctorDetails.currentWorkingPlace || "N/A"}</p>
 
@@ -144,7 +152,7 @@ const ConsultationDoctorByIdPage = async ({
 
             <div className="flex flex-wrap gap-2 pt-1 text-xs">
               <Badge variant="outline">Experience: {doctorDetails.experience ?? 0} yrs</Badge>
-              <Badge variant="outline">Fee: ${doctorDetails.appointmentFee?.toFixed(2) ?? "N/A"}</Badge>
+              <Badge variant="outline">Fee: {formatCurrency(doctorDetails.appointmentFee)}</Badge>
               <Badge variant="outline">Rating: {doctorDetails.averageRating?.toFixed(1) ?? "0.0"}</Badge>
             </div>
 
@@ -167,7 +175,7 @@ const ConsultationDoctorByIdPage = async ({
             <p><span className="font-medium">Qualification:</span> {doctorDetails.qualification || "N/A"}</p>
             <p><span className="font-medium">Experience:</span> {doctorDetails.experience ?? 0} years</p>
             <p><span className="font-medium">Registration Number:</span> {doctorDetails.registrationNumber || "N/A"}</p>
-            <p><span className="font-medium">Appointment Fee:</span> ${doctorDetails.appointmentFee?.toFixed(2) ?? "N/A"}</p>
+            <p><span className="font-medium">Appointment Fee:</span> {formatCurrency(doctorDetails.appointmentFee)}</p>
             <p><span className="font-medium">Average Rating:</span> {doctorDetails.averageRating?.toFixed(1) ?? "0.0"}</p>
           </div>
         </div>

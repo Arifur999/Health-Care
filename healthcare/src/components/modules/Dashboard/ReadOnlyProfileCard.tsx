@@ -1,3 +1,4 @@
+import { formatCurrency } from "@/lib/currency"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -71,7 +72,7 @@ const ReadOnlyProfileCard = ({ profile, role }: { profile: IMeProfile; role: str
           {typeof profile.appointmentFee === "number" && (
             <div>
               <p className="text-xs font-medium uppercase text-muted-foreground">Appointment Fee</p>
-              <p className="text-sm">${profile.appointmentFee.toFixed(2)}</p>
+              <p className="text-sm">{formatCurrency(profile.appointmentFee)}</p>
             </div>
           )}
           {profile.contactNumber && (

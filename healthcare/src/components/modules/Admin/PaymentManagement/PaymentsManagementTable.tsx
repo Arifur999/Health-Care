@@ -1,5 +1,6 @@
 "use client";
 
+import { formatCurrency } from "@/lib/currency"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -58,7 +59,7 @@ const PaymentsManagementTable = () => {
                   <TableRow key={payment.id}>
                     <TableCell>{payment.appointment?.patient?.name ?? "N/A"}</TableCell>
                     <TableCell>{payment.appointment?.doctor?.name ?? "N/A"}</TableCell>
-                    <TableCell>${payment.amount.toFixed(2)}</TableCell>
+                    <TableCell>{formatCurrency(payment.amount)}</TableCell>
                     <TableCell className="font-mono text-xs">{payment.transactionId}</TableCell>
                     <TableCell>
                       <Badge variant={payment.status === "PAID" ? "secondary" : "outline"}>
