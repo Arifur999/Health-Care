@@ -22,8 +22,9 @@ const DashboardMobileSidebar = ({dashboardHome, navItems, userInfo} : DashboardM
     <div className="flex h-full flex-col overflow-y-auto">
       {/* Logo / Brand */}
       <div className="flex h-16 items-center border-b px-6">
-        <Link href={dashboardHome}>
-          <span className="text-xl font-bold text-primary">PH Healthcare</span>
+        <Link href={dashboardHome} className="font-display text-2xl uppercase tracking-wide">
+          <span className="text-primary">Med</span>
+          <span className="text-accent">dical</span>
         </Link>
       </div>
 
