@@ -5,6 +5,7 @@ import { type IPrescription } from "@/types/prescription.types";
 import { format } from "date-fns";
 import { FileDown } from "lucide-react";
 import Link from "next/link";
+import PrescriptionPrintButton from "./PrescriptionPrintButton";
 
 const formatDate = (value?: string) => {
   if (!value) return "N/A";
@@ -47,16 +48,17 @@ const MyPrescriptionsList = ({ prescriptions }: { prescriptions: IPrescription[]
             <p className="text-sm text-muted-foreground">{prescription.instructions}</p>
             <p className="text-xs text-muted-foreground">Issued {formatDate(prescription.createdAt)}</p>
           </CardContent>
-          {prescription.pdfUrl && (
-            <CardFooter>
+          <CardFooter className="flex flex-wrap gap-2">
+            <PrescriptionPrintButton prescription={prescription} />
+            {prescription.pdfUrl && (
               <Button asChild variant="outline" size="sm">
                 <a href={prescription.pdfUrl} target="_blank" rel="noopener noreferrer">
                   <FileDown className="size-4" aria-hidden="true" />
                   Download PDF
                 </a>
               </Button>
-            </CardFooter>
-          )}
+            )}
+          </CardFooter>
         </Card>
       ))}
     </div>
