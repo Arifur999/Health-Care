@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/sheet"
 import { getDefaultDashboardRoute } from "@/lib/authUtils"
 import { cn } from "@/lib/utils"
+import GlobalSearch from "@/components/shared/GlobalSearch"
 import { logoutAction } from "@/services/auth.services"
 import { type UserInfo } from "@/types/user.types"
 import { Clock3, Key, LayoutDashboard, LogOut, Mail, Menu, Phone, Search, User } from "lucide-react"
@@ -187,7 +188,14 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
           </nav>
 
           <div className="hidden items-center gap-8 lg:flex">
-            <Search className="size-5 text-primary-foreground" aria-hidden="true" />
+            <GlobalSearch
+              trigger={
+                <button type="button" className="cursor-pointer text-primary-foreground hover:text-secondary">
+                  <Search className="size-5" aria-hidden="true" />
+                  <span className="sr-only">Search</span>
+                </button>
+              }
+            />
             <Button asChild className="rounded-full bg-secondary px-8 py-5 text-primary hover:bg-secondary/90">
               <Link href="/appointment">Appointment</Link>
             </Button>
