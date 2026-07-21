@@ -12,8 +12,8 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] Wire up the navbar search icon — it renders but has no click handler, no functionality at all (dead UI element, misleading to users)
 - [ ] Add Privacy Policy + Terms of Service pages, linked from the footer — currently don't exist at all; matters more than usual for a site handling health data
 - [ ] Add a dark mode toggle — `.dark` CSS variables already exist in globals.css, but there's no UI to switch themes, and `next-themes` is only wired into the toast library
-- [ ] Add a cookie consent banner — trust/compliance signal, low effort
-- [ ] Add an FAQ page — standard expectation for medical sites, reduces support load
+- [x] Add a cookie consent banner — trust/compliance signal, low effort
+- [x] Add an FAQ page — standard expectation for medical sites, reduces support load
 
 ## Tier 2 — Meaningful UX features
 
