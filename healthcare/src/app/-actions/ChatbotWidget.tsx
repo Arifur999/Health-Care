@@ -110,7 +110,7 @@ export function ChatbotWidget() {
   if (!isOpen) {
     return (
       <Button
-        className="fixed bottom-5 right-5 z-50 size-14 rounded-full shadow-lg md:bottom-6 md:right-6 md:size-16"
+        className="fixed bottom-5 right-5 z-60 size-14 rounded-full shadow-lg md:bottom-6 md:right-6 md:size-16"
         onClick={() => handleToggleChat(true)}
       >
         <MessageCircle className="size-7 md:size-8" />
@@ -120,7 +120,7 @@ export function ChatbotWidget() {
   }
 
   return (
-    <Card className="fixed inset-x-3 bottom-3 z-50 flex h-[min(76vh,640px)] flex-col gap-0 rounded-xl shadow-2xl sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-full sm:max-w-md">
+    <Card className="fixed inset-x-3 bottom-3 z-60 flex h-[min(76vh,640px)] flex-col gap-0 rounded-xl shadow-2xl sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-full sm:max-w-md">
       <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-3">
         <div className="flex items-center gap-2">
           <span className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">

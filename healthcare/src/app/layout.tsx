@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
+import CookieConsentBanner from "@/components/shared/CookieConsentBanner";
 import type { Metadata } from "next";
 import { Work_Sans, Yeseva_One } from "next/font/google";
 import ChatbotWidget from "./-actions/ChatbotWidget";
@@ -40,6 +41,7 @@ export default function RootLayout({
             {children}
             <ChatbotWidget />
             <Toaster position="top-right" richColors />
+            <CookieConsentBanner />
           </QueryProviders>
         </ThemeProvider>
       </body>
