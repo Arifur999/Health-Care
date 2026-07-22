@@ -1,12 +1,13 @@
 import NewsSidebar from "@/components/modules/News/NewsSidebar"
 import ContactSection from "@/components/modules/home/ContactSection"
 import InnerPageHero from "@/components/shared/InnerPageHero"
-import { Button } from "@/components/ui/button"
-import { newsArticles } from "@/lib/newsData"
+import { getNews, getNewsBySlug } from "@/services/news.services"
+import { type INews } from "@/types/news.types"
 import { format } from "date-fns"
-import { ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 
 interface SingleNewsPageProps {
   params: Promise<{ slug: string }>
@@ -14,15 +15,19 @@ interface SingleNewsPageProps {
 
 const SingleNewsPage = async ({ params }: SingleNewsPageProps) => {
   const { slug } = await params
-  const index = newsArticles.findIndex((item) => item.slug === slug)
 
-  if (index === -1) {
+  const response = await getNewsBySlug(slug).catch(() => null)
+  const article = response?.data
+  if (!article) {
     notFound()
   }
 
-  const article = newsArticles[index]
-  const previous = newsArticles[index - 1]
-  const next = newsArticles[index + 1]
+  // Fetch the list to compute previous/next by publish order.
+  const listResponse = await getNews().catch(() => null)
+  const articles: INews[] = listResponse?.data ?? []
+  const index = articles.findIndex((item) => item.slug === slug)
+  const previous = index >= 0 ? articles[index - 1] : undefined
+  const next = index >= 0 ? articles[index + 1] : undefined
 
   return (
     <>
@@ -40,13 +45,13 @@ const SingleNewsPage = async ({ params }: SingleNewsPageProps) => {
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[2fr_1fr] lg:px-8">
           <div className="space-y-6">
             <div className="flex flex-wrap items-center gap-4 text-sm text-accent">
-              <span>{format(new Date(article.date), "MMMM dd, yyyy")}</span>
+              <span>{format(new Date(article.createdAt), "MMMM dd, yyyy")}</span>
               <span>By {article.author}</span>
             </div>
 
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/home/doctor-card-1.jpg"
+              src={article.coverImage || "/images/home/news-thumb.jpg"}
               alt=""
               className="h-87.5 w-full rounded-[5px] object-cover"
             />

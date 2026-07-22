@@ -130,6 +130,11 @@ export const adminNavItems: NavSection[] = [
                 href: "/admin/dashboard/review-management",
                 icon: "Star",
             },
+            {
+                title: "News",
+                href: "/admin/dashboard/news-management",
+                icon: "Newspaper",
+            },
         ],
     },
 ];
