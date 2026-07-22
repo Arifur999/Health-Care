@@ -39,6 +39,10 @@ export interface IDoctor {
             icon : string;
         }
     }>
+    // Lightweight availability probe from the list endpoint: present and
+    // non-empty when the doctor has at least one upcoming open slot. Typed as
+    // unknown[] so IDoctorDetails can narrow it to the full schedule item type.
+    doctorSchedules?: unknown[]
 }
 
 export interface ICreateDoctorPayload {

@@ -307,6 +307,7 @@ const DoctorsList = ({
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {doctors.map((doctor: IDoctor) => {
               const specialtiesList = doctor.specialties?.map((item) => item.specialty.title) ?? []
+              const isAvailable = (doctor.doctorSchedules?.length ?? 0) > 0
 
               return (
                 <article
@@ -314,6 +315,14 @@ const DoctorsList = ({
                   className="group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
                 >
                   <div className="pointer-events-none absolute left-0 top-0 h-1 w-full bg-linear-to-r from-cyan-500 via-sky-500 to-blue-500 opacity-80" />
+                  <span
+                    className={`absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${
+                      isAvailable ? "bg-green-100 text-green-700" : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    <span className={`size-1.5 rounded-full ${isAvailable ? "bg-green-600" : "bg-muted-foreground"}`} />
+                    {isAvailable ? "Available" : "No open slots"}
+                  </span>
                   <div className="flex items-start gap-3">
                     <Avatar className="size-14 ring-2 ring-blue-100">
                       <AvatarImage src={doctor.profilePhoto} alt={doctor.name} />
