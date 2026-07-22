@@ -21,6 +21,8 @@ import { getDefaultDashboardRoute } from "@/lib/authUtils"
 import { cn } from "@/lib/utils"
 import GlobalSearch from "@/components/shared/GlobalSearch"
 import ThemeToggle from "@/components/shared/ThemeToggle"
+import LanguageToggle from "@/components/shared/LanguageToggle"
+import { useTranslation } from "@/lib/i18n/LanguageProvider"
 import { logoutAction } from "@/services/auth.services"
 import { type UserInfo } from "@/types/user.types"
 import { Clock3, Key, LayoutDashboard, LogOut, Mail, Menu, Phone, Search, User } from "lucide-react"
@@ -29,13 +31,13 @@ import { usePathname } from "next/navigation"
 import { useState } from "react"
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About us", href: "/about-us" },
-  { label: "Services", href: "/diagnostics" },
-  { label: "Doctors", href: "/consultation" },
-  { label: "News", href: "/news" },
-  { label: "Contact", href: "/contact" },
-]
+  { tKey: "nav.home", href: "/" },
+  { tKey: "nav.about", href: "/about-us" },
+  { tKey: "nav.services", href: "/diagnostics" },
+  { tKey: "nav.doctors", href: "/consultation" },
+  { tKey: "nav.news", href: "/news" },
+  { tKey: "nav.contact", href: "/contact" },
+] as const
 
 const EMERGENCY_PHONE = "+880 1700-000000"
 
@@ -51,6 +53,7 @@ const Brand = ({ className, inverted = false }: { className?: string; inverted?:
 )
 
 const TopBar = () => {
+  const { t } = useTranslation()
   return (
     <div className="hidden border-b bg-background lg:block">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
@@ -63,7 +66,7 @@ const TopBar = () => {
             </span>
             <div>
               <p className="font-medium text-accent">{EMERGENCY_PHONE}</p>
-              <p className="text-xs font-medium uppercase text-primary">Emergency</p>
+              <p className="text-xs font-medium uppercase text-primary">{t("topbar.emergency")}</p>
             </div>
           </a>
 
@@ -73,7 +76,7 @@ const TopBar = () => {
             </span>
             <div>
               <p className="font-medium text-accent">09:00 - 20:00 Everyday</p>
-              <p className="text-xs font-medium uppercase text-primary">Work Hour</p>
+              <p className="text-xs font-medium uppercase text-primary">{t("topbar.workHour")}</p>
             </div>
           </div>
 
@@ -83,7 +86,7 @@ const TopBar = () => {
             </span>
             <div>
               <p className="font-medium text-accent">Dhaka, Bangladesh</p>
-              <p className="text-xs font-medium uppercase text-primary">Location</p>
+              <p className="text-xs font-medium uppercase text-primary">{t("topbar.location")}</p>
             </div>
           </div>
         </div>
@@ -161,13 +164,14 @@ const AccountMenu = ({ currentUser }: { currentUser: UserInfo }) => {
 
 const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
   const pathname = usePathname()
+  const { t } = useTranslation()
 
   return (
     <header className="sticky top-0 z-40">
       <TopBar />
 
       <div className="bg-primary">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:justify-center lg:gap-16 lg:px-8">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:justify-center lg:gap-10 lg:px-8">
           <div className="lg:hidden">
             <Brand className="text-2xl" inverted />
           </div>
@@ -184,13 +188,13 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
                     isActive ? "text-secondary" : "text-primary-foreground hover:text-secondary",
                   )}
                 >
-                  {item.label}
+                  {t(item.tKey)}
                 </Link>
               )
             })}
           </nav>
 
-          <div className="hidden items-center gap-8 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex">
             <GlobalSearch
               trigger={
                 <button type="button" className="cursor-pointer text-primary-foreground hover:text-secondary">
@@ -200,8 +204,9 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
               }
             />
             <ThemeToggle className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" />
+            <LanguageToggle />
             <Button asChild className="rounded-full bg-secondary px-8 py-5 text-primary hover:bg-secondary/90">
-              <Link href="/appointment">Appointment</Link>
+              <Link href="/appointment">{t("nav.appointment")}</Link>
             </Button>
             {currentUser ? (
               <AccountMenu currentUser={currentUser} />
@@ -211,7 +216,7 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
                 variant="outline"
                 className="rounded-full border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
               >
-                <Link href="/login">Login</Link>
+                <Link href="/login">{t("nav.login")}</Link>
               </Button>
             )}
           </div>
@@ -249,7 +254,7 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
                       href={item.href}
                       className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                     >
-                      {item.label}
+                      {t(item.tKey)}
                     </Link>
                   </SheetClose>
                 ))}
@@ -275,13 +280,13 @@ const PublicNavbar = ({ currentUser }: PublicNavbarProps) => {
                 ) : (
                   <SheetClose asChild>
                     <Button variant="outline" asChild>
-                      <Link href="/login">Login</Link>
+                      <Link href="/login">{t("nav.login")}</Link>
                     </Button>
                   </SheetClose>
                 )}
                 <SheetClose asChild>
                   <Button className="rounded-full" asChild>
-                    <Link href="/appointment">Appointment</Link>
+                    <Link href="/appointment">{t("nav.appointment")}</Link>
                   </Button>
                 </SheetClose>
               </div>

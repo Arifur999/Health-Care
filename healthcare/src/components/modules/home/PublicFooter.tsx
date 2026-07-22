@@ -1,5 +1,8 @@
+"use client"
+
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useTranslation } from "@/lib/i18n/LanguageProvider"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
@@ -19,6 +22,7 @@ const socialLinks = [
 ]
 
 const PublicFooter = () => {
+  const { t } = useTranslation()
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
@@ -27,12 +31,12 @@ const PublicFooter = () => {
             Meddical
           </Link>
           <p className="max-w-xs text-base leading-6">
-            Leading the Way in Medical Excellence, Trusted Care.
+            {t("footer.tagline")}
           </p>
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Important Links</h2>
+          <h2 className="text-lg font-semibold">{t("footer.importantLinks")}</h2>
           <nav className="grid gap-3" aria-label="Footer navigation">
             {quickLinks.map((item) => (
               <Link key={item.label} href={item.href} className="text-base transition-colors hover:text-secondary">
@@ -43,7 +47,7 @@ const PublicFooter = () => {
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Contact Us</h2>
+          <h2 className="text-lg font-semibold">{t("footer.contactUs")}</h2>
           <div className="grid gap-3 text-base">
             <p>
               Call:{" "}
@@ -63,11 +67,11 @@ const PublicFooter = () => {
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Newsletter</h2>
+          <h2 className="text-lg font-semibold">{t("footer.newsletter")}</h2>
           <div className="flex items-center gap-2 rounded-[5px] bg-secondary p-1.5">
             <input
               type="email"
-              placeholder="Enter your email address"
+              placeholder={t("footer.emailPlaceholder")}
               className="w-full bg-transparent px-3 py-2 text-sm text-primary placeholder:text-primary/70 focus:outline-none"
             />
             <span
@@ -83,13 +87,13 @@ const PublicFooter = () => {
       <div className="border-t border-primary-foreground/15">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-            <p>© {new Date().getFullYear()} MEDdical. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} MEDdical. {t("footer.rights")}</p>
             <div className="flex gap-4">
               <Link href="/privacy-policy" className="transition-colors hover:text-secondary">
-                Privacy Policy
+                {t("footer.privacy")}
               </Link>
               <Link href="/terms-of-service" className="transition-colors hover:text-secondary">
-                Terms of Service
+                {t("footer.terms")}
               </Link>
             </div>
           </div>

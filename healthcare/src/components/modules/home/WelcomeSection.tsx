@@ -1,15 +1,18 @@
+"use client"
+
+import { useTranslation } from "@/lib/i18n/LanguageProvider"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 const WelcomeSection = () => {
+  const { t } = useTranslation()
   return (
     <section className="bg-background pb-20 pt-8 sm:pt-12">
       <div className="mx-auto w-full max-w-3xl space-y-4 px-4 text-center sm:px-6 lg:px-8">
-        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">Welcome to Meddical</p>
-        <h2 className="font-display text-3xl text-primary sm:text-4xl">A Great Place to Receive Care</h2>
+        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">{t("welcome.eyebrow")}</p>
+        <h2 className="font-display text-3xl text-primary sm:text-4xl">{t("welcome.title")}</h2>
         <p className="text-base leading-7 text-foreground/80">
-          Meddical connects you with qualified specialists, digital prescriptions, and diagnostic
-          services so your care team stays coordinated from the very first visit.
+          {t("welcome.body")}
         </p>
       </div>
 
@@ -32,7 +35,7 @@ const WelcomeSection = () => {
             href="/about-us"
             className="flex shrink-0 items-center gap-2 text-base text-accent hover:underline"
           >
-            Learn More
+            {t("welcome.learnMore")}
             <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </div>

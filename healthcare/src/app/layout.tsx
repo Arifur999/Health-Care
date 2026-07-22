@@ -7,6 +7,7 @@ import ChatbotWidget from "./-actions/ChatbotWidget";
 import "./globals.css";
 import QueryProviders from "./providers/QueryProvider";
 import ThemeProvider from "./providers/ThemeProvider";
+import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 
 const workSans = Work_Sans({
   variable: "--font-work-sans",
@@ -44,13 +45,15 @@ export default function RootLayout({
         className={`${workSans.variable} ${yesevaOne.variable} antialiased font-sans`}
       >
         <ThemeProvider>
-          <QueryProviders>
-            {children}
-            <ChatbotWidget />
-            <Toaster position="top-right" richColors />
-            <CookieConsentBanner />
-            <ServiceWorkerRegister />
-          </QueryProviders>
+          <LanguageProvider>
+            <QueryProviders>
+              {children}
+              <ChatbotWidget />
+              <Toaster position="top-right" richColors />
+              <CookieConsentBanner />
+              <ServiceWorkerRegister />
+            </QueryProviders>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

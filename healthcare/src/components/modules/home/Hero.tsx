@@ -1,26 +1,32 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
+import { useTranslation } from "@/lib/i18n/LanguageProvider"
+import { type TranslationKey } from "@/lib/i18n/translations"
 import { Banknote, CalendarCheck, Users } from "lucide-react"
 import Link from "next/link"
 
-const highlights = [
+const highlights: { titleKey: TranslationKey; icon: typeof CalendarCheck; className: string }[] = [
   {
-    title: "Book an Appointment",
+    titleKey: "hero.bookAppointment",
     icon: CalendarCheck,
     className: "bg-primary text-primary-foreground",
   },
   {
-    title: "Expert Doctors",
+    titleKey: "hero.expertDoctors",
     icon: Users,
     className: "bg-secondary text-primary",
   },
   {
-    title: "Affordable Care",
+    titleKey: "hero.affordableCare",
     icon: Banknote,
     className: "bg-accent text-accent-foreground",
   },
 ]
 
 const Hero = () => {
+  const { t } = useTranslation()
+  const titleLines = t("hero.title").split("\n")
   return (
     <section className="relative isolate overflow-hidden bg-background">
       <div className="absolute inset-0 -z-10">
@@ -38,14 +44,17 @@ const Hero = () => {
       </div>
 
       <div className="mx-auto flex min-h-125 w-full max-w-7xl flex-col justify-center gap-6 px-4 py-14 sm:px-6 lg:min-h-137.5 lg:px-8">
-        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">Caring for Life</p>
+        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">{t("hero.tagline")}</p>
         <h1 className="font-display text-4xl leading-tight text-primary sm:text-5xl">
-          Leading the Way
-          <br />
-          in Medical Excellence
+          {titleLines.map((line, index) => (
+            <span key={index}>
+              {line}
+              {index < titleLines.length - 1 && <br />}
+            </span>
+          ))}
         </h1>
         <Button size="lg" asChild className="w-fit rounded-full bg-secondary px-9 py-6 text-base text-primary hover:bg-secondary/90">
-          <Link href="/diagnostics">Our Services</Link>
+          <Link href="/diagnostics">{t("hero.cta")}</Link>
         </Button>
       </div>
 
@@ -55,10 +64,10 @@ const Hero = () => {
             const Icon = item.icon
             return (
               <div
-                key={item.title}
+                key={item.titleKey}
                 className={`flex items-center justify-center gap-4 rounded-[5px] px-6 py-6 shadow-lg ${item.className}`}
               >
-                <p className="text-base font-medium">{item.title}</p>
+                <p className="text-base font-medium">{t(item.titleKey)}</p>
                 <Icon className="size-9" aria-hidden="true" />
               </div>
             )
