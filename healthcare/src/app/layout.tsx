@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsentBanner from "@/components/shared/CookieConsentBanner";
+import ServiceWorkerRegister from "@/components/shared/ServiceWorkerRegister";
 import type { Metadata } from "next";
 import { Work_Sans, Yeseva_One } from "next/font/google";
 import ChatbotWidget from "./-actions/ChatbotWidget";
@@ -24,6 +25,12 @@ export const metadata: Metadata = {
     template: "%s | MEDdical",
   },
   description: "MEDdical connects you with qualified specialists, digital prescriptions, and diagnostic services so your care team stays coordinated from the very first visit.",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "MEDdical",
+    statusBarStyle: "default",
+  },
 };
 
 export default function RootLayout({
@@ -42,6 +49,7 @@ export default function RootLayout({
             <ChatbotWidget />
             <Toaster position="top-right" richColors />
             <CookieConsentBanner />
+            <ServiceWorkerRegister />
           </QueryProviders>
         </ThemeProvider>
       </body>
