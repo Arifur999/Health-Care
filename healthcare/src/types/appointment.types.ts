@@ -46,6 +46,7 @@ export interface IAppointment {
   patientId?: string
   scheduleId?: string
   videoCallingId?: string
+  appointmentType?: AppointmentType
   status?: AppointmentStatus
   paymentStatus?: PaymentStatus
   createdAt?: string | Date
@@ -56,9 +57,12 @@ export interface IAppointment {
   payment?: IAppointmentPayment | null
 }
 
+export type AppointmentType = "IN_PERSON" | "VIDEO_CALL"
+
 export interface IBookAppointmentPayload {
   doctorId: string
   scheduleId: string
+  appointmentType?: AppointmentType
 }
 
 export interface IBookAppointmentResult {

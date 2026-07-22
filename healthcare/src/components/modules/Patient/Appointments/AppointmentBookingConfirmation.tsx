@@ -15,11 +15,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { type AppointmentType } from "@/types/appointment.types"
+import { cn } from "@/lib/utils"
 import { useMutation } from "@tanstack/react-query"
 import { format } from "date-fns"
-import { AlertCircle, CreditCard, Wallet } from "lucide-react"
+import { AlertCircle, CreditCard, MapPin, Video, Wallet } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { toast } from "sonner"
 
 interface AppointmentBookingConfirmationProps {
@@ -70,6 +73,7 @@ const AppointmentBookingConfirmation = ({
   isScheduleAvailable,
 }: AppointmentBookingConfirmationProps) => {
   const router = useRouter()
+  const [appointmentType, setAppointmentType] = useState<AppointmentType>("IN_PERSON")
 
   const payNowMutation = useMutation({
     mutationFn: bookAppointmentAction,
@@ -80,7 +84,7 @@ const AppointmentBookingConfirmation = ({
   })
 
   const handlePayNow = async () => {
-    const result = await payNowMutation.mutateAsync({ doctorId, scheduleId })
+    const result = await payNowMutation.mutateAsync({ doctorId, scheduleId, appointmentType })
 
     if (!result.success) {
       toast.error(result.message || "Failed to book appointment")
@@ -96,7 +100,7 @@ const AppointmentBookingConfirmation = ({
   }
 
   const handlePayLater = async () => {
-    const result = await payLaterMutation.mutateAsync({ doctorId, scheduleId })
+    const result = await payLaterMutation.mutateAsync({ doctorId, scheduleId, appointmentType })
 
     if (!result.success) {
       toast.error(result.message || "Failed to book appointment")
@@ -187,6 +191,41 @@ const AppointmentBookingConfirmation = ({
               <div className="rounded-2xl border p-4">
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Ends</p>
                 <p className="mt-2 text-sm font-medium">{formatDateTime(scheduleEnd)}</p>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div className="space-y-3">
+              <p className="text-sm font-medium">How would you like to consult?</p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {([
+                  { value: "IN_PERSON" as const, icon: MapPin, title: "In-person", desc: "Visit the doctor at their chamber" },
+                  { value: "VIDEO_CALL" as const, icon: Video, title: "Video call", desc: "Join an online video consultation" },
+                ]).map((option) => {
+                  const Icon = option.icon
+                  const selected = appointmentType === option.value
+                  return (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => setAppointmentType(option.value)}
+                      className={cn(
+                        "flex cursor-pointer items-start gap-3 rounded-2xl border p-4 text-left transition-colors",
+                        selected ? "border-accent bg-accent/5 ring-1 ring-accent" : "hover:bg-muted/40",
+                      )}
+                      aria-pressed={selected}
+                    >
+                      <span className={cn("flex size-9 shrink-0 items-center justify-center rounded-full", selected ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground")}>
+                        <Icon className="size-4" aria-hidden="true" />
+                      </span>
+                      <span>
+                        <span className="block text-sm font-medium">{option.title}</span>
+                        <span className="block text-xs text-muted-foreground">{option.desc}</span>
+                      </span>
+                    </button>
+                  )
+                })}
               </div>
             </div>
           </CardContent>

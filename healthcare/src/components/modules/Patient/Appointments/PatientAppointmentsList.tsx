@@ -14,9 +14,10 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { type IAppointment } from "@/types/appointment.types"
+import { getVideoConsultationLink } from "@/lib/videoConsultation"
 import { useMutation } from "@tanstack/react-query"
 import { format } from "date-fns"
-import { AlertCircle, CalendarClock, CircleDollarSign, CreditCard } from "lucide-react"
+import { AlertCircle, CalendarClock, CircleDollarSign, CreditCard, MapPin, Video } from "lucide-react"
 import Link from "next/link"
 import { useMemo } from "react"
 import { toast } from "sonner"
@@ -164,17 +165,48 @@ const PatientAppointmentsList = ({
                     </div>
                   </div>
 
+                  <div className="flex flex-wrap items-center gap-2 text-sm">
+                    {appointment.appointmentType === "VIDEO_CALL" ? (
+                      <Badge variant="secondary" className="gap-1">
+                        <Video className="size-3.5" aria-hidden="true" /> Video call
+                      </Badge>
+                    ) : (
+                      <Badge variant="secondary" className="gap-1">
+                        <MapPin className="size-3.5" aria-hidden="true" /> In-person
+                      </Badge>
+                    )}
+                  </div>
+
                   <div className="text-sm text-muted-foreground">
                     Appointment ID: <span className="font-medium text-foreground">{appointment.id}</span>
                   </div>
                 </CardContent>
 
-                <CardFooter className="justify-between gap-3">
-                  <Button asChild variant="outline">
-                    <Link href={`/consultation/doctor/${appointment.doctorId || appointment.doctor?.id || ""}`}>
-                      View Doctor
-                    </Link>
-                  </Button>
+                <CardFooter className="flex-wrap justify-between gap-3">
+                  <div className="flex flex-wrap gap-2">
+                    <Button asChild variant="outline">
+                      <Link href={`/consultation/doctor/${appointment.doctorId || appointment.doctor?.id || ""}`}>
+                        View Doctor
+                      </Link>
+                    </Button>
+
+                    {appointment.appointmentType === "VIDEO_CALL" &&
+                      appointment.paymentStatus === "PAID" &&
+                      appointment.status !== "CANCELED" &&
+                      appointment.status !== "COMPLETED" &&
+                      getVideoConsultationLink(appointment.videoCallingId) && (
+                        <Button asChild variant="secondary">
+                          <a
+                            href={getVideoConsultationLink(appointment.videoCallingId) as string}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Video className="size-4" aria-hidden="true" />
+                            Join Video Call
+                          </a>
+                        </Button>
+                      )}
+                  </div>
 
                   {canPayNow ? (
                     <Button

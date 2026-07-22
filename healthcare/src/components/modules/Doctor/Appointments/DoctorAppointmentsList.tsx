@@ -12,9 +12,10 @@ import {
 } from "@/components/ui/select";
 import { changeAppointmentStatus, getMyAppointments } from "@/services/appointment.services";
 import { type IAppointment } from "@/types/appointment.types";
+import { getVideoConsultationLink } from "@/lib/videoConsultation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { FileText } from "lucide-react";
+import { FileText, MapPin, Video } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 
@@ -86,6 +87,34 @@ const DoctorAppointmentsList = () => {
             <p className="text-sm text-muted-foreground">
               {formatDateTime(appointment.schedule?.startTime)} — {formatDateTime(appointment.schedule?.endTime)}
             </p>
+
+            <div className="flex flex-wrap items-center gap-2">
+              {appointment.appointmentType === "VIDEO_CALL" ? (
+                <Badge variant="secondary" className="gap-1">
+                  <Video className="size-3.5" aria-hidden="true" /> Video call
+                </Badge>
+              ) : (
+                <Badge variant="secondary" className="gap-1">
+                  <MapPin className="size-3.5" aria-hidden="true" /> In-person
+                </Badge>
+              )}
+              {appointment.appointmentType === "VIDEO_CALL" &&
+                appointment.paymentStatus === "PAID" &&
+                appointment.status !== "CANCELED" &&
+                appointment.status !== "COMPLETED" &&
+                getVideoConsultationLink(appointment.videoCallingId) && (
+                  <Button asChild size="sm" variant="secondary">
+                    <a
+                      href={getVideoConsultationLink(appointment.videoCallingId) as string}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Video className="size-4" aria-hidden="true" />
+                      Join Video Call
+                    </a>
+                  </Button>
+                )}
+            </div>
 
             <Select
               value={appointment.status}
