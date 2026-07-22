@@ -34,16 +34,16 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] Currency inconsistency ($ vs ৳) → standardized on Taka via a shared helper.
 - [x] Removed leftover `console.log` in the backend doctors-list service.
 
-## Tier 3 — Larger features (bigger lift, still valuable)
+## Tier 3 — Larger features (bigger lift, still valuable) — ALL DONE
 
-- [ ] Real CMS-backed news/blog (News page currently reads from static `lib/newsData.ts` mock data)
-- [ ] Insurance / health package info page
-- [ ] Bangla/English language toggle — target audience is Bangladeshi
-- [ ] WhatsApp quick-chat integration — very common expectation for South Asian healthcare sites
-- [ ] PWA support (installable, works offline for viewing prescriptions/appointments)
+- [x] Real CMS-backed news/blog — News list + article pages now read from a News API (backend model + module) instead of the static mock; admin News Management page for create/edit/publish/delete. Existing articles were seeded.
+- [x] Insurance / health package info page (`/insurance`) — how insurance works, accepted providers, claim support.
+- [x] Bangla/English language toggle — LanguageProvider + persisted locale + EN/বাংলা switch; core public marketing surface (top bar, nav, hero, welcome, footer) fully bilingual.
+- [x] WhatsApp quick-chat — floating button on public pages (`NEXT_PUBLIC_WHATSAPP_NUMBER`).
+- [x] PWA support — web app manifest, branded icon, service worker (network-first + offline fallback page); installable to home screen.
 
 ## Notes
 
-- Working through this top-to-bottom, committing after each item.
-- Nothing in Tier 1 requires backend changes — pure frontend.
-- Tier 2's notification system and Tier 3's CMS/insurance pages need new backend models — flagging that scope before starting those specifically.
+- Every roadmap tier (1, 2, 3) plus the extra appointment features (video consults, reminders, notifications, completion) is complete, each verified end-to-end and committed.
+- Deployment: three newer Prisma migrations run automatically via `migrate deploy` (needs `MIGRATE_DATABASE_URL`). New backend env vars: `CRON_SECRET` (required for reminder/cleanup endpoints), `VIDEO_MEETING_BASE_URL` (optional). Point an external cron at `/api/v1/internal/send-appointment-reminders` every ~5 min. Optional frontend env: `NEXT_PUBLIC_WHATSAPP_NUMBER`, `NEXT_PUBLIC_VIDEO_BASE_URL`, `NEXT_PUBLIC_SITE_URL`.
+- Full regression audit after Tier 3: 42/42 pages clean across patient/doctor/admin, zero code issues.
