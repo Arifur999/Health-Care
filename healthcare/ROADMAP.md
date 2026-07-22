@@ -17,11 +17,16 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Tier 2 — Meaningful UX features
 
-- [~] Doctor availability indicator on doctor cards — DEFERRED: the doctors-list API doesn't include schedules by default (adding per-card would bloat the payload). The doctor **detail** page already shows availability. Needs a lightweight backend `_count` of open slots to do it on cards — flagged for approval.
+- [x] Doctor availability indicator on doctor cards — done via a lightweight backend availability probe (at most one upcoming open slot per doctor in the list); cards show a green "Available" / muted "No open slots" badge.
 - [x] Downloadable/printable prescription (PDF) for patients — done via a browser-print letterhead view (no external PDF dep; "Save as PDF" works from the print dialog).
-- [ ] Real notification system — DEFERRED: needs a new backend Notification model + triggers (appointment confirmed, prescription ready, reminders). `NotificationDropdown` intentionally shows an empty list rather than fake data. Flagged for approval — biggest backend lift.
+- [x] Real notification system — done: Notification model + module, unread badge in the bell dropdown, mark-read / mark-all-read, one-minute polling. Triggers fire on appointment booked (both parties), status change, prescription issued, and reminder.
 - [x] Trust badges — Verified-doctor check + BMDC registration number now on doctor cards and detail.
 - [x] Emergency quick-contact — header number is a tel: link; mobile menu has a prominent emergency call block (mobile had no visible number before); footer phone/email are tel:/mailto: links. (Chose this over a floating button to avoid clutter with the chat widget + cookie banner.)
+
+### New features (post-Tier-2 requests)
+- [x] Appointment type — patient chooses **In-person** or **Video call** at booking; type badge on appointment cards; paid video appointments get a working "Join Video Call" link (Jitsi room from videoCallingId; swappable to real Google Meet via Calendar API later — see `lib/videoConsultation.ts`).
+- [x] Appointment reminder email ~10 min before (paid, upcoming appointments; `reminderSent` guarantees one-per-appointment). Triggered via `/internal/send-appointment-reminders` (CRON_SECRET-protected) — point an external cron at it every ~5 min.
+- [x] Appointment completion — doctor's status dropdown marks an appointment COMPLETED (notifies the patient and unlocks "Write Prescription"). Already present; now also fires a notification.
 
 ### Bonus fixes found during Tier 2 / audit
 - [x] **Critical:** app-wide broken booking/schedules — frontend read a nonexistent `startDateTime` field; nothing schedule-related worked. Fixed across 20 files + backend constant.
