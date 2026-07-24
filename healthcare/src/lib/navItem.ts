@@ -81,6 +81,11 @@ export const adminNavItems: NavSection[] = [
                 icon: "Stethoscope",
             },
             {
+                title: "Doctor Applications",
+                href: "/admin/dashboard/doctor-applications",
+                icon: "UserPlus",
+            },
+            {
                 title: "Patients",
                 href: "/admin/dashboard/patients-management",
                 icon: "Users",
