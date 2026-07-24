@@ -19,6 +19,11 @@ export interface BarChartData {
     count: number
 }
 
+export interface RevenueByMonthData {
+    month: Date | string,
+    revenue: number
+}
+
 export interface IAdminDashboardData {
     appointmentCount : number;
     patientCount : number;
@@ -30,6 +35,7 @@ export interface IAdminDashboardData {
     totalRevenue : number;
     barChartData : BarChartData[];
     pieChartData : PieChartData[];
+    revenueByMonth ?: RevenueByMonthData[];
 }
 
 export interface AppointmentStatusCount {

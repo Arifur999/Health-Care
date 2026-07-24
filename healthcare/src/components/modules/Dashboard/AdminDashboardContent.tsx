@@ -2,7 +2,9 @@
 
 import AppointmentBarChart from "@/components/shared/AppointmentBarChart";
 import AppointmentPieChart from "@/components/shared/AppointmentPieChart";
+import RevenueAreaChart from "@/components/shared/RevenueAreaChart";
 import StatsCard from "@/components/shared/StatsCard";
+import { formatCurrency } from "@/lib/currency";
 import { getDashboardData } from "@/services/dashboard.services";
 import { ApiResponse } from "@/types/api.types";
 import { IAdminDashboardData } from "@/types/dashboard.types";
@@ -26,7 +28,7 @@ const AdminDashboardContent = () => {
             </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <StatsCard
             title="Total Appointments"
             value={data?.appointmentCount || 0}
@@ -39,6 +41,22 @@ const AdminDashboardContent = () => {
             iconName="Users"
             description="Number of patients registered"
             />
+            <StatsCard
+            title="Total Doctors"
+            value={data?.doctorCount || 0}
+            iconName="Stethoscope"
+            description="Active doctors on the platform"
+            />
+            <StatsCard
+            title="Total Revenue"
+            value={formatCurrency(data?.totalRevenue || 0)}
+            iconName="CircleDollarSign"
+            description="From all paid appointments"
+            />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-6">
+            <RevenueAreaChart data={data?.revenueByMonth || []} />
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-6">
