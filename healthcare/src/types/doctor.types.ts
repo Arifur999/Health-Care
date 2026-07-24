@@ -103,6 +103,10 @@ export interface IDoctorReview {
     rating?: number;
     comment?: string;
     patientId?: string;
+    patient?: {
+        name?: string;
+        profilePhoto?: string | null;
+    };
     createdAt?: string | Date;
 }
 

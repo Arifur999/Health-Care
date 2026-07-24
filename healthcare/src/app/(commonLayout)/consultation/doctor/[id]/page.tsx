@@ -7,7 +7,7 @@ import { getDoctorById } from "@/services/doctor.services"
 import { formatCurrency } from "@/lib/currency"
 import { type IDoctorDetails } from "@/types/doctor.types"
 import { format } from "date-fns"
-import { BadgeCheck } from "lucide-react"
+import { BadgeCheck, Star } from "lucide-react"
 import Link from "next/link"
 
 const formatDateTime = (value?: string | Date | null) => {
@@ -34,6 +34,29 @@ const getInitials = (name?: string) => {
     .slice(0, 2)
     .map((item) => item[0]?.toUpperCase() ?? "")
     .join("")
+}
+
+const Stars = ({ rating, size = "size-4" }: { rating: number; size?: string }) => {
+  const rounded = Math.round(rating)
+  return (
+    <span
+      className="inline-flex items-center gap-0.5"
+      role="img"
+      aria-label={`${rating.toFixed(1)} out of 5 stars`}
+    >
+      {[1, 2, 3, 4, 5].map((index) => (
+        <Star
+          key={index}
+          className={`${size} ${
+            index <= rounded
+              ? "fill-[#159eec] text-[#159eec]"
+              : "fill-transparent text-muted-foreground/40"
+          }`}
+          aria-hidden="true"
+        />
+      ))}
+    </span>
+  )
 }
 
 const getTodayStart = () => {
@@ -113,6 +136,14 @@ const ConsultationDoctorByIdPage = async ({
       return leftValue - rightValue
     })
 
+  const reviews = doctorDetails.reviews ?? []
+  // Prefer a live average from the loaded reviews; fall back to the stored
+  // aggregate so the rating still shows if reviews aren't included.
+  const averageRating =
+    reviews.length > 0
+      ? reviews.reduce((sum, review) => sum + (review.rating ?? 0), 0) / reviews.length
+      : doctorDetails.averageRating ?? 0
+
   return (
     <section className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
       <Button asChild variant="outline">
@@ -153,7 +184,13 @@ const ConsultationDoctorByIdPage = async ({
             <div className="flex flex-wrap gap-2 pt-1 text-xs">
               <Badge variant="outline">Experience: {doctorDetails.experience ?? 0} yrs</Badge>
               <Badge variant="outline">Fee: {formatCurrency(doctorDetails.appointmentFee)}</Badge>
-              <Badge variant="outline">Rating: {doctorDetails.averageRating?.toFixed(1) ?? "0.0"}</Badge>
+              <span className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5">
+                <Stars rating={averageRating} size="size-3.5" />
+                <span className="font-medium">{averageRating.toFixed(1)}</span>
+                <span className="text-muted-foreground">
+                  ({reviews.length} {reviews.length === 1 ? "review" : "reviews"})
+                </span>
+              </span>
             </div>
 
             <div className="pt-3">
@@ -176,7 +213,11 @@ const ConsultationDoctorByIdPage = async ({
             <p><span className="font-medium">Experience:</span> {doctorDetails.experience ?? 0} years</p>
             <p><span className="font-medium">Registration Number:</span> {doctorDetails.registrationNumber || "N/A"}</p>
             <p><span className="font-medium">Appointment Fee:</span> {formatCurrency(doctorDetails.appointmentFee)}</p>
-            <p><span className="font-medium">Average Rating:</span> {doctorDetails.averageRating?.toFixed(1) ?? "0.0"}</p>
+            <p className="flex items-center gap-2">
+              <span className="font-medium">Average Rating:</span>
+              <Stars rating={averageRating} size="size-3.5" />
+              <span>{averageRating.toFixed(1)} / 5</span>
+            </p>
           </div>
         </div>
 
@@ -214,17 +255,55 @@ const ConsultationDoctorByIdPage = async ({
       </div>
 
       <div className="rounded-2xl border bg-card p-5 shadow-sm">
-        <h2 className="mb-3 text-base font-semibold">Patient Reviews</h2>
-        <div className="space-y-3">
-          {(doctorDetails.reviews ?? []).map((review, index) => (
-            <div key={review.id ?? `review-${index}`} className="rounded-md border p-3 text-sm">
-              <p><span className="font-medium">Rating:</span> {review.rating ?? "N/A"} / 5</p>
-              <p><span className="font-medium">Comment:</span> {review.comment || "N/A"}</p>
-              <p><span className="font-medium">Patient ID:</span> {review.patientId || "N/A"}</p>
-              <p className="text-xs text-muted-foreground">{formatDateTime(review.createdAt)}</p>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-base font-semibold">Patient Reviews</h2>
+          {reviews.length > 0 && (
+            <div className="flex items-center gap-2 text-sm">
+              <Stars rating={averageRating} size="size-4" />
+              <span className="font-semibold">{averageRating.toFixed(1)}</span>
+              <span className="text-muted-foreground">
+                · {reviews.length} {reviews.length === 1 ? "review" : "reviews"}
+              </span>
             </div>
-          ))}
-          {(!doctorDetails.reviews || doctorDetails.reviews.length === 0) && (
+          )}
+        </div>
+        <div className="space-y-3">
+          {reviews.map((review, index) => {
+            const reviewerName = review.patient?.name?.trim() || "Verified Patient"
+            return (
+              <div
+                key={review.id ?? `review-${index}`}
+                className="rounded-xl border bg-background p-4"
+              >
+                <div className="flex items-start gap-3">
+                  <Avatar className="size-9 shrink-0">
+                    {review.patient?.profilePhoto ? (
+                      <AvatarImage src={review.patient.profilePhoto} alt={reviewerName} />
+                    ) : null}
+                    <AvatarFallback className="bg-[#1f2b6c] text-xs text-white">
+                      {getInitials(reviewerName)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="min-w-0 flex-1 space-y-1">
+                    <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium">{reviewerName}</span>
+                        <BadgeCheck className="size-3.5 text-[#159eec]" aria-label="Verified patient" />
+                      </div>
+                      <span className="text-xs text-muted-foreground">
+                        {formatDateTime(review.createdAt)}
+                      </span>
+                    </div>
+                    <Stars rating={review.rating ?? 0} size="size-3.5" />
+                    {review.comment ? (
+                      <p className="pt-0.5 text-sm text-foreground/90">{review.comment}</p>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+          {reviews.length === 0 && (
             <p className="text-sm text-muted-foreground">No reviews yet.</p>
           )}
         </div>
