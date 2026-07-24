@@ -4,6 +4,7 @@ import InnerPageHero from "@/components/shared/InnerPageHero"
 import { getNews, getNewsBySlug } from "@/services/news.services"
 import { type INews } from "@/types/news.types"
 import { format } from "date-fns"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -49,12 +50,16 @@ const SingleNewsPage = async ({ params }: SingleNewsPageProps) => {
               <span>By {article.author}</span>
             </div>
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={article.coverImage || "/images/home/news-thumb.jpg"}
-              alt=""
-              className="h-87.5 w-full rounded-[5px] object-cover"
-            />
+            <div className="relative h-87.5 w-full overflow-hidden rounded-[5px]">
+              <Image
+                src={article.coverImage || "/images/home/news-thumb.jpg"}
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 768px"
+                className="object-cover"
+              />
+            </div>
 
             <div className="space-y-4">
               {article.content.map((paragraph, idx) => (

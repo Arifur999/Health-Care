@@ -4,6 +4,7 @@ import { getAllSpecialties, getDoctors } from "@/services/doctor.services"
 import { type IDoctor } from "@/types/doctor.types"
 import { type ISpecialty } from "@/types/specialty.types"
 import { useQuery } from "@tanstack/react-query"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -51,8 +52,13 @@ const BookAppointmentSection = () => {
   return (
     <section className="relative isolate overflow-hidden py-24">
       <div className="absolute inset-0 -z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/home/appointment-bg.jpg" alt="" className="size-full object-cover" />
+        <Image
+          src="/images/home/appointment-bg.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-background/80" />
       </div>
 

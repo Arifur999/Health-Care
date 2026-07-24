@@ -5,6 +5,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import { getDoctors } from "@/services/doctor.services"
 import { type IDoctor } from "@/types/doctor.types"
 import { useQuery } from "@tanstack/react-query"
+import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -48,12 +49,15 @@ const OurDoctorsSection = ({
           const specialty = doctor.specialties?.[0]?.specialty.title ?? doctor.designation ?? "Specialist"
           return (
             <div key={String(doctor.id)} className="overflow-hidden rounded-[5px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={doctor.profilePhoto || "/images/home/doctor-card-3.jpg"}
-                alt={doctor.name}
-                className="h-87.5 w-full object-cover"
-              />
+              <div className="relative h-87.5 w-full">
+                <Image
+                  src={doctor.profilePhoto || "/images/home/doctor-card-3.jpg"}
+                  alt={doctor.name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
+                  className="object-cover"
+                />
+              </div>
               <div className="space-y-3 bg-secondary px-6 py-6 text-center">
                 <p className="text-lg text-primary">{doctor.name}</p>
                 <p className="text-lg font-bold uppercase tracking-[2.88px] text-primary">{specialty}</p>

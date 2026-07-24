@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { getNews } from "@/services/news.services"
 import { type INews } from "@/types/news.types"
 import { format } from "date-fns"
+import Image from "next/image"
 import Link from "next/link"
 import type { Metadata } from "next"
 
@@ -35,12 +36,15 @@ const NewsPage = async () => {
             )}
             {articles.map((article) => (
               <article key={article.slug} className="space-y-4">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={article.coverImage || "/images/home/news-thumb.jpg"}
-                  alt=""
-                  className="h-72.5 w-full rounded-[5px] object-cover"
-                />
+                <div className="relative h-72.5 w-full overflow-hidden rounded-[5px]">
+                  <Image
+                    src={article.coverImage || "/images/home/news-thumb.jpg"}
+                    alt=""
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 768px"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="flex flex-wrap items-center gap-4 text-sm text-accent">
                   <span>{format(new Date(article.createdAt), "MMMM dd, yyyy")}</span>
                   <span>By {article.author}</span>

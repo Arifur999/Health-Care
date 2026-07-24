@@ -1,6 +1,7 @@
 import { newsArticles, newsCategories } from "@/lib/newsData"
 import { format } from "date-fns"
 import { Search } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 const NewsSidebar = () => {
@@ -25,10 +26,11 @@ const NewsSidebar = () => {
         <div className="mt-4 space-y-4">
           {newsArticles.slice(0, 6).map((article) => (
             <Link key={article.slug} href={`/news/${article.slug}`} className="flex gap-3 group">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/home/news-thumb.jpg"
                 alt=""
+                width={56}
+                height={56}
                 className="size-14 shrink-0 rounded-[5px] object-cover"
               />
               <div className="space-y-1">

@@ -3,6 +3,7 @@ import OurDoctorsSection from "@/components/modules/home/OurDoctorsSection"
 import ServicesSidebar from "@/components/modules/Services/ServicesSidebar"
 import InnerPageHero from "@/components/shared/InnerPageHero"
 import { services } from "@/lib/servicesData"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 
 const bullets = [
@@ -38,12 +39,15 @@ const SingleServicePage = async ({ params }: SingleServicePageProps) => {
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[280px_1fr] lg:px-8">
           <ServicesSidebar activeSlug={service.slug} />
 
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/home/service-photo-1.jpg"
-            alt=""
-            className="h-72.5 w-full rounded-[5px] object-cover sm:h-87.5"
-          />
+          <div className="relative h-72.5 w-full overflow-hidden rounded-[5px] sm:h-87.5">
+            <Image
+              src="/images/home/service-photo-1.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 100vw, 800px"
+              className="object-cover"
+            />
+          </div>
         </div>
 
         <div className="mx-auto mt-10 w-full max-w-6xl space-y-5 px-4 sm:px-6 lg:px-8">

@@ -2,6 +2,7 @@
 
 import { useTranslation } from "@/lib/i18n/LanguageProvider"
 import { ArrowRight } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 const WelcomeSection = () => {
@@ -17,10 +18,12 @@ const WelcomeSection = () => {
       </div>
 
       <div className="mx-auto mt-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/images/home/welcome-doctors-group.jpg"
           alt="Meddical care team"
+          width={992}
+          height={250}
+          sizes="(max-width: 1024px) 100vw, 1024px"
           className="aspect-992/250 w-full rounded-[5px] object-cover"
         />
 

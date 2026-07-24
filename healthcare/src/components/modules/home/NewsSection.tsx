@@ -2,6 +2,7 @@
 
 import { newsArticles } from "@/lib/newsData"
 import { format } from "date-fns"
+import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -26,10 +27,11 @@ const NewsSection = () => {
             href={`/news/${article.slug}`}
             className="flex gap-4 rounded-[5px] bg-background p-3 shadow-sm transition-shadow hover:shadow-md"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/home/news-thumb.jpg"
               alt=""
+              width={128}
+              height={154}
               className="h-38.5 w-32 shrink-0 rounded-[5px] object-cover"
             />
             <div className="flex flex-col justify-center gap-2 py-2">

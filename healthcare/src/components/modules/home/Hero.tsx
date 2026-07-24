@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { useTranslation } from "@/lib/i18n/LanguageProvider"
 import { type TranslationKey } from "@/lib/i18n/translations"
 import { Banknote, CalendarCheck, Users } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 const highlights: { titleKey: TranslationKey; icon: typeof CalendarCheck; className: string }[] = [
@@ -30,11 +31,13 @@ const Hero = () => {
   return (
     <section className="relative isolate overflow-hidden bg-background">
       <div className="absolute inset-0 -z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/images/home/hero-doctor.jpg"
           alt="Doctor caring for a patient"
-          className="size-full object-cover object-top"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
         />
         <div className="absolute inset-0 bg-linear-to-r from-background from-35% via-background/70 via-55% to-transparent" />
         <div className="pointer-events-none absolute inset-0 overflow-hidden">

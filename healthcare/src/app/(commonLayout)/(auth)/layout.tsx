@@ -1,3 +1,4 @@
+import Image from "next/image"
 import type { ReactNode } from "react"
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {
@@ -10,11 +11,12 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
 
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-20">
         <div className="relative isolate hidden overflow-hidden rounded-[5px] lg:block lg:min-h-137.5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/images/home/service-photo-1.jpg"
             alt="A doctor caring for a patient"
-            className="absolute inset-0 -z-10 size-full object-cover"
+            fill
+            sizes="(max-width: 1024px) 0px, 50vw"
+            className="-z-10 object-cover"
           />
           <div className="absolute inset-0 -z-10 bg-primary/80" />
 

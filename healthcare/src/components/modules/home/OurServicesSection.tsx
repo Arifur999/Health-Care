@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Activity, Droplet, HeartPulse, Stethoscope } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 const sideItems = [
@@ -74,8 +75,15 @@ const OurServicesSection = () => {
         <div className="flex shrink-0 flex-col gap-6 sm:flex-row lg:w-80 lg:flex-col">
           {photos.map((src, index) => (
             <div key={src} className="space-y-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" className="h-44 w-full rounded-[5px] object-cover" />
+              <div className="relative h-44 w-full overflow-hidden rounded-[5px]">
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, 320px"
+                  className="object-cover"
+                />
+              </div>
               <div className="flex h-2 overflow-hidden rounded-full">
                 <span className={`h-full ${index === 0 ? "w-3/4" : "w-1/2"} bg-primary`} />
                 <span className="h-full w-1/5 bg-accent" />

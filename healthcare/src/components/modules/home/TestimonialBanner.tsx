@@ -4,6 +4,7 @@ import { getAllReviews } from "@/services/review.services"
 import { type IReview } from "@/types/review.types"
 import { useQuery } from "@tanstack/react-query"
 import { Quote } from "lucide-react"
+import Image from "next/image"
 import { useState } from "react"
 
 const TestimonialBanner = () => {
@@ -25,8 +26,13 @@ const TestimonialBanner = () => {
   return (
     <section className="relative isolate overflow-hidden py-20">
       <div className="absolute inset-0 -z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/home/appointment-bg.jpg" alt="" className="size-full object-cover" />
+        <Image
+          src="/images/home/appointment-bg.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-primary/90" />
       </div>
 

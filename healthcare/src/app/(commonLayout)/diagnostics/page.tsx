@@ -3,6 +3,7 @@ import InnerPageHero from "@/components/shared/InnerPageHero"
 import { getIconComponent } from "@/lib/iconMapper"
 import { services } from "@/lib/servicesData"
 import { ArrowRight } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import type { Metadata } from "next"
 
@@ -36,12 +37,15 @@ const DiagnosticsPage = () => {
             return (
               <article key={service.slug} className="space-y-4">
                 <div className="relative">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={photos[index % photos.length]}
-                    alt=""
-                    className="h-52 w-full rounded-[5px] object-cover"
-                  />
+                  <div className="relative h-52 w-full overflow-hidden rounded-[5px]">
+                    <Image
+                      src={photos[index % photos.length]}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
+                      className="object-cover"
+                    />
+                  </div>
                   <span className="absolute -bottom-5 right-5 flex size-11 items-center justify-center rounded-full bg-primary text-secondary shadow-md">
                     <Icon className="size-5" aria-hidden="true" />
                   </span>

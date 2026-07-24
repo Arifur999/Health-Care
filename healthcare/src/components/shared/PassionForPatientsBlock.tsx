@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 const bullets = [
   "A Passion for Healing",
   "5-Star Care",
@@ -23,8 +25,15 @@ const PassionForPatientsBlock = ({
   imageFirst = true,
 }: PassionForPatientsBlockProps) => {
   const imageBlock = (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={image} alt="" className="h-72.5 w-full rounded-[5px] object-cover sm:h-100" />
+    <div className="relative h-72.5 w-full overflow-hidden rounded-[5px] sm:h-100">
+      <Image
+        src={image}
+        alt=""
+        fill
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        className="object-cover"
+      />
+    </div>
   )
 
   const textBlock = (
