@@ -1,14 +1,16 @@
 "use server"
 
 
-import { bookAppointment, bookAppointmentWithPayLater, initiateAppointmentPayment } from "@/services/appointment.services"
+import { bookAppointment, bookAppointmentWithPayLater, cancelMyAppointment, initiateAppointmentPayment } from "@/services/appointment.services"
 import { type ApiErrorResponse, type ApiResponse } from "@/types/api.types"
 import {
+  type IAppointment,
   type IBookAppointmentPayload,
   type IBookAppointmentResult,
   type IInitiatePaymentResult,
 } from "@/types/appointment.types"
 import { bookAppointmentServerZodSchema } from "@/zod/appointment.validation"
+import { revalidatePath } from "next/cache"
 
 
 const getActionErrorMessage = (error: unknown, fallbackMessage: string) => {
@@ -94,6 +96,28 @@ export const initiateAppointmentPaymentAction = async (
     return {
       success: false,
       message: getActionErrorMessage(error, "Failed to initiate payment"),
+    }
+  }
+}
+
+export const cancelMyAppointmentAction = async (
+  appointmentId: string,
+): Promise<ApiResponse<IAppointment> | ApiErrorResponse> => {
+  if (!appointmentId) {
+    return {
+      success: false,
+      message: "Invalid appointment id",
+    }
+  }
+
+  try {
+    const result = await cancelMyAppointment(appointmentId)
+    revalidatePath("/dashboard/my-appointments")
+    return result
+  } catch (error: unknown) {
+    return {
+      success: false,
+      message: getActionErrorMessage(error, "Failed to cancel appointment"),
     }
   }
 }

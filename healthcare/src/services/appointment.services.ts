@@ -79,3 +79,15 @@ export const changeAppointmentStatus = async (appointmentId: string, appointment
     throw error
   }
 }
+
+export const cancelMyAppointment = async (appointmentId: string) => {
+  try {
+    return await httpClient.patch<IAppointment>(
+      `/appointments/cancel-my-appointment/${appointmentId}`,
+      {},
+    )
+  } catch (error) {
+    console.log("Error canceling appointment:", error)
+    throw error
+  }
+}

@@ -1,10 +1,21 @@
 "use client"
 
 
-import { initiateAppointmentPaymentAction } from "@/app/-actions/appointment.actions"
+import { cancelMyAppointmentAction, initiateAppointmentPaymentAction } from "@/app/-actions/appointment.actions"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import {
   Card,
   CardContent,
@@ -17,8 +28,9 @@ import { type IAppointment } from "@/types/appointment.types"
 import { getVideoConsultationLink } from "@/lib/videoConsultation"
 import { useMutation } from "@tanstack/react-query"
 import { format } from "date-fns"
-import { AlertCircle, CalendarClock, CircleDollarSign, CreditCard, MapPin, Video } from "lucide-react"
+import { AlertCircle, CalendarClock, CircleDollarSign, CreditCard, MapPin, Video, X } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useMemo } from "react"
 import { toast } from "sonner"
 
@@ -46,8 +58,25 @@ const PatientAppointmentsList = ({
   feedbackType,
   feedbackMessage,
 }: PatientAppointmentsListProps) => {
+  const router = useRouter()
+
   const initiatePaymentMutation = useMutation({
     mutationFn: initiateAppointmentPaymentAction,
+  })
+
+  const cancelMutation = useMutation({
+    mutationFn: cancelMyAppointmentAction,
+    onSuccess: (result) => {
+      if (!result.success) {
+        toast.error(result.message || "Failed to cancel appointment")
+        return
+      }
+      toast.success("Appointment canceled")
+      router.refresh()
+    },
+    onError: () => {
+      toast.error("Failed to cancel appointment")
+    },
   })
 
   const sortedAppointments = useMemo(() => {
@@ -123,6 +152,13 @@ const PatientAppointmentsList = ({
           {sortedAppointments.map((appointment) => {
             const canPayNow =
               appointment.paymentStatus !== "PAID" && appointment.status !== "CANCELED"
+            // Patients may cancel only their own unpaid, still-scheduled
+            // bookings — paid ones need a support-handled refund, and
+            // completed/canceled ones can't be undone.
+            const canCancel =
+              appointment.paymentStatus !== "PAID" &&
+              appointment.status !== "CANCELED" &&
+              appointment.status !== "COMPLETED"
 
             return (
               <Card key={appointment.id} className="gap-4">
@@ -208,20 +244,55 @@ const PatientAppointmentsList = ({
                       )}
                   </div>
 
-                  {canPayNow ? (
-                    <Button
-                      type="button"
-                      onClick={() => void handlePayNow(appointment.id)}
-                      disabled={initiatePaymentMutation.isPending}
-                    >
-                      <CreditCard className="size-4" />
-                      {initiatePaymentMutation.isPending ? "Redirecting..." : "Pay Now"}
-                    </Button>
-                  ) : (
-                    <Button type="button" variant="secondary" disabled>
-                      {appointment.paymentStatus === "PAID" ? "Paid" : "Unavailable"}
-                    </Button>
-                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {canCancel && (
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            className="text-destructive hover:text-destructive"
+                            disabled={cancelMutation.isPending}
+                          >
+                            <X className="size-4" aria-hidden="true" />
+                            {cancelMutation.isPending ? "Canceling..." : "Cancel"}
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Cancel this appointment?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This frees up the time slot for other patients. You can&apos;t undo
+                              this — you&apos;d have to book again.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Keep appointment</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => cancelMutation.mutate(appointment.id)}
+                            >
+                              Yes, cancel
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    )}
+
+                    {canPayNow ? (
+                      <Button
+                        type="button"
+                        onClick={() => void handlePayNow(appointment.id)}
+                        disabled={initiatePaymentMutation.isPending}
+                      >
+                        <CreditCard className="size-4" />
+                        {initiatePaymentMutation.isPending ? "Redirecting..." : "Pay Now"}
+                      </Button>
+                    ) : (
+                      <Button type="button" variant="secondary" disabled>
+                        {appointment.paymentStatus === "PAID" ? "Paid" : "Unavailable"}
+                      </Button>
+                    )}
+                  </div>
                 </CardFooter>
               </Card>
             )
