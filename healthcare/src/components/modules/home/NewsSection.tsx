@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslation } from "@/lib/i18n/LanguageProvider"
 import { newsArticles } from "@/lib/newsData"
 import { format } from "date-fns"
 import Image from "next/image"
@@ -7,6 +8,7 @@ import Link from "next/link"
 import { useState } from "react"
 
 const NewsSection = () => {
+  const { t } = useTranslation()
   const [page, setPage] = useState(0)
   const visible = newsArticles.slice(page * 4, page * 4 + 4)
   const pageCount = Math.ceil(newsArticles.length / 4)
@@ -17,7 +19,7 @@ const NewsSection = () => {
         <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">
           Better information, Better health
         </p>
-        <h2 className="font-display text-3xl text-primary sm:text-4xl">News</h2>
+        <h2 className="font-display text-3xl text-primary sm:text-4xl">{t("news.title")}</h2>
       </div>
 
       <div className="mx-auto mt-10 grid w-full max-w-6xl gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:px-8">

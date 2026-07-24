@@ -4,6 +4,7 @@ import { FacebookIcon, InstagramIcon, TwitterIcon } from "@hugeicons/core-free-i
 import { HugeiconsIcon } from "@hugeicons/react"
 import { getDoctors } from "@/services/doctor.services"
 import { type IDoctor } from "@/types/doctor.types"
+import { useTranslation } from "@/lib/i18n/LanguageProvider"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
@@ -19,10 +20,13 @@ interface OurDoctorsSectionProps {
 const OurDoctorsSection = ({
   pageSize = 3,
   fetchLimit = 9,
-  eyebrow = "Trusted Care",
-  title = "Our Doctors",
+  eyebrow,
+  title,
 }: OurDoctorsSectionProps) => {
+  const { t } = useTranslation()
   const [page, setPage] = useState(0)
+  const displayEyebrow = eyebrow ?? t("doctors.eyebrow")
+  const displayTitle = title ?? t("doctors.title")
 
   const { data: doctorsResponse } = useQuery({
     queryKey: ["home-our-doctors", fetchLimit],
@@ -40,8 +44,8 @@ const OurDoctorsSection = ({
   return (
     <section className="bg-background py-20">
       <div className="mx-auto w-full max-w-3xl space-y-3 px-4 text-center sm:px-6 lg:px-8">
-        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">{eyebrow}</p>
-        <h2 className="font-display text-3xl text-primary sm:text-4xl">{title}</h2>
+        <p className="text-lg font-bold uppercase tracking-[2.88px] text-accent">{displayEyebrow}</p>
+        <h2 className="font-display text-3xl text-primary sm:text-4xl">{displayTitle}</h2>
       </div>
 
       <div className="mx-auto mt-10 grid w-full max-w-6xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 lg:px-8">
