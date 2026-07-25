@@ -42,6 +42,18 @@ Status: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] WhatsApp quick-chat — floating button on public pages (`NEXT_PUBLIC_WHATSAPP_NUMBER`).
 - [x] PWA support — web app manifest, branded icon, service worker (network-first + offline fallback page); installable to home screen.
 
+## Tier 4 — Post-launch polish (this round) — ALL DONE
+
+- [x] Public doctor reviews redesigned — reviewer name + avatar + star rating + comment (was a raw "Patient ID: <uuid>"); backend now returns reviewer name/photo only (no PII). Live average computed from reviews.
+- [x] Patient self-cancellation — patients can cancel their own unpaid, still-scheduled appointments; frees the slot and notifies the doctor. Also closed an IDOR (PATIENT could change any appointment's status).
+- [x] Apply-as-a-doctor — public `/careers` application form + admin review page (`/admin/dashboard/doctor-applications`); approving creates the doctor account (temp password + emailed credentials), rejecting emails a decline. New `DoctorApplication` model/migration.
+- [x] Image optimization — `next/image` across all raster/photo images (fill+sizes, priority heroes, remotePatterns for user URLs). Small SVG icons/blob previews left as `<img>` on purpose.
+- [x] Rate limiting — Redis-backed (Upstash), fail-open, on auth (register/login/forget/reset, 20/15 min) and public doctor-application submit (5/hr).
+- [x] Full homepage bilingual (EN/বাংলা) — Services, Doctors, Book Appointment, News, Contact now translate; Services/Contact converted to client components.
+- [x] Admin dashboard — Total Doctors + Total Revenue KPI cards, and a monthly Revenue Trends area chart (new `getRevenueByMonth`).
+- [x] Automated tests — Vitest unit tests (currency, video link, doctor-application schema, EN/বাংলা parity). Deploy-safe: excluded from the build, not added to the pnpm lockfile. See `TESTING.md`.
+- [x] Accessibility — `<html lang>` follows the locale, skip-to-content link, labeled search inputs, language-toggle group label.
+
 ## Notes
 
 - Every roadmap tier (1, 2, 3) plus the extra appointment features (video consults, reminders, notifications, completion) is complete, each verified end-to-end and committed.
