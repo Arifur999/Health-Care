@@ -96,6 +96,7 @@ const GlobalSearch = ({ trigger }: GlobalSearchProps) => {
                   if (event.key === "Enter") handleViewAllDoctors()
                 }}
                 placeholder="Search doctors, specialties, services..."
+                aria-label="Search doctors, specialties, services"
                 className="border-0 shadow-none focus-visible:ring-0"
               />
               {query && (

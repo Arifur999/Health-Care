@@ -14,7 +14,7 @@ const RootDashboardLayout = async ({children} : {children: React.ReactNode}) => 
             {/* DashboardNavbar */}
             <DashboardNavbar />
             {/* Dashboard Content */}
-            <main className="flex-1 overflow-y-auto bg-muted/10 p-4 md:p-6">
+            <main id="main-content" tabIndex={-1} className="flex-1 overflow-y-auto bg-muted/10 p-4 md:p-6">
                 <div>
                     {children}
                 </div>

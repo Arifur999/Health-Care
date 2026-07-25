@@ -7,7 +7,11 @@ const LanguageToggle = ({ className }: { className?: string }) => {
   const { locale, setLocale } = useTranslation()
 
   return (
-    <div className={cn("inline-flex items-center rounded-full border border-primary-foreground/30 p-0.5 text-xs", className)}>
+    <div
+      role="group"
+      aria-label="Language"
+      className={cn("inline-flex items-center rounded-full border border-primary-foreground/30 p-0.5 text-xs", className)}
+    >
       <button
         type="button"
         onClick={() => setLocale("en")}

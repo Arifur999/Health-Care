@@ -44,11 +44,16 @@ const DataTableSearch = ({
 
   return (
     <div className="relative w-full md:max-w-sm">
-      <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+      <Search
+        aria-hidden="true"
+        className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2"
+      />
       <Input
+        type="search"
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder={placeholder}
+        aria-label={placeholder}
         className="h-9 pr-9 pl-9"
         disabled={isLoading}
       />

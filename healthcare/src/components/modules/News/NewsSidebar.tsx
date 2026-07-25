@@ -9,7 +9,9 @@ const NewsSidebar = () => {
     <aside className="space-y-8">
       <form className="flex items-center gap-2 rounded-[5px] bg-primary p-2">
         <input
+          type="search"
           placeholder="Search"
+          aria-label="Search news"
           className="w-full bg-transparent px-2 text-sm text-primary-foreground placeholder:text-primary-foreground/60 outline-none"
         />
         <button

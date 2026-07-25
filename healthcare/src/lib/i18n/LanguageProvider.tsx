@@ -23,6 +23,12 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
     }
   }, [])
 
+  // Keep the document language in sync so screen readers announce content with
+  // the correct pronunciation, and assistive tech/browsers know the page language.
+  useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
+
   const setLocale = (next: Locale) => {
     setLocaleState(next)
     window.localStorage.setItem(STORAGE_KEY, next)
