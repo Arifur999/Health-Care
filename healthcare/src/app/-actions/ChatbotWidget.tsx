@@ -18,9 +18,27 @@ type Message = {
 
 const exampleQueries = ["Neurologist in Dhaka", "Find me a cardiologist", "Top 5 pediatricians"]
 
-export function ChatbotWidget() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([])
+const WELCOME_MESSAGE: Message = {
+  sender: "ai",
+  text: "Hello! I'm Amy. Tell me what kind of doctor you need and I will help you find a good match.",
+}
+
+interface ChatbotWidgetProps {
+  // When `open` is provided the widget is "controlled": the parent owns the
+  // open state (e.g. the floating action menu) and the built-in launcher
+  // button is hidden. Omit both to keep the standalone launcher behaviour.
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+}
+
+export function ChatbotWidget({ open, onOpenChange }: ChatbotWidgetProps = {}) {
+  const isControlled = open !== undefined
+  const [internalOpen, setInternalOpen] = useState(false)
+  const isOpen = isControlled ? open : internalOpen
+
+  // Seeded with the greeting so it shows immediately whether the chat is
+  // opened by the standalone launcher or by the parent (controlled) menu.
+  const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE])
   const [inputValue, setInputValue] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isSyncing, setIsSyncing] = useState(false)
@@ -40,13 +58,11 @@ export function ChatbotWidget() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
-  const handleToggleChat = (open: boolean) => {
-    setIsOpen(open)
-    if (open) {
-      setMessages([
-        { sender: "ai", text: "Hello! I'm Amy. Tell me what kind of doctor you need and I will help you find a good match." },
-      ])
+  const handleToggleChat = (nextOpen: boolean) => {
+    if (!isControlled) {
+      setInternalOpen(nextOpen)
     }
+    onOpenChange?.(nextOpen)
   }
 
   const askAmy = async (query: string) => {
@@ -108,6 +124,11 @@ export function ChatbotWidget() {
   const isAdmin = userRole === "ADMIN" || userRole === "SUPER_ADMIN"
 
   if (!isOpen) {
+    // In controlled mode the parent (floating action menu) owns the launcher,
+    // so render nothing here when closed.
+    if (isControlled) {
+      return null
+    }
     return (
       <Button
         className="fixed bottom-5 right-5 z-60 size-14 rounded-full shadow-lg md:bottom-6 md:right-6 md:size-16"

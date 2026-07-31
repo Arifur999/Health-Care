@@ -1,9 +1,9 @@
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsentBanner from "@/components/shared/CookieConsentBanner";
 import ServiceWorkerRegister from "@/components/shared/ServiceWorkerRegister";
+import FloatingActions from "@/components/shared/FloatingActions";
 import type { Metadata } from "next";
 import { Work_Sans, Yeseva_One } from "next/font/google";
-import ChatbotWidget from "./-actions/ChatbotWidget";
 import "./globals.css";
 import QueryProviders from "./providers/QueryProvider";
 import ThemeProvider from "./providers/ThemeProvider";
@@ -54,7 +54,7 @@ export default function RootLayout({
           <LanguageProvider>
             <QueryProviders>
               {children}
-              <ChatbotWidget />
+              <FloatingActions />
               <Toaster position="top-right" richColors />
               <CookieConsentBanner />
               <ServiceWorkerRegister />
